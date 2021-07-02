@@ -3,7 +3,9 @@
 :root {
   --white: #fff;
   --black: #141414;
-  --grey: #303030;
+  --darkgrey: #303030;
+  --grey: #929699;
+  --lightgrey: #8f8f8f;
   --bg--green: linear-gradient(180deg, #7cd235 0%, #2bb34f 100%);
 }
 
@@ -25,17 +27,33 @@ body {
   background-color: var(--black);
 }
 
+.wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container of login and carousel*/
 .container {
   display: grid;
-  grid-template-columns: 630px 453px;
+  /* grid-template-columns: 630px 453px; */
+  grid-template-columns: minmax(58%, 630px) minmax(42%, 453px);
   height: 660px;
 }
 
+/* Login */
 .login {
-  background: var(--grey);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--darkgrey);
   border-radius: 8px 0 0 8px;
 }
-
+/* Carousel */
 .images {
   background-image: url("../img/biomutant.jpg");
   background-position: center center;
@@ -43,13 +61,17 @@ body {
   border-radius: 0 8px 8px 0;
 }
 
+/* Login Form */
+
 .login .logo {
   font-weight: 300;
   text-transform: uppercase;
   font-size: 45px;
+  text-align: center;
   line-height: 61px;
   letter-spacing: 2.8px;
   color: var(--white);
+  padding: 25px;
 }
 
 .login .logo span {
@@ -57,5 +79,51 @@ body {
 }
 
 .login .login_form {
-  /* background-color: red; */
+  width: 330px;
+  /* background-color: var(--lightgrey); */
 }
+
+.login .input {
+  display: flex;
+  position: relative;
+  margin: 20px;
+}
+
+.login .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--lightgrey);
+  border-radius: 8px 0 0 8px;
+  width: 52px;
+  height: 52px;
+}
+
+.login .icon img {
+  width: 20px;
+  padding: 16px;
+}
+
+.login .username,
+.login .password {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--lightgrey);
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  padding: 0 20px;
+  background-color: var(--darkgrey);
+  width: calc(100% - 52px);
+  height: 52px;
+}
+
+.login .showhide {
+  position: absolute;
+  width: 20px;
+  padding: 20px 14px 18.5px 0;
+  right: 0;
+  top: 0;
+}
+
+/* End of Login Form */
