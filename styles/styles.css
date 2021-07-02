@@ -1,0 +1,61 @@
+/** @format */
+
+:root {
+  --white: #fff;
+  --black: #141414;
+  --grey: #303030;
+  --bg--green: linear-gradient(180deg, #7cd235 0%, #2bb34f 100%);
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url("../fonts/Avenir.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/Avenir.woff") format("woff"),
+    url("../fonts/Avenir.ttf") format("truetype"),
+    url("../fonts/Avenir.svg#Avenir") format("svg");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Avenir", Helvetica, sans-serif;
+}
+
+body {
+  background-color: var(--black);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 630px 453px;
+  height: 660px;
+}
+
+.login {
+  background: var(--grey);
+  border-radius: 8px 0 0 8px;
+}
+
+.images {
+  background-image: url("../img/biomutant.jpg");
+  background-position: center center;
+  background-size: cover;
+  border-radius: 0 8px 8px 0;
+}
+
+.login .logo {
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 45px;
+  line-height: 61px;
+  letter-spacing: 2.8px;
+  color: var(--white);
+}
+
+.login .logo span {
+  font-weight: 900;
+}
+
+.login .login_form {
+  /* background-color: red; */
+}
