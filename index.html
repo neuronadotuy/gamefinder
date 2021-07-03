@@ -8,6 +8,11 @@
 	<link rel="stylesheet" href="/styles/styles.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
 		integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
+		rel="stylesheet">
 	<title>GameFinder</title>
 </head>
 
@@ -17,7 +22,7 @@
 			<div class="login">
 				<h1 class="logo">Game<span>Finder</span></h1>
 
-				<form class="login_form" action="">
+				<form class="login-form" action="">
 					<div class="input">
 						<div class="icon">
 							<img src="img/avatar.svg" alt="">
@@ -31,14 +36,43 @@
 						<input class="password" type="password" placeholder="Password">
 						<img class="showhide" src="img/showpass.svg" alt="">
 					</div>
-					<div class="check">
-						<input type="checkbox">
-						<p>Remember me</p>
+					<div class="check-wrapper">
+						<div class="check">
+							<input type="checkbox" id="checkbox_id">
+							<label for="checkbox_id">Remember me</label>
+						</div>
+						<input type="submit" value="Login">
 					</div>
-					<input type="submit" value="Login">
-					<a href="!#">Register now</a>
-					<a href="!#">Forgot password?</a>
+					<div class="login-links">
+						<a href="!#">Register now</a>
+						<a href="!#">Forgot password?</a>
+					</div>
 				</form>
+				<div class="login-separation">
+					<hr>
+					<p>or</p>
+					<hr>
+				</div>
+				<div class="login-alt-links">
+					<div class="alt-link">
+						<div class="icon fb-icon">
+							<img src="img/FB.svg" alt="">
+						</div>
+						<a href="!#" class="fb">Login with Facebook</a>
+					</div>
+					<div class="alt-link">
+						<div class="icon tw-icon">
+							<img src="img/TW.svg" alt="">
+						</div>
+						<a href="!#" class="tw">Login with Twitter</a>
+					</div>
+					<div class="alt-link">
+						<div class="icon google-icon">
+							<img src="img/G.svg" alt="">
+						</div>
+						<a href="!#" class="google">Login with Google</a>
+					</div>
+				</div>
 			</div>
 			<div class="images">
 			</div>
