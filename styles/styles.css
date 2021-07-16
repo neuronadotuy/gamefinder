@@ -7,6 +7,7 @@
 	--grey: #929699;
 	--lightgrey: #8f8f8f;
 	--green: #7cd235;
+	--icon: #d1d1d1;
 	--bg--green: linear-gradient(180deg, #7cd235 0%, #2bb34f 100%);
 }
 
@@ -38,6 +39,10 @@ a:hover {
 	color: var(--green);
 }
 
+.flex {
+	display: flex;
+}
+
 input {
 	color: var(--white);
 }
@@ -45,7 +50,11 @@ input:focus {
 	outline: none;
 }
 
-.container {
+.bold {
+	font-weight: 800;
+}
+
+.login-container {
 	display: flex;
 	height: 100vh;
 	width: 100vw;
@@ -82,19 +91,22 @@ input:focus {
 /* Login Form */
 
 .login .logo {
-	font-weight: 300;
-	text-transform: uppercase;
 	font-size: 45px;
-	text-align: center;
 	line-height: 61px;
 	letter-spacing: 2.8px;
-	color: var(--white);
 	padding: 25px;
+}
+
+.logo {
+	font-weight: 400;
+	text-transform: uppercase;
+	text-align: center;
+	color: var(--white);
 	cursor: pointer;
 }
 
-.login .logo span {
-	font-weight: 900;
+.logo span {
+	font-weight: 800;
 }
 
 .login .login-form {
@@ -117,7 +129,8 @@ input:focus {
 	height: 52px;
 }
 
-.login .icon img {
+.login .icon svg {
+	fill: var(--icon);
 	width: 20px;
 	padding: 16px;
 }
@@ -139,6 +152,7 @@ input:focus {
 
 .login .showhide {
 	position: absolute;
+	fill: var(--icon);
 	width: 20px;
 	padding: 20px 14px 18.5px 0;
 	right: 0;

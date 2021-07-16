@@ -5,21 +5,153 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/styles/styles.css">
+	<link rel="stylesheet" href="/styles/mainview.css">
 	<title>GameFinder | Main</title>
 </head>
 
 <body>
 	<div class="container">
-		<div class="wrapper-container">
-			<nav>
-				<h1 class="logo">
-					Game<span>Finder</span>
-				</h1>
-				<form id="search">
-					<input type="search" name="searchbar" placeholder="Type game name or console">
-					<button><img src="./img/search.svg" alt="Search"></button>
-				</form>
-			</nav>
+		<!-- nav -->
+		<div class="nav-container">
+			<div class="nav-menu">
+				<div class="nav-info">
+					<!-- info -->
+					<h1 class="logo">
+						Game<span>Finder</span>
+					</h1>
+					<form id="search">
+						<button><img src="./img/search.svg" alt="Search"></button>
+						<input type="search" name="searchbar" placeholder="Type game name or console">
+					</form>
+					<!-- logout -->
+					<div class="wrapper-logout-profile">
+						<div class="nav-logout">
+							<a href="!#">
+								Logout
+								<div class="logout-img">
+									<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 12"
+										style="enable-background:new 0 0 16 12;" xml:space="preserve">
+										<g>
+											<path class="st0" d="M10,10.5c0,0.3-0.2,0.5-0.5,0.5h-8C1.2,11,1,10.8,1,10.5v-9C1,1.2,1.2,1,1.5,1h8C9.8,1,10,1.2,10,1.5v2
+			C10,3.8,10.2,4,10.5,4S11,3.8,11,3.5v-2C11,0.7,10.3,0,9.5,0h-8C0.7,0,0,0.7,0,1.5v9C0,11.3,0.7,12,1.5,12h8c0.8,0,1.5-0.7,1.5-1.5
+			v-2C11,8.2,10.8,8,10.5,8S10,8.2,10,8.5V10.5z" />
+											<path class="st0" d="M15.9,6.4C16,6.3,16,6.1,16,6S16,5.7,15.9,5.6l-3-3c-0.2-0.2-0.5-0.2-0.7,0s-0.2,0.5,0,0.7l2.1,2.1H5.5
+			C5.2,5.5,5,5.7,5,6s0.2,0.5,0.5,0.5h8.8l-2.1,2.1c-0.2,0.2-0.2,0.5,0,0.7s0.5,0.2,0.7,0L15.9,6.4z" />
+										</g>
+									</svg>
+								</div>
+							</a>
+						</div>
+						<div class="nav-profile">
+							<img src="img/elmanga.jpeg" alt="Profile">
+						</div>
+					</div>
+				</div>
+				<!-- divider -->
+				<div class="nav-divider"></div>
+			</div>
+		</div>
+		<!-- nav end -->
+		<!-- main area -->
+		<div class="main-container">
+			<aside>
+				<ul>
+					<li><a href="!#" class="bold">Home</a></li>
+					<li><a href="!#" class="bold">Reviews</a></li>
+					<li><a href="!#" class="bold">New Releases</a></li>
+					<li><a href="!#" class="icon-link">
+							<div class="icon">
+								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+									xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 17 16"
+									style="enable-background:new 0 0 17 16;" xml:space="preserve">
+									<path class="st0" d="M3.6,15.4c-0.4,0.2-0.8-0.1-0.7-0.6l0.8-4.7L0.2,6.8C-0.2,6.5,0,5.9,0.5,5.8l4.9-0.7l2.2-4.3
+					   c0.2-0.4,0.7-0.4,0.9,0l2.2,4.3l4.9,0.7c0.4,0.1,0.6,0.6,0.3,0.9l-3.5,3.4l0.8,4.7c0.1,0.4-0.4,0.8-0.7,0.6L8,13.2L3.6,15.4
+					   L3.6,15.4z" />
+								</svg>
+							</div>
+							This Week
+						</a></li>
+					<li><a href="!#" class="icon-link">
+							<div class="icon">
+								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+									xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16"
+									style="enable-background:new 0 0 16 16;" xml:space="preserve">
+									<path class="st0" d="M3.5,0C3.8,0,4,0.2,4,0.5V1h8V0.5C12,0.2,12.2,0,12.5,0S13,0.2,13,0.5V1h1c1.1,0,2,0.9,2,2v11c0,1.1-0.9,2-2,2
+	H2c-1.1,0-2-0.9-2-2V5h16V4H0V3c0-1.1,0.9-2,2-2h1V0.5C3,0.2,3.2,0,3.5,0z" />
+								</svg>
+							</div>
+							This Month
+						</a></li>
+					<li><a href="!#" class="icon-link">
+							<div class="icon">
+								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+									xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 13 16"
+									style="enable-background:new 0 0 13 16;" xml:space="preserve">
+									<path class="st0" d="M12.8,0.1C12.9,0.2,13,0.3,13,0.5V8c0,0.2-0.1,0.4-0.3,0.5L12.5,8l0.2,0.5l0,0l0,0l0,0
+	c-0.1,0.1-0.3,0.1-0.4,0.1c-0.3,0.1-0.6,0.2-1,0.4c-0.8,0.3-1.9,0.5-2.7,0.5C7.7,9.5,7,9.2,6.3,9l0,0C5.7,8.7,5.1,8.5,4.5,8.5
+	C3.8,8.5,2.9,8.7,2.1,9C1.7,9.1,1.4,9.2,1,9.3v6.2C1,15.8,0.8,16,0.5,16S0,15.8,0,15.5v-15C0,0.2,0.2,0,0.5,0S1,0.2,1,0.5v0.3
+	c0.2-0.1,0.5-0.2,0.8-0.3C2.6,0.3,3.7,0,4.5,0C5.3,0,6,0.3,6.6,0.5l0,0C7.3,0.8,7.8,1,8.5,1c0.7,0,1.6-0.2,2.4-0.5
+	c0.5-0.1,0.9-0.3,1.3-0.5l0,0l0,0h0" />
+								</svg>
+							</div>
+							Coming Soon
+						</a></li>
+					<li><a href="!#" class="bold">Popular</a></li>
+					<li><a href="!#" class="icon-link">
+							<div class="icon">
+								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+									xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16"
+									style="enable-background:new 0 0 16 16;" xml:space="preserve">
+									<path fill-rule="evenodd" clip-rule="evenodd"
+										d="M11.7424 10.3434C13.7502 7.60286 13.309 3.77838 10.7297 1.56713C8.15026 -0.644296 4.30284 -0.496048 1.90121 1.90731C-0.500426 4.31066 -0.645921 8.15818 1.56735 10.736C3.78044 13.3137 7.60525 13.7522 10.3443 11.7425C10.3742 11.7823 10.4061 11.8201 10.4419 11.857L14.2919 15.707C14.6824 16.0977 15.3157 16.098 15.7064 15.7075C16.0972 15.317 16.0974 14.6837 15.7069 14.293L11.8569 10.443C11.8213 10.4069 11.783 10.3736 11.7424 10.3434ZM9.24994 11.2631C10.9516 10.2807 11.9999 8.46496 11.9999 6.5C11.9999 3.46243 9.53751 0.999999 6.49994 0.999999C3.46237 0.999999 0.999941 3.46243 0.999941 6.5C0.999941 8.46496 2.04823 10.2807 3.74994 11.2631C5.45165 12.2456 7.54823 12.2456 9.24994 11.2631Z" />
+								</svg>
+							</div>
+							Last Searches
+						</a></li>
+					<li><a href="!#" class="icon-link">
+							<div class="icon">
+								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+									xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16"
+									style="enable-background:new 0 0 16 16;" xml:space="preserve">
+									<path class="st0" d="M2.5,0.5C2.5,0.2,2.7,0,3,0h10c0.3,0,0.5,0.2,0.5,0.5c0,0.5,0,1,0,1.5c1.1,0.2,2,0.9,2.3,2c0.4,1,0.1,2.2-0.6,3
+	c-0.7,0.8-1.8,1.2-2.9,0.9c-0.8,1.9-1.9,2.8-2.8,3v2.2l1.4,0.4c0.2,0,0.4,0.1,0.5,0.3l1.8,1.4c0.2,0.1,0.2,0.4,0.2,0.6
+	C13.4,15.9,13.2,16,13,16H3c-0.2,0-0.4-0.1-0.5-0.3c-0.1-0.2,0-0.4,0.2-0.6l1.8-1.4c0.2-0.1,0.3-0.2,0.5-0.3l1.4-0.4v-2.2
+	c-1-0.2-2-1.1-2.8-3C2.6,8.2,1.5,7.8,0.8,7C0,6.2-0.2,5,0.2,4c0.4-1,1.3-1.8,2.3-2C2.5,1.5,2.5,1,2.5,0.5z M2.6,3
+	C1.5,3.2,0.8,4.3,1,5.4C1.2,6.5,2.2,7.2,3.3,7C3,5.9,2.7,4.6,2.6,3z M15,5.4c-0.2,1.1-1.2,1.8-2.3,1.6c0.3-1,0.6-2.3,0.7-3.9
+	C14.5,3.2,15.2,4.3,15,5.4z" />
+								</svg>
+							</div>
+							Best of the year
+						</a></li>
+				</ul>
+			</aside>
+			<main>
+				<div class="main-info">
+					<div class="main-title">
+						<h2 class='bold'>New and trending</h2>
+						<p>Based on player counts and release date</p>
+					</div>
+					<div class="main-align">
+						<div class="align-icon">
+							<svg width="21" height="24" viewBox="0 0 21 24" fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" clip-rule="evenodd"
+									d="M17.543 0.799927H3.25729C1.67933 0.799927 0.400146 2.07911 0.400146 3.65707V7.94278C0.400146 9.52074 1.67933 10.7999 3.25729 10.7999H17.543C19.121 10.7999 20.4001 9.52074 20.4001 7.94278V3.65707C20.4001 2.07911 19.121 0.799927 17.543 0.799927ZM1.82878 3.65709C1.82878 2.86811 2.46837 2.22852 3.25735 2.22852H17.5431C18.332 2.22852 18.9716 2.86811 18.9716 3.65709V7.9428C18.9716 8.73178 18.332 9.37137 17.5431 9.37137H3.25735C2.46837 9.37137 1.82878 8.73178 1.82878 7.9428V3.65709ZM3.25729 13.6571H17.543C19.121 13.6571 20.4001 14.9362 20.4001 16.5142V20.7999C20.4001 22.3779 19.121 23.6571 17.543 23.6571H3.25729C1.67933 23.6571 0.400146 22.3779 0.400146 20.7999V16.5142C0.400146 14.9362 1.67933 13.6571 3.25729 13.6571ZM1.82878 16.5141C1.82878 15.7252 2.46837 15.0856 3.25735 15.0856H17.5431C18.332 15.0856 18.9716 15.7252 18.9716 16.5141V20.7999C18.9716 21.5888 18.332 22.2284 17.5431 22.2284H3.25735C2.46837 22.2284 1.82878 21.5888 1.82878 20.7999V16.5141Z" />
+							</svg>
+						</div>
+						<!--  -->
+						<div class="align-icon offset">
+							<svg width="21" height="19" viewBox="0 0 21 19" fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" clip-rule="evenodd"
+									d="M0.400146 0.828666C0.400146 0.434176 0.719943 0.11438 1.11443 0.11438H19.6859C20.0804 0.11438 20.4001 0.434176 20.4001 0.828666C20.4001 1.22315 20.0804 1.54295 19.6859 1.54295H1.11443C0.719943 1.54295 0.400146 1.22315 0.400146 0.828666ZM17.543 4.40006H3.25729C1.67933 4.40006 0.400146 5.67925 0.400146 7.25721V11.5429C0.400146 13.1209 1.67933 14.4001 3.25729 14.4001H17.543C19.121 14.4001 20.4001 13.1209 20.4001 11.5429V7.25721C20.4001 5.67925 19.121 4.40006 17.543 4.40006ZM1.82886 7.25735C1.82886 6.46837 2.46845 5.82878 3.25743 5.82878H17.5431C18.3321 5.82878 18.9717 6.46837 18.9717 7.25735V11.5431C18.9717 12.332 18.3321 12.9716 17.5431 12.9716H3.25743C2.46845 12.9716 1.82886 12.332 1.82886 11.5431V7.25735ZM1.11443 17.2573C0.719943 17.2573 0.400146 17.5771 0.400146 17.9716C0.400146 18.3661 0.719943 18.6859 1.11443 18.6859H19.6859C20.0804 18.6859 20.4001 18.3661 20.4001 17.9716C20.4001 17.5771 20.0804 17.2573 19.6859 17.2573H1.11443Z" />
+							</svg>
+						</div>
+					</div>
+				</div>
+			</main>
 		</div>
 	</div>
 </body>
