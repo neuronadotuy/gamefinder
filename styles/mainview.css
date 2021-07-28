@@ -170,6 +170,12 @@ aside a:hover .icon {
 }
 
 /* main-info area */
+.main-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .main-title h2 {
 	color: var(--white);
 	font-size: 55px;
@@ -180,6 +186,13 @@ aside a:hover .icon {
 	color: var(--white);
 	font-size: 18px;
 	line-height: 24px;
+}
+
+/* alignment buttons */
+
+.main-align {
+	display: flex;
+	gap: 24px;
 }
 
 .main-align .align-icon {
@@ -198,4 +211,87 @@ aside a:hover .icon {
 
 .main-align .align-icon svg {
 	fill: var(--black);
+}
+
+/* cards area */
+
+.cards-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(360px, auto));
+	gap: 24px;
+	padding-top: 30px;
+}
+
+/* card */
+.card {
+	background-color: var(--darkgrey);
+	border-radius: 10px;
+}
+
+.card-img {
+	background-image: url(../img/Biomutant-screenshots-gallery-08-24-2017-1.png);
+	height: 205px;
+	border-radius: 10px 10px 0 0;
+	background-position: top center;
+	background-size: cover;
+}
+
+.card-info {
+	padding: 20px;
+	color: var(--white);
+}
+
+.card-info h3 {
+	font-size: 23px;
+	line-height: 31px;
+}
+
+.card-info .rank {
+	color: var(--green2);
+	font-size: 16px;
+}
+
+.card-info .line,
+.consoles ul {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 10px;
+	width: 100%;
+}
+
+.card-info .release,
+.card-info .genre {
+	font-size: 12px;
+	font-weight: 300;
+	color: var(--lightgrey);
+	border-bottom: 1px solid #3d3d3d;
+	padding: 6.5px 0 3px 0;
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 20px;
+	width: 65%;
+}
+
+.card-info .gift {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	color: var(--white);
+	width: 47px;
+	height: 24px;
+	border-radius: 10px;
+	border: none;
+	background: var(--bg--green);
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.card-info .gift:hover {
+	background: var(--green);
 }
