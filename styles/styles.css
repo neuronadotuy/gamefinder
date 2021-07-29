@@ -62,16 +62,16 @@ li {
 	font-weight: 800;
 }
 
-.login-container {
+.login__container {
 	display: flex;
-	height: 100vh;
-	width: 100vw;
 	justify-content: center;
 	align-items: center;
+	height: 100vh;
+	width: 100vw;
 }
 
-/* wrapper-container of login and carousel*/
-.wrapper-container {
+/* wrapper of login and carousel*/
+.login {
 	display: grid;
 	/* grid-template-columns: 630px 453px; */
 	grid-template-columns: minmax(58%, 630px) minmax(42%, 453px);
@@ -79,7 +79,7 @@ li {
 }
 
 /* Login */
-.login {
+.login__wrapper {
 	display: flex;
 	width: 100%;
 	flex-direction: column;
@@ -89,7 +89,7 @@ li {
 	border-radius: 8px 0 0 8px;
 }
 /* Carousel */
-.images {
+.carousel__images {
 	background-image: url('../img/biomutant.jpg');
 	background-position: center center;
 	background-size: cover;
@@ -98,14 +98,14 @@ li {
 
 /* Login Form */
 
-.login .logo {
+.header {
 	font-size: 45px;
 	line-height: 61px;
 	letter-spacing: 2.8px;
 	padding: 25px;
 }
 
-.logo {
+.header__h1 {
 	font-weight: 400;
 	text-transform: uppercase;
 	text-align: center;
@@ -113,11 +113,11 @@ li {
 	cursor: pointer;
 }
 
-.logo span {
+.header__h1--bold {
 	font-weight: 800;
 }
 
-.login .login-form {
+.login__form {
 	width: 330px;
 }
 
@@ -127,13 +127,28 @@ li {
 	margin-bottom: 20px;
 } */
 
-.login .input {
+.input__wrapper {
 	position: relative;
 	display: grid;
 	grid-template-columns: 52px 278px;
 	grid-template-areas: '.icon' '.username';
 	margin-bottom: 20px;
 	width: 330px;
+}
+
+.input__icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid var(--lightgrey);
+	border-radius: 8px 0 0 8px;
+	width: 52px;
+	height: 52px;
+}
+
+.input__icon svg {
+	width: 20px;
+	padding: 16px;
 }
 
 .error_message {
@@ -144,17 +159,7 @@ li {
 	line-height: 19px;
 }
 
-.login .input .icon {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: 1px solid var(--lightgrey);
-	border-radius: 8px 0 0 8px;
-	width: 52px;
-	height: 52px;
-}
-
-.login .input .icon_error {
+.icon_error {
 	border: 1px solid var(--red);
 	transition: all 0.3s ease-in-out;
 }
@@ -167,13 +172,8 @@ li {
 	fill: var(--red);
 }
 
-.login .icon svg {
-	width: 20px;
-	padding: 16px;
-}
-
-.login .username,
-.login .password {
+.input__username,
+.input__password {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -185,21 +185,21 @@ li {
 	transition: all 0.3s ease-in-out;
 }
 
-.login .username::placeholder,
-.login .password::placeholder {
+.input__username::placeholder,
+.input__password::placeholder {
 	color: var(--lightgrey);
 }
 
-.login .username_error::placeholder,
-.login .password_error::placeholder {
+.username_error::placeholder,
+.password_error::placeholder {
 	color: var(--red);
 }
 
-.login .input_error {
+.input_error {
 	border: 1px solid var(--red);
 }
 
-.login .showhide {
+.showhide {
 	position: absolute;
 	fill: var(--icon);
 	width: 20px;
@@ -209,24 +209,24 @@ li {
 	cursor: pointer;
 }
 
-.login .check-wrapper {
+.checkbox-login__wrapper {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-top: 32px;
 }
 
-.login .check {
+.checkbox {
 	display: flex;
 	gap: 10px;
 }
 
-.login .check label {
+.checkbox label {
 	color: var(--lightgrey);
 	cursor: pointer;
 }
 
-.login input[type='checkbox'] {
+.checkbox input[type='checkbox'] {
 	appearance: none;
 	border: 1px solid var(--lightgrey);
 	width: 20px;
@@ -242,7 +242,7 @@ li {
 	justify-content: center;
 }
 
-.login input[type='checkbox']::after {
+.checkbox input[type='checkbox']::after {
 	font-family: 'Font Awesome 5 Free';
 	font-weight: 900;
 	font-size: 11px;
@@ -251,19 +251,19 @@ li {
 	display: none;
 }
 
-.login input[type='checkbox']:hover {
+.checkbox input[type='checkbox']:hover {
 	border: 1px solid var(--green);
 }
 
-.login input[type='checkbox']:checked {
+.checkbox input[type='checkbox']:checked {
 	background-color: var(--green);
 }
 
-.login input[type='checkbox']:checked::after {
+.checkbox input[type='checkbox']:checked::after {
 	display: block;
 }
 
-.login input[type='submit'] {
+.login-btn {
 	text-transform: uppercase;
 	font-size: 16px;
 	line-height: 22px;
@@ -279,31 +279,23 @@ li {
 	transition: all 0.2s ease-in-out;
 }
 
-.login input[type='submit']:hover {
+.login-btn:hover {
 	background: none;
 	background-color: var(--green);
 }
 
-.login input[type='submit']:active {
+.login-btn:active {
 	background: none;
 	background: linear-gradient(180deg, #7cd235 0%, #2bb34f 100%);
 	box-shadow: inset 0 5px 3px #2bb34f;
 }
 
-/* .login input[type='submit']:focus {
-	background: none;
-	background: linear-gradient(180deg, #7cd235 0%, #2bb34f 100%);
-	border: 1px solid #ffffff;
-	box-sizing: border-box;
-	box-shadow: none;
-} */
-
-.login .login-links {
+.register-remember__wrapper {
 	display: flex;
 	justify-content: space-between;
 }
 
-.login .login-links a {
+.register-remember__wrapper a {
 	font-size: 14px;
 	line-height: 19px;
 	padding-top: 15px;
@@ -311,7 +303,7 @@ li {
 /* End of Login Form */
 
 /* Separation */
-.login-separation {
+.separation__wrapper {
 	display: grid;
 	grid-template-columns: 134px 61px 134px;
 	max-width: 330px;
@@ -321,7 +313,7 @@ li {
 	padding-bottom: 21px;
 }
 
-.login-separation p {
+.separation__wrapper p {
 	height: 19px;
 	color: var(--white);
 	text-align: center;
@@ -329,7 +321,7 @@ li {
 	line-height: 19px;
 }
 
-.login-separation hr {
+.separation__wrapper hr {
 	height: 2px;
 	border: none;
 	background-color: var(--white);
@@ -337,14 +329,14 @@ li {
 
 /* Alt login */
 
-.login-alt-links {
+.alt-login__wrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
 	width: 330px;
 }
 
-.login-alt-links .alt-link {
+.alt-loginlink__wrapper {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -352,7 +344,7 @@ li {
 	height: 40px;
 }
 
-.login-alt-links .alt-link a {
+.alt-loginlink__wrapper a {
 	text-transform: uppercase;
 	color: var(--white);
 	font-size: 12px;
@@ -363,7 +355,7 @@ li {
 	/* max-height: 40px; */
 }
 
-.login-alt-links .icon {
+.alt-loginlink__icon {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -374,11 +366,11 @@ li {
 
 /* Facebook */
 
-.fb-icon {
+.facebook__icon {
 	background-color: #263c68;
 	padding: 11px, 14px;
 }
-.fb {
+.alt-loginlink--facebook {
 	background-color: #3b5998;
 	width: 100%;
 	border-left: none;
@@ -386,17 +378,17 @@ li {
 	transition: all 0.3 ease-in-out;
 }
 
-.fb:hover {
+.alt-loginlink--facebook:hover {
 	background-color: #263c68;
 }
 
 /* Twitter */
 
-.tw-icon {
+.twitter__icon {
 	background-color: #0695cb;
 	padding: 11px, 14px;
 }
-.tw {
+.alt-loginlink--twitter {
 	background-color: #00aced;
 	width: 100%;
 	border-left: none;
@@ -404,17 +396,17 @@ li {
 	transition: all 0.3 ease-in-out;
 }
 
-.tw:hover {
+.alt-loginlink--twitter:hover {
 	background-color: #0695cb;
 }
 
 /* Google */
 
-.google-icon {
+.google__icon {
 	background-color: #9d9d9d;
 	padding: 11px, 14px;
 }
-.google {
+.alt-loginlink--google {
 	background-color: #c7c7c7;
 	width: 100%;
 	border-left: none;
@@ -440,12 +432,12 @@ li {
 	}
 
 	/* wrapper-container of login and carousel*/
-	.wrapper-container {
+	.login {
 		display: block;
 	}
 
 	/* Login */
-	.login {
+	.login__wrapper {
 		display: flex;
 		width: 100vw;
 		height: 100vh;
@@ -456,7 +448,7 @@ li {
 		border-radius: 0;
 	}
 	/* Carousel */
-	.images {
+	.carousel__images {
 		display: none;
 	}
 }
@@ -468,7 +460,7 @@ li {
 @media (max-width: 767px) {
 	/* Login Form */
 
-	.login .logo {
+	.header__h1 {
 		font-weight: 300;
 		text-transform: uppercase;
 		font-size: 35px;
@@ -480,11 +472,11 @@ li {
 		cursor: pointer;
 	}
 
-	.login .login-form {
+	.login__form {
 		width: 240px;
 	}
 
-	.login .input {
+	.input__wrapper {
 		display: grid;
 		grid-template-columns: 52px auto;
 		grid-template-areas:
@@ -495,19 +487,19 @@ li {
 		gap: 0px;
 	}
 
-	.login .icon img {
+	.input__icon svg {
 		width: 20px;
 		padding: 16px;
 	}
 
-	.login .check-wrapper {
+	.checkbox-login__wrapper {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		margin-top: 32px;
 	}
 
-	.login .check label {
+	.checkbox label {
 		color: var(--lightgrey);
 		font-size: 14px;
 		cursor: pointer;
@@ -516,7 +508,7 @@ li {
 	/* End of Login Form */
 
 	/* Separation */
-	.login-separation {
+	.separation__wrapper {
 		display: grid;
 		grid-template-columns: 89px 61px 89px;
 		max-width: 240px;
@@ -528,18 +520,311 @@ li {
 
 	/* Alt login */
 
-	.login-alt-links {
+	.alt-login__wrapper {
 		display: flex;
 		flex-direction: column;
 		gap: 24px;
 		width: 240px;
 	}
 
-	.login-alt-links .alt-link {
+	.alt-loginlink__wrapper {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		padding: 0 0;
 		height: 40px;
 	}
+}
+
+/********** main.html **********/
+
+.main__wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.sidebar {
+	width: 100%;
+	height: 120px;
+	background: var(--bg--green);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.nav,
+.aside-main__container {
+	width: calc(100% - 80px);
+}
+
+.nav__info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.nav-info .logo {
+	font-size: 28px;
+	line-height: 38px;
+	letter-spacing: 1.7px;
+}
+
+/* Form and Input */
+
+.nav__form {
+	position: relative;
+	display: flex;
+	gap: 0px;
+}
+
+.nav__form input[type='search'] {
+	width: 362px;
+	height: 40px;
+	border-radius: 20px;
+	border: none;
+	font-size: 16px;
+	color: #a6a6a6;
+	font-weight: 300;
+	line-height: 22px;
+	padding: 9px 61px;
+}
+
+.nav__form button {
+	position: absolute;
+	border: none;
+	display: block;
+	/* text-indent: -999px; */
+	top: 13px;
+	left: 20px;
+	cursor: pointer;
+	background-color: transparent;
+}
+
+/* End of Form and Input */
+
+.logout-profile__wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 32px;
+}
+
+.logout a {
+	display: flex;
+	flex-direction: row;
+	gap: 11px;
+}
+
+.logout__img {
+	width: 16px;
+	fill: white;
+	transition: all 0.3s ease-in-out;
+}
+
+.logout a {
+	color: var(--white);
+}
+
+.logout a:hover,
+.logout a:hover .logout__img {
+	fill: #dddddd;
+	color: #dddddd;
+}
+
+.profile img {
+	width: 45px;
+	height: 45px;
+	border-radius: 100px;
+}
+
+.nav__divider {
+	background-color: var(--white);
+	margin-top: 15px;
+	width: 100%;
+	height: 1px;
+}
+
+/****** main section ******/
+
+.aside-main__container {
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 194px auto;
+	gap: 20px;
+}
+
+/* aside and icons */
+
+aside {
+	padding-top: 33px;
+}
+
+main {
+	padding-top: 24px;
+}
+
+aside ul li {
+	list-style-type: none;
+	font-size: 20px;
+	line-height: 33px;
+	padding-bottom: 11px;
+}
+
+aside ul li:nth-child(3),
+aside ul li:nth-child(6),
+aside ul li:nth-child(7) {
+	padding-bottom: 33px;
+}
+
+aside ul li .icon__link {
+	display: flex;
+	align-items: center;
+	gap: 13px;
+}
+
+/* aling the svg to the icon area */
+div.icon svg {
+	display: flex;
+	align-items: center;
+}
+
+aside ul .icon {
+	fill: var(--white);
+	width: 16px;
+	transition: all 0.3s ease-in-out;
+}
+aside a:hover {
+	color: var(--green);
+}
+
+aside a:hover .icon {
+	fill: var(--green);
+}
+
+/* main-info area */
+.main__info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.main__title h2 {
+	color: var(--white);
+	font-size: 55px;
+	line-height: 75px;
+}
+
+.main__title p {
+	color: var(--white);
+	font-size: 18px;
+	line-height: 24px;
+}
+
+/* alignment buttons */
+
+.alignment__icons {
+	display: flex;
+	gap: 24px;
+}
+
+.alignment__icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	background-color: #515151;
+	border-radius: 10px;
+}
+.alignment__icon--offset {
+	background-color: #303030;
+}
+
+.alignment__icon svg {
+	fill: var(--black);
+}
+
+/* cards area */
+
+.cards__wrapper {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(360px, auto));
+	gap: 24px;
+	padding-top: 30px;
+}
+
+/* card */
+.card {
+	background-color: var(--darkgrey);
+	border-radius: 10px;
+}
+
+.card__img {
+	background-image: url(../img/Biomutant-screenshots-gallery-08-24-2017-1.png);
+	height: 205px;
+	border-radius: 10px 10px 0 0;
+	background-position: top center;
+	background-size: cover;
+}
+
+.card__info {
+	padding: 20px;
+	color: var(--white);
+}
+
+.card__info h3 {
+	font-size: 23px;
+	line-height: 31px;
+}
+
+.card__info .rank {
+	color: var(--green2);
+	font-size: 16px;
+}
+
+.card__line,
+.consoles ul {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 10px;
+	width: 100%;
+}
+
+.card__info .release,
+.card__info .genre {
+	font-size: 12px;
+	font-weight: 300;
+	color: var(--lightgrey);
+	border-bottom: 1px solid #3d3d3d;
+	padding: 6.5px 0 3px 0;
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 20px;
+	width: 65%;
+}
+
+.card__info .gift {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	color: var(--white);
+	width: 47px;
+	height: 24px;
+	border-radius: 10px;
+	border: none;
+	background: var(--bg--green);
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.card__info .gift:hover {
+	background: var(--green);
 }
