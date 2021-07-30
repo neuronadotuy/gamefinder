@@ -98,7 +98,7 @@ li {
 
 /* Login Form */
 
-.header {
+.header__h1--login {
 	font-size: 45px;
 	line-height: 61px;
 	letter-spacing: 2.8px;
@@ -164,12 +164,21 @@ li {
 	transition: all 0.3s ease-in-out;
 }
 
+.icon--focus {
+	border: 1px solid var(--white);
+	transition: all 0.3s ease-in-out;
+}
+
 .icon-svg {
 	fill: var(--icon);
 }
 
 .icon-svg_error {
 	fill: var(--red);
+}
+
+.icon__svg--focus {
+	fill: var(--white);
 }
 
 .input__username,
@@ -190,6 +199,11 @@ li {
 	color: var(--lightgrey);
 }
 
+.input--focus {
+	color: var(--white);
+	border: 1px solid var(--white);
+}
+
 .username_error::placeholder,
 .password_error::placeholder {
 	color: var(--red);
@@ -199,14 +213,25 @@ li {
 	border: 1px solid var(--red);
 }
 
+.show-hide__password {
+	position: relative;
+}
+
 .showhide {
 	position: absolute;
 	fill: var(--icon);
 	width: 20px;
-	padding: 20px 14px 18.5px 0;
-	right: 0;
-	top: 0;
+	right: 20px;
+	top: 20px;
 	cursor: pointer;
+}
+
+.showPassword {
+	display: none;
+}
+
+.hidePassword {
+	display: none;
 }
 
 .checkbox-login__wrapper {
@@ -423,7 +448,7 @@ li {
 /* -------------------------------------- */
 
 @media (max-width: 1023px) {
-	.container {
+	.login__container {
 		display: block;
 		height: 100vh;
 		width: 100vw;
@@ -564,7 +589,7 @@ li {
 	justify-content: space-between;
 }
 
-.nav-info .logo {
+.header__h1--nav {
 	font-size: 28px;
 	line-height: 38px;
 	letter-spacing: 1.7px;

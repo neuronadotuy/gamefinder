@@ -14,6 +14,21 @@
       "email": "olivier@gmail.com",
       "password": "$2a$10$BRFXLlyB7NKG/3wYWUVts.GlgF7UUGTXp4qcWUmSXS37fHhnypT8.",
       "id": 3
+    },
+    {
+      "email": "123@123.com",
+      "password": "$2a$10$/uMJdqpxN6h8d1MGZ.Q0Q.l5hJrG0OY5/cZGIohSaamLEL7JFSp0C",
+      "id": 4
+    },
+    {
+      "email": "123@123456.com",
+      "password": "$2a$10$k3IrWb.5qkglYCrgHPoTSuhZGS9HTikJiN/9jcXR/A6P2r0CRsLwG",
+      "id": 5
+    },
+    {
+      "email": "test@email.com",
+      "password": "$2a$10$OH.HE3iWxXUapFHmq5jUS.dRhi6OF2x6KMjGEZbVLvY.iSPKWIe7.",
+      "id": 6
     }
   ]
 }
