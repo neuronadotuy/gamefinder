@@ -439,7 +439,7 @@ li {
 	transition: all 0.3 ease-in-out;
 }
 
-.google:hover {
+.alt-loginlink--google:hover {
 	background-color: #9d9d9d;
 }
 
