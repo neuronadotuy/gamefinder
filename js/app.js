@@ -3,6 +3,9 @@ const inputName = document.querySelector('#input_name');
 const inputPassword = document.querySelector('#input_pass');
 const btnSubmit = document.querySelector('#btn_submit');
 const btnLogout = document.querySelector('#logout');
+const snackbar = document.querySelector('#snackbar');
+const closeSnackbar = document.querySelector('.snackbar--close');
+const snackbarMessage = document.querySelector('.snackbar__message');
 
 const iconName = document.querySelector('#icon_name');
 const showOrHidePassword = document.querySelector('.show-hide__icon');
@@ -40,7 +43,7 @@ function hidePasswordFn() {
 	}
 	hidePassword.classList.add('hidePassword');
 }
-// Username input validation
+// Add error on username blur
 function inputNameError(e) {
 	e.target.classList.remove('input--focus');
 	e.target.parentElement.children[0].classList.remove('icon--focus');
@@ -62,7 +65,7 @@ function inputNameError(e) {
 	}
 }
 
-// Password input validation
+// Add error on password blur
 function inputPassError(e) {
 	e.target.classList.remove('input--focus');
 	e.target.parentElement.children[0].classList.remove('icon--focus');
@@ -139,6 +142,10 @@ async function login(e) {
 			body: JSON.stringify({ email: email.value, password: password.value }),
 		});
 		const res = await req.json();
+		console.log(req.status);
+		console.log(res);
+
+		// https://blog.logrocket.com/jwt-authentication-best-practices/
 
 		// Username validation
 		if (!re.test(email.value.toLowerCase()) || email.value === 0) {
@@ -158,10 +165,10 @@ async function login(e) {
 			console.log(emailValidation);
 		}
 
-		// Username validation
+		// Password validation
 		if (password.value.trim().length <= 3) {
 			passValidation = false;
-			password.classList.add('input_error', 'username_error');
+			password.classList.add('input_error', 'password_error');
 			password.parentElement.children[0].classList.add('icon_error');
 			password.parentElement.children[0].children[0].classList.add(
 				'icon-svg_error'
@@ -176,9 +183,34 @@ async function login(e) {
 			console.log(emailValidation);
 		}
 
-		// localStorage.setItem('JWT', res.accessToken);
+		// Login success
+		if (
+			req.status === 200 &&
+			emailValidation === true &&
+			passValidation === true
+		) {
+			console.log('Login ok');
+			snackbar.classList.add('snackbar__wrapper');
+			snackbar.classList.remove('snackbar__wrapper--hidden');
+			snackbar.children[0].classList.add('snackbar--success');
+			snackbarMessage.innerHTML = 'Success';
+		}
+
+		// Login error
+		if (
+			req.status === 400 ||
+			emailValidation !== true ||
+			passValidation !== true
+		) {
+			console.log('Error');
+			snackbar.classList.add('snackbar__wrapper');
+			snackbar.classList.remove('snackbar__wrapper--hidden');
+			snackbar.children[0].classList.add('snackbar--error');
+			snackbarMessage.innerHTML = `${res}`;
+		}
+
+		localStorage.setItem('JWT', res.accessToken);
 		// window.location.href = 'http://localhost:5501/main.html';
-		console.log(res);
 	} catch (error) {
 		console.log(error);
 	}

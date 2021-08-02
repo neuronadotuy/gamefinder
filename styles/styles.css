@@ -9,8 +9,11 @@
 	--green: #7cd235;
 	--green2: #2bb34f;
 	--icon: #d1d1d1;
-	--red: #d24040;
+	--red: #ed7474;
 	--bg--green: linear-gradient(180deg, #7cd235 0%, #2bb34f 100%);
+	--success: #88da44;
+	--alert: #edae74;
+	--error: #ed7474;
 }
 
 /* @font-face {
@@ -68,6 +71,61 @@ li {
 	align-items: center;
 	height: 100vh;
 	width: 100vw;
+}
+
+/* Snackbars */
+.snackbar__wrapper--hidden {
+	display: none;
+}
+
+.snackbar__wrapper {
+	display: flex;
+	justify-content: center;
+	box-shadow: 0px 20px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.snackbar {
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 640px;
+	height: 40px;
+	top: 0;
+	z-index: 10;
+}
+
+.snackbar--success {
+	background-color: var(--success);
+}
+
+.snackbar--alert {
+	background-color: var(--alert);
+}
+
+.snackbar--error {
+	background-color: var(--error);
+}
+
+.snackbar__message {
+	color: var(--white);
+	padding-left: 20px;
+	font-size: 14px;
+	line-height: 19px;
+}
+
+.snackbar--close {
+	fill: var(--white);
+	opacity: 70%;
+	width: 16px;
+	padding-right: 20px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+.snackbar--close:hover {
+	fill: var(--white);
+	opacity: 100%;
+	width: 16px;
 }
 
 /* wrapper of login and carousel*/
@@ -448,6 +506,10 @@ li {
 /* -------------------------------------- */
 
 @media (max-width: 1023px) {
+	.snackbar {
+		width: 100%;
+	}
+
 	.login__container {
 		display: block;
 		height: 100vh;
