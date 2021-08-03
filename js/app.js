@@ -13,6 +13,10 @@ const hidePassword = document.querySelector('#hidePassword');
 const nameError = document.createElement('p');
 const passError = document.createElement('p');
 
+// Carousel selector
+const carousel = document.querySelector('#carousel');
+const carouselImage = document.querySelector('.carousel__image');
+
 eventListeners();
 function eventListeners() {
 	// document.addEventListener('DOMContentLoaded', startApp);
@@ -227,4 +231,12 @@ async function login(e) {
 function snackbarClose() {
 	snackbar.classList.remove('snackbar__wrapper');
 	snackbar.classList.add('snackbar__wrapper--hidden');
+}
+
+// Carousel
+
+function carouselFn() {
+	for (let i = 0; i < carouselImage.length; i++) {
+		carouselImage[i].classList.add('carousel__image--hide');
+	}
 }

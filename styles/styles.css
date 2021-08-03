@@ -147,18 +147,44 @@ li {
 	border-radius: 8px 0 0 8px;
 }
 /* Carousel */
-.carousel__images {
+
+.carousel__wrapper {
 	position: relative;
-	background-position: center center;
-	background-size: cover;
+	overflow: hidden;
 	border-radius: 0 8px 8px 0;
 }
 
 .carousel__image {
 	position: absolute;
 	height: 100%;
-	background-size: cover;
 	border-radius: 0 8px 8px 0;
+}
+
+.carousel__image--hide {
+	display: none;
+}
+
+.carousel__dots {
+	width: 100%;
+	height: 48px;
+	position: absolute;
+	display: flex;
+	gap: 9px;
+	justify-content: center;
+	z-index: 10;
+	bottom: 0;
+	right: 0;
+}
+
+.carousel__dot {
+	cursor: pointer;
+	height: 7px;
+	width: 7px;
+	background-color: var(--white);
+	opacity: 50%;
+	border-radius: 100%;
+	display: inline-block;
+	transition: background-color 0.5s ease;
 }
 
 /* Login Form */
