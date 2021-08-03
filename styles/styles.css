@@ -148,8 +148,15 @@ li {
 }
 /* Carousel */
 .carousel__images {
-	background-image: url('../img/biomutant.jpg');
+	position: relative;
 	background-position: center center;
+	background-size: cover;
+	border-radius: 0 8px 8px 0;
+}
+
+.carousel__image {
+	position: absolute;
+	height: 100%;
 	background-size: cover;
 	border-radius: 0 8px 8px 0;
 }
@@ -178,12 +185,6 @@ li {
 .login__form {
 	width: 330px;
 }
-
-/* .login .input {
-	display: flex;
-	position: relative;
-	margin-bottom: 20px;
-} */
 
 .input__wrapper {
 	position: relative;
