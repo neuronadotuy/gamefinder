@@ -547,15 +547,18 @@ li {
 @media (max-width: 767px) {
 	/* Login Form */
 
-	.header__h1 {
-		font-weight: 300;
-		text-transform: uppercase;
+	.header__h1--login {
 		font-size: 35px;
-		text-align: center;
 		line-height: 61px;
 		letter-spacing: 2.8px;
-		color: var(--white);
 		padding: 25px;
+	}
+
+	.header__h1 {
+		font-weight: 400;
+		text-transform: uppercase;
+		text-align: center;
+		color: var(--white);
 		cursor: pointer;
 	}
 
