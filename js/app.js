@@ -2,11 +2,10 @@
 const inputName = document.querySelector('#input_name');
 const inputPassword = document.querySelector('#input_pass');
 const btnSubmit = document.querySelector('#btn_submit');
-const btnLogout = document.querySelector('#logout');
+const btnLogout = document.querySelector('#logout-btn');
 const snackbar = document.querySelector('#snackbar');
 const closeSnackbar = document.querySelector('.snackbar--close');
 const snackbarMessage = document.querySelector('.snackbar__message');
-
 const iconName = document.querySelector('#icon_name');
 const showOrHidePassword = document.querySelector('.show-hide__icon');
 const showPassword = document.querySelector('#showPassword');
@@ -18,13 +17,15 @@ eventListeners();
 function eventListeners() {
 	// document.addEventListener('DOMContentLoaded', startApp);
 	inputName.addEventListener('blur', inputNameError);
-	inputName.addEventListener('focus', inputNameFocus);
 	inputPassword.addEventListener('blur', inputPassError);
+
+	inputName.addEventListener('focus', inputNameFocus);
 	inputPassword.addEventListener('focus', inputPassFocus);
 
 	showPassword.addEventListener('click', showPasswordFn);
 	hidePassword.addEventListener('click', hidePasswordFn);
 	btnSubmit.addEventListener('click', login);
+	closeSnackbar.addEventListener('click', snackbarClose);
 }
 
 // Show / Hide password
@@ -99,7 +100,9 @@ function inputNameFocus(e) {
 	e.target.parentElement.children[0].children[0].classList.remove(
 		'icon-svg_error'
 	);
-	e.target.parentElement.removeChild(nameError);
+	while (e.target.parentElement.contains(nameError)) {
+		e.target.parentElement.removeChild(nameError);
+	}
 }
 
 // Remove error on password focus
@@ -114,15 +117,13 @@ function inputPassFocus(e) {
 	e.target.parentElement.children[0].children[0].classList.remove(
 		'icon-svg_error'
 	);
-	e.target.parentElement.removeChild(passError);
+	while (e.target.parentElement.contains(passError)) {
+		e.target.parentElement.removeChild(passError);
+	}
 }
 
 // friendly reminder how to start the server
 // json-server db.json -m ./node_modules/json-server-auth
-
-//Regex
-const re =
-	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 async function login(e) {
 	e.preventDefault();
@@ -148,6 +149,10 @@ async function login(e) {
 		// https://blog.logrocket.com/jwt-authentication-best-practices/
 
 		// Username validation
+		// regex
+		const re =
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 		if (!re.test(email.value.toLowerCase()) || email.value === 0) {
 			emailValidation = false;
 			email.classList.add('input_error', 'username_error');
@@ -189,11 +194,15 @@ async function login(e) {
 			emailValidation === true &&
 			passValidation === true
 		) {
-			console.log('Login ok');
+			localStorage.setItem('JWT', res.accessToken);
 			snackbar.classList.add('snackbar__wrapper');
 			snackbar.classList.remove('snackbar__wrapper--hidden');
+			snackbar.children[0].classList.remove('snackbar--error');
 			snackbar.children[0].classList.add('snackbar--success');
 			snackbarMessage.innerHTML = 'Success';
+			setTimeout(() => {
+				window.location.href = 'http://localhost:5501/main.html';
+			}, 2000);
 		}
 
 		// Login error
@@ -205,21 +214,17 @@ async function login(e) {
 			console.log('Error');
 			snackbar.classList.add('snackbar__wrapper');
 			snackbar.classList.remove('snackbar__wrapper--hidden');
+			snackbar.children[0].classList.remove('snackbar--success');
 			snackbar.children[0].classList.add('snackbar--error');
-			snackbarMessage.innerHTML = `${res}`;
+			snackbarMessage.innerHTML = `${res ? res : 'Server Disconnected'}`;
 		}
-
-		localStorage.setItem('JWT', res.accessToken);
-		// window.location.href = 'http://localhost:5501/main.html';
 	} catch (error) {
 		console.log(error);
 	}
 }
 
-// if (localStorage.getItem('JWT')) {
-// 	window.location.href = 'http://localhost:5501/main.html';
-// }
-
-const logout = () => {
-	localStorage.removeItem('JWT');
-};
+// Close snackbar on "X" click
+function snackbarClose() {
+	snackbar.classList.remove('snackbar__wrapper');
+	snackbar.classList.add('snackbar__wrapper--hidden');
+}
