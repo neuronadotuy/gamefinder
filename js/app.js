@@ -14,14 +14,14 @@ const nameError = document.createElement('p');
 const passError = document.createElement('p');
 
 // Carousel selector
-const carousel = document.querySelector('#carousel');
-const carouselImage = document.querySelectorAll('.carousel__image');
-const carouselDot = document.querySelectorAll('.carousel__dot');
-let carouselPosition = 0;
+// const carousel = document.querySelector('#carousel');
+// const carouselImage = document.querySelectorAll('.carousel__image');
+// const carouselDot = document.querySelectorAll('.carousel__dot');
+// let carouselPosition = 0;
 
 eventListeners();
 function eventListeners() {
-	document.addEventListener('DOMContentLoaded', startApp);
+	// document.addEventListener('DOMContentLoaded', startApp);
 	inputName.addEventListener('blur', inputNameError);
 	inputPassword.addEventListener('blur', inputPassError);
 
@@ -36,9 +36,9 @@ function eventListeners() {
 	// carouselDot.addEventListener('click', carouselFn);
 }
 
-function startApp() {
-	carouselFn();
-}
+// function startApp() {
+// 	carouselFn();
+// }
 
 // Show / Hide password
 function showPasswordFn() {
@@ -137,29 +137,35 @@ function inputPassFocus(e) {
 // friendly reminder how to start the server
 // json-server db.json -m ./node_modules/json-server-auth
 
+function snackbarError(msg) {
+	snackbar.classList.add('snackbar__wrapper');
+	snackbar.classList.remove('snackbar__wrapper--hidden');
+	snackbar.children[0].classList.remove('snackbar--success');
+	snackbar.children[0].classList.add('snackbar--error');
+	snackbarMessage.innerHTML = msg;
+
+	setTimeout(() => {
+		snackbarClose();
+	}, 4000);
+}
+
+function snackbarSuccess(msg) {
+	snackbar.classList.add('snackbar__wrapper');
+	snackbar.classList.remove('snackbar__wrapper--hidden');
+	snackbar.children[0].classList.remove('snackbar--error');
+	snackbar.children[0].classList.add('snackbar--success');
+	snackbarMessage.innerHTML = msg;
+}
+
 async function login(e) {
 	e.preventDefault();
-	const email = inputName;
-	const password = inputPassword;
-	const server = 'http://localhost:3000/login';
-
 	let emailValidation;
 	let passValidation;
 
+	const email = inputName;
+	const password = inputPassword;
+
 	try {
-		const req = await fetch(server, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ email: email.value, password: password.value }),
-		});
-		const res = await req.json();
-		console.log(req.status);
-		console.log(res);
-
-		// https://blog.logrocket.com/jwt-authentication-best-practices/
-
 		// Username validation
 		// regex
 		const re =
@@ -176,10 +182,8 @@ async function login(e) {
 			email.parentElement.appendChild(nameError);
 			nameError.classList.add('error_message');
 			nameError.textContent = 'Enter a valid email';
-			console.log(emailValidation);
 		} else {
 			emailValidation = true;
-			console.log(emailValidation);
 		}
 
 		// Password validation
@@ -193,12 +197,34 @@ async function login(e) {
 
 			password.parentElement.appendChild(passError);
 			passError.classList.add('error_message');
-			passError.textContent = 'Enter a valid email';
-			console.log(emailValidation);
+			passError.textContent = 'Enter a valid password';
 		} else {
 			passValidation = true;
-			console.log(emailValidation);
 		}
+
+		// If Email or Password are invalid, dont call the api
+		if (emailValidation !== true || passValidation !== true) {
+			// snackbar error
+			snackbarError('Email and password required');
+			console.log(emailValidation, passValidation);
+			return;
+		}
+
+		const server = 'http://localhost:3000/login';
+
+		const req = await fetch(server, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email: inputName.value,
+				password: inputPassword.value,
+			}),
+		});
+		const res = await req.json();
+		console.log(req.status);
+		console.log(res);
 
 		// Login success
 		if (
@@ -207,11 +233,8 @@ async function login(e) {
 			passValidation === true
 		) {
 			localStorage.setItem('JWT', res.accessToken);
-			snackbar.classList.add('snackbar__wrapper');
-			snackbar.classList.remove('snackbar__wrapper--hidden');
-			snackbar.children[0].classList.remove('snackbar--error');
-			snackbar.children[0].classList.add('snackbar--success');
-			snackbarMessage.innerHTML = 'Success';
+			snackbarSuccess('Success');
+
 			setTimeout(() => {
 				window.location.href = 'http://localhost:5501/main.html';
 			}, 2000);
@@ -223,12 +246,7 @@ async function login(e) {
 			emailValidation !== true ||
 			passValidation !== true
 		) {
-			console.log('Error');
-			snackbar.classList.add('snackbar__wrapper');
-			snackbar.classList.remove('snackbar__wrapper--hidden');
-			snackbar.children[0].classList.remove('snackbar--success');
-			snackbar.children[0].classList.add('snackbar--error');
-			snackbarMessage.innerHTML = `${res ? res : 'Server Disconnected'}`;
+			snackbarError(res);
 		}
 	} catch (error) {
 		console.log(error);
@@ -240,80 +258,3 @@ function snackbarClose() {
 	snackbar.classList.remove('snackbar__wrapper');
 	snackbar.classList.add('snackbar__wrapper--hidden');
 }
-
-// Carousel
-
-// const carousel = document.querySelector('#carousel');
-// const carouselImage = document.querySelectorAll('.carousel__image');
-// const carouselDot = document.querySelectorAll('.carousel__dot');
-// let carouselPosition = 0;
-
-const carouselImages = document.querySelector('#carousel__images');
-const btns = document.querySelectorAll('.btn');
-const slides = document.querySelectorAll('.img');
-const backgrounds = document.querySelectorAll('.bg');
-const options = document.querySelectorAll('.option');
-
-var index = 1;
-var op_index = 0;
-var size = slides[index].clientWidth;
-
-update();
-
-function update() {
-	slider.style.transform = 'translateX(' + -size * index + 'px)';
-
-	backgrounds.forEach((img) => img.classList.remove('show'));
-	backgrounds[op_index].classList.add('show');
-
-	options.forEach((option) => option.classList.remove('colored'));
-	options[op_index].classList.add('colored');
-}
-
-function slide() {
-	slider.style.transition = 'transform .5s ease-in-out';
-	update();
-}
-
-function btnCheck() {
-	if (this.id === 'prev') {
-		index--;
-		if (op_index === 0) {
-			op_index = 4;
-		} else {
-			op_index--;
-		}
-	} else {
-		index++;
-		if (op_index === 4) {
-			op_index = 0;
-		} else {
-			op_index++;
-		}
-	}
-
-	slide();
-}
-
-function optionFunc() {
-	let i = Number(this.getAttribute('op-index'));
-	op_index = i;
-	index = i + 1;
-
-	slide();
-}
-
-slider.addEventListener('transitionend', () => {
-	if (slides[index].id === 'first') {
-		slider.style.transition = 'none';
-		index = slides.length - 2;
-		slider.style.transform = 'translateX(' + -size * index + 'px)';
-	} else if (slides[index].id === 'last') {
-		slider.style.transition = 'none';
-		index = 1;
-		slider.style.transform = 'translateX(' + -size * index + 'px)';
-	}
-});
-
-btns.forEach((btn) => btn.addEventListener('click', btnCheck));
-options.forEach((option) => option.addEventListener('click', optionFunc));
