@@ -163,6 +163,10 @@ li {
 
 .carousel__image {
 	position: absolute;
+	height: 100%;
+}
+
+.carousel__image img {
 	width: auto;
 	height: 100%;
 }
