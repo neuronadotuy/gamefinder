@@ -15,11 +15,13 @@ const passError = document.createElement('p');
 
 // Carousel selector
 const carousel = document.querySelector('#carousel');
-const carouselImage = document.querySelector('.carousel__image');
+const carouselImage = document.querySelectorAll('.carousel__image');
+const carouselDot = document.querySelectorAll('.carousel__dot');
+let carouselPosition = 0;
 
 eventListeners();
 function eventListeners() {
-	// document.addEventListener('DOMContentLoaded', startApp);
+	document.addEventListener('DOMContentLoaded', startApp);
 	inputName.addEventListener('blur', inputNameError);
 	inputPassword.addEventListener('blur', inputPassError);
 
@@ -30,6 +32,12 @@ function eventListeners() {
 	hidePassword.addEventListener('click', hidePasswordFn);
 	btnSubmit.addEventListener('click', login);
 	closeSnackbar.addEventListener('click', snackbarClose);
+
+	// carouselDot.addEventListener('click', carouselFn);
+}
+
+function startApp() {
+	carouselFn();
 }
 
 // Show / Hide password
@@ -235,8 +243,31 @@ function snackbarClose() {
 
 // Carousel
 
+// const carousel = document.querySelector('#carousel');
+// const carouselImage = document.querySelectorAll('.carousel__image');
+// const carouselDot = document.querySelectorAll('.carousel__dot');
+// let carouselPosition = 0;
+
 function carouselFn() {
 	for (let i = 0; i < carouselImage.length; i++) {
 		carouselImage[i].classList.add('carousel__image--hide');
 	}
+	for (let i = 0; i < carouselDot.length; i++) {
+		carouselDot[i].classList.remove('carousel__dot--active');
+	}
+
+	carouselImage.src = carouselImage[carouselPosition];
+
+	if (carouselPosition < carouselImage.length - 1) {
+		carouselPosition++;
+	} else {
+		carouselPosition = 0;
+	}
+
+	carouselImage[carouselPosition].classList.remove('carousel__image--hide');
+	carouselDot[carouselPosition].classList.add('carousel__dot--active');
+
+	setTimeout(() => {
+		carouselFn();
+	}, 3000);
 }
