@@ -5,11 +5,17 @@ const alignVertical = document.querySelector('.alignment__icon--vertical');
 const cardsWrapper = document.querySelector('.cards__wrapper');
 const cardInfo = document.querySelector('#card-info');
 const cardImg = document.querySelector('.card__img');
+const openModal = document.querySelector('.open-modal');
+const closeModalBtn = document.querySelector('.modal__close');
+const modal = document.querySelector('#modal');
 
 eventListeners();
 function eventListeners() {
 	alignHorizontal.addEventListener('click', alignHorizontalFn);
 	alignVertical.addEventListener('click', alignVerticalFn);
+	openModal.addEventListener('click', openModalFn);
+	modal.addEventListener('click', closeModalFn);
+	document.addEventListener('keydown', escKeyboard);
 }
 
 function alignHorizontalFn(e) {
@@ -47,5 +53,27 @@ function alignVerticalFn(e) {
 	while (cardImg.classList.contains('card__img')) {
 		cardImg.classList.remove('card__img');
 		cardImg.classList.add('card__img--vertical');
+	}
+}
+
+function openModalFn() {
+	while (modal.classList.contains('modal--hidden')) {
+		modal.classList.remove('modal--hidden');
+	}
+}
+
+function closeModalFn(e) {
+	if (
+		e.target.classList.contains('modal') ||
+		e.target.classList.contains('modal__close') ||
+		e.target.classList.contains('modal__close--path')
+	) {
+		modal.classList.add('modal--hidden');
+	}
+}
+
+function escKeyboard(e) {
+	if ((e.key = 'Escape')) {
+		modal.classList.add('modal--hidden');
 	}
 }

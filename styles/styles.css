@@ -808,6 +808,12 @@ aside a:hover .icon {
 	font-size: 23px;
 	line-height: 31px;
 	grid-area: header;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.card__info .header:hover {
+	color: var(--lightgrey);
 }
 
 .consoles {
@@ -926,7 +932,7 @@ aside a:hover .icon {
 	overflow-y: scroll;
 	display: grid;
 	column-gap: 50px;
-	grid-template-columns: 60% auto;
+	grid-template-columns: repeat(2, 1fr);
 	grid-template-areas:
 		'modal--consoles .'
 		'modal--header .'
@@ -959,6 +965,7 @@ aside a:hover .icon {
 	height: 16px;
 	cursor: pointer;
 	opacity: 0.8;
+	padding: 10px;
 }
 
 .modal__wrapper .modal__close:hover {
@@ -1054,6 +1061,10 @@ aside a:hover .icon {
 	grid-area: modal--desc;
 }
 
+.modal__wrapper .modal__desc::selection {
+	background: var(--green);
+}
+
 .modal__wrapper .modal__buttons {
 	display: flex;
 	flex-direction: row;
@@ -1131,7 +1142,7 @@ aside a:hover .icon {
 	grid-template-areas: 'image1 image1';
 	grid-area: modal--images;
 	padding-bottom: 15px;
-	column-gap: 16px;
+	gap: 16px;
 }
 
 .modal__wrapper .modal__images img {
