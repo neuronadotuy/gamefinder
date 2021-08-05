@@ -823,16 +823,16 @@ aside a:hover .icon {
 	width: 100%;
 }
 
-.release {
+.release--card {
 	grid-area: release;
 }
 
-.genre {
+.genre--card {
 	grid-area: genre;
 }
 
-.release,
-.genre {
+.release--card,
+.genre--card {
 	font-size: 12px;
 	font-weight: 300;
 	color: var(--lightgrey);
@@ -913,7 +913,7 @@ aside a:hover .icon {
 	background-image: linear-gradient(
 			0deg,
 			rgba(30, 30, 30, 1) 35%,
-			rgba(30, 30, 30, 0.3) 100%
+			rgba(30, 30, 30, 0.5) 100%
 		),
 		url(../img/Biomutant-screenshots-gallery-08-24-2017-1.png);
 	background-size: cover;
@@ -924,6 +924,22 @@ aside a:hover .icon {
 	margin: 5vh 10vw;
 	border-radius: 10px;
 	overflow-y: scroll;
+	display: grid;
+	column-gap: 50px;
+	grid-template-columns: 60% auto;
+	grid-template-areas:
+		'modal--consoles .'
+		'modal--header .'
+		'modal--featured-info modal--images'
+		'. modal--images'
+		'modal--featured-buttons modal--images'
+		'. modal--images'
+		'modal--desc modal--images'
+		'. modal--images'
+		'modal--buttons modal--images'
+		'. modal--images'
+		'modal--spec modal--images'
+		'. modal--images';
 }
 
 .modal__wrapper .modal__consoles {
@@ -931,12 +947,13 @@ aside a:hover .icon {
 	flex-direction: row;
 	gap: 20px;
 	padding-bottom: 10px;
+	grid-area: modal--consoles;
 }
 
 .modal__wrapper .modal__close {
-	position: absolute;
-	top: 20px;
-	right: 20px;
+	position: fixed;
+	top: 8%;
+	right: 13%;
 	fill: var(--white);
 	width: 16px;
 	height: 16px;
@@ -952,6 +969,178 @@ aside a:hover .icon {
 	font-size: 60px;
 	line-height: 81px;
 	padding-bottom: 44px;
+	grid-area: modal--header;
+}
+
+.modal__wrapper .modal__featured-info {
+	display: flex;
+	gap: 20px;
+	padding-bottom: 32px;
+	grid-area: modal--featured-info;
+}
+
+.modal__wrapper .modal__featured-info .modal__featured-item {
+	font-weight: 400;
+	color: var(--darkgrey);
+	padding: 3px 10px;
+	background-color: var(--white);
+	border-radius: 2px;
+}
+
+.modal__wrapper .modal__featured-info .modal__featured-item span {
+	font-weight: 800;
+	color: var(--green2);
+}
+
+.modal__wrapper .modal__features-buttons {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	flex-direction: row;
+	padding-bottom: 32px;
+	grid-area: modal--featured-buttons;
+}
+
+.modal__wrapper .modal__featured-button--outline {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+	padding: 0px 20px;
+	height: 50px;
+	border: 1px solid var(--lightgrey);
+	border-radius: 10px;
+	color: var(--white);
+}
+
+.modal__wrapper .modal__featured-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+	padding: 0px 20px;
+	height: 50px;
+	background: var(--bg--green);
+	border-radius: 10px;
+	border: 1px solid var(--bg--green);
+
+	color: var(--white);
+}
+
+.modal__wrapper .button__text {
+	font-size: 12px;
+	line-height: 13px;
+}
+
+.modal__wrapper .button__text span {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.modal__wrapper .button__icon {
+	font-weight: 800;
+	font-size: 24px;
+}
+
+.modal__wrapper .button__icon--gift img {
+	width: auto;
+	height: 25px;
+}
+
+.modal__wrapper .modal__desc {
+	font-size: 14px;
+	line-height: 19px;
+	padding-bottom: 32px;
+	grid-area: modal--desc;
+}
+
+.modal__wrapper .modal__buttons {
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+	padding-bottom: 32px;
+	grid-area: modal--buttons;
+}
+
+.modal__wrapper .modal__buttons .modal__button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+	border-radius: 10px;
+	background-color: var(--darkgrey);
+	padding: 5px 11px;
+}
+
+.modal__wrapper .modal__buttons .modal__button .button__icon {
+	padding-bottom: 5px;
+}
+
+.modal__wrapper .modal__spec {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-areas:
+		'plataforms genre'
+		'release developer'
+		'publisher age-rating'
+		'website .';
+	gap: 20px;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 300;
+	padding-bottom: 32px;
+	grid-area: modal--spec;
+}
+
+.modal__wrapper .modal__spec .spec__title {
+	color: var(--grey);
+}
+
+.modal__wrapper .modal__spec .spec__desc {
+	color: var(--white);
+}
+
+.modal__wrapper .modal__spec .plataforms {
+	grid-area: plataforms;
+}
+.modal__wrapper .modal__spec .genre {
+	grid-area: genre;
+}
+.modal__wrapper .modal__spec .release {
+	grid-area: release;
+}
+.modal__wrapper .modal__spec .developer {
+	grid-area: developer;
+}
+.modal__wrapper .modal__spec .publisher {
+	grid-area: publisher;
+}
+.modal__wrapper .modal__spec .age-rating {
+	grid-area: age-rating;
+}
+.modal__wrapper .modal__spec .website {
+	grid-area: website;
+}
+.modal__wrapper .modal__spec .underline {
+	text-decoration: underline;
+	cursor: pointer;
+}
+.modal__wrapper .modal__images {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-areas: 'image1 image1';
+	grid-area: modal--images;
+	padding-bottom: 15px;
+	column-gap: 16px;
+}
+
+.modal__wrapper .modal__images img {
+	width: 100%;
+	border-radius: 3px;
+}
+
+.modal__wrapper .modal__images .modal__image--first {
+	grid-area: image1;
 }
 
 /* -------------------------------------- */
