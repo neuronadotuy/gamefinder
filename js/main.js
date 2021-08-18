@@ -86,6 +86,42 @@ async function fetchAPI() {
 		});
 		const games = await req.json();
 		allGames(games.results);
+		getGameDetails(games.results);
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+async function getGameDetails(games) {
+	for (let i = 0; i < games.length; i++) {
+		const gameId = games[i].id;
+		// const gamePics = games.results[i].short_screenshots;
+
+		const gameDetails = await fetchGameDesc(gameId);
+
+		listOfGames.push(gameDetails);
+	}
+	addDescription();
+}
+
+let listOfGames = [];
+
+// Get game's screenshots and description to complete the card and modal
+async function fetchGameDesc(id) {
+	const API_KEY = '7a45335865234c029dcee2ab6fd2fd49';
+	const url = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
+	try {
+		const req = await fetch(url, {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'User-Agent': 'Nicolas Oten',
+			},
+		});
+		const data = await req.json();
+		// console.log(data.description);
+		return data;
 	} catch (error) {
 		console.log(error);
 	}
@@ -107,7 +143,9 @@ function allGames(games) {
 
 		newGame += `
 		<div class="card" id=${id}>
-		<div class="card__img card__img--format" style="background-image: url(${background_image});"></div>
+		<div class="card__img card__img--format" style="background-image: url(${
+			background_image || '../img/placeholder.jpg'
+		});"></div>
 		<div class="card__info card__info--format">
 			<h3 class="header bold open-modal">${name}</h3>
 			<div class="consoles">
@@ -165,41 +203,38 @@ function allGames(games) {
 			<div class="gift__container">
 				<button class="gift bold">+<img src="./img/gift.svg" alt=""></button>
 			</div>
-			<div class="card__description--format card__description--hidden">Hey</div>
+			<div class="card__description--format card__description--hidden" id="card__description--${id}"></div>
 		</div>
 		
 	</div>
 		`;
 	});
-
 	cardsWrapper.innerHTML += newGame;
 }
 
-// const getGameDescription = (id) => {
-// 	fetchGameDesc();
-// 	async function fetchGameDesc() {
-// 		const API_KEY = '7a45335865234c029dcee2ab6fd2fd49';
-// 		const url = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
-// 		try {
-// 			const req = await fetch(url, {
-// 				method: 'GET',
-// 				headers: {
-// 					Accept: 'application/json',
-// 					'Content-Type': 'application/json',
-// 					'User-Agent': 'Nicolas Oten',
-// 				},
-// 			});
-// 			const games = await req.json();
-// 			allGames(games.results);
-// 		} catch (error) {
-// 			console.log(error);
+function addDescription() {
+	for (let i = 0; i < listOfGames.length; i++) {
+		const newGameDescription = listOfGames[i].description;
+		document.getElementById(
+			`card__description--${listOfGames[i].id}`
+		).innerHTML = newGameDescription;
+	}
+}
+
+// function addGameDesc(id) {
+// 	let description = '';
+// 	for (let i = 0; i < cardsDetails.length; i++) {
+// 		let game = cardsDetails[i];
+// 		if (game.id === id) {
+// 			description;
 // 		}
 // 	}
-// };
+// 	document.querySelector(`#game__description--${id}`).innerHTML = description;
+// }
 
-function showDescription() {
-	console.log('game description');
-}
+// function showDescription() {
+// 	console.log('game description');
+// }
 
 // Open modal on game name (card)
 document.addEventListener('click', openModalFn);
@@ -323,8 +358,19 @@ function alignVerticalFn() {
 }
 
 // Modal
+function makeModal(id) {
+	var modalInfo;
+	let i = 0;
+	let modalFlag = false;
+	while (i < listOfGames.length && !modalFlag) {
+		const modal = listOfGames[i];
+		if (modal.id === id) {
+			modalInfo = listOfGames[i];
+			modalFlag = true;
+		}
+		i++;
+	}
 
-// Get game by id
-function getGameID(id) {
-	// body
+	let newModal = '';
+	newModal += ``;
 }
