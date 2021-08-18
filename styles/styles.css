@@ -24,6 +24,10 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
+*::selection {
+	background: var(--green);
+}
+
 body {
 	background-color: var(--black);
 }
@@ -977,8 +981,8 @@ aside a:hover .icon {
 	overflow-y: scroll;
 	display: grid;
 	column-gap: 50px;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-areas:
+	grid-template-columns: 60% auto;
+	/* grid-template-areas:
 		'modal--consoles .'
 		'modal--header .'
 		'modal--featured-info modal--images'
@@ -990,7 +994,17 @@ aside a:hover .icon {
 		'modal--buttons modal--images'
 		'. modal--images'
 		'modal--spec modal--images'
-		'. modal--images';
+		'. modal--images'; */
+}
+
+.modal-header__wrapper {
+	grid-column: 1 / 3;
+}
+.modal-information__wrapper {
+	grid-column: 1 / 2;
+}
+.modal-images__wrapper {
+	grid-column: 2 / 3;
 }
 
 .modal__wrapper .modal__consoles {
