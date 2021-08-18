@@ -3,8 +3,6 @@
 const alignHorizontal = document.querySelector('.alignment__icon--horizontal');
 const alignVertical = document.querySelector('.alignment__icon--vertical');
 const cardsWrapper = document.querySelector('.cards__wrapper');
-const cardInfo = document.querySelector('#card-info');
-const cardImg = document.querySelector('.card__img');
 const closeModalBtn = document.querySelector('.modal__close');
 const modal = document.querySelector('#modal');
 const asideMenu = document.querySelector('#aside-menu');
@@ -31,32 +29,8 @@ function eventListeners() {
 	alignVertical.addEventListener('click', alignVerticalFn);
 	navBtn.addEventListener('click', navLuncher);
 	menuCloser.addEventListener('click', navCloser);
-	modal.addEventListener('click', closeModalFn);
+	// modal.addEventListener('click', closeModalFn);
 	document.addEventListener('keydown', escKeyboard);
-}
-
-// function openModalFn() {
-// 	// while (modal.classList.contains('modal--hidden')) {
-// 	// 	modal.classList.remove('modal--hidden');
-// 	// }
-
-// 	console.log('open modal');
-// }
-
-function closeModalFn(e) {
-	if (
-		e.target.classList.contains('modal') ||
-		e.target.classList.contains('modal__close') ||
-		e.target.classList.contains('modal__close--path')
-	) {
-		modal.classList.add('modal--hidden');
-	}
-}
-
-function escKeyboard(e) {
-	if ((e.keyCode = 'Escape')) {
-		modal.classList.add('modal--hidden');
-	}
 }
 
 const tabletView = window.innerWidth <= '767px';
@@ -97,8 +71,8 @@ const formatDate = function (date) {
 		.replace(',', '');
 };
 
-consultAPI();
-async function consultAPI() {
+fetchAPI();
+async function fetchAPI() {
 	const API_KEY = '7a45335865234c029dcee2ab6fd2fd49';
 	const url = `https://api.rawg.io/api/games?key=${API_KEY}`;
 	try {
@@ -121,46 +95,53 @@ async function consultAPI() {
 function allGames(games) {
 	let newGame = '';
 	games.forEach((game, index) => {
-		const { id, background_image, name, platforms, released, rating, genres } =
-			game;
+		const {
+			id,
+			background_image,
+			name,
+			parent_platforms,
+			released,
+			rating,
+			genres,
+		} = game;
 
 		newGame += `
 		<div class="card" id=${id}>
-		<div class="card__img" style="background-image: url(${background_image});"></div>
-		<div class="card__info" id="card-info">
+		<div class="card__img card__img--format" style="background-image: url(${background_image});"></div>
+		<div class="card__info card__info--format">
 			<h3 class="header bold open-modal">${name}</h3>
 			<div class="consoles">
 			<ul>`;
-		for (let i = 0; i < platforms.length; i++) {
-			platforms[i].platform.slug;
+		for (let i = 0; i < parent_platforms.length; i++) {
+			parent_platforms[i].platform.slug;
 			// newGame += `<li>${platform}</li>`;
-			if (platforms[i].platform.slug === 'playstation3') {
+			if (parent_platforms[i].platform.slug === 'playstation') {
 				newGame += `<li><div class="console__icon">${playstationIcon}</div></li>`;
 			}
 
-			if (platforms[i].platform.slug === 'xbox360') {
+			if (parent_platforms[i].platform.slug === 'xbox360') {
 				newGame += `<li><div class="console__icon">${xboxIcon}</div></li>`;
 			}
 
-			if (platforms[i].platform.slug === 'pc') {
+			if (parent_platforms[i].platform.slug === 'pc') {
 				newGame += `<li><div class="console__icon">${pcIcon}</div></li>`;
 			}
 
-			if (platforms[i].platform.slug === 'nintendo-switch') {
+			if (parent_platforms[i].platform.slug === 'nintendo') {
 				newGame += `<li><div class="console__icon">${nintendoIcon}</div></li>`;
 			}
 
-			if (platforms[i].platform.slug === 'ios') {
+			if (parent_platforms[i].platform.slug === 'ios') {
 				newGame += `<li><div class="console__icon">${iosIcon}</div></li>`;
 			}
 
-			if (platforms[i].platform.slug === 'macos') {
+			if (parent_platforms[i].platform.slug === 'mac') {
 				newGame += `<li><div class="console__icon">${macIcon}</div></li>`;
 			}
-			if (platforms[i].platform.slug === 'linux') {
+			if (parent_platforms[i].platform.slug === 'linux') {
 				newGame += `<li><div class="console__icon">${linuxIcon}</div></li>`;
 			}
-			if (platforms[i].platform.slug === 'android') {
+			if (parent_platforms[i].platform.slug === 'android') {
 				newGame += `<li><div class="console__icon">${androidIcon}</div></li>`;
 			}
 		}
@@ -184,7 +165,9 @@ function allGames(games) {
 			<div class="gift__container">
 				<button class="gift bold">+<img src="./img/gift.svg" alt=""></button>
 			</div>
+			<div class="card__description--format card__description--hidden">Hey</div>
 		</div>
+		
 	</div>
 		`;
 	});
@@ -192,11 +175,83 @@ function allGames(games) {
 	cardsWrapper.innerHTML += newGame;
 }
 
-let openModal = document.querySelector('.open-modal');
-openModal.addEventListener('click', openModalFn);
-function openModalFn(e) {
-	console.log(e.target);
+// const getGameDescription = (id) => {
+// 	fetchGameDesc();
+// 	async function fetchGameDesc() {
+// 		const API_KEY = '7a45335865234c029dcee2ab6fd2fd49';
+// 		const url = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
+// 		try {
+// 			const req = await fetch(url, {
+// 				method: 'GET',
+// 				headers: {
+// 					Accept: 'application/json',
+// 					'Content-Type': 'application/json',
+// 					'User-Agent': 'Nicolas Oten',
+// 				},
+// 			});
+// 			const games = await req.json();
+// 			allGames(games.results);
+// 		} catch (error) {
+// 			console.log(error);
+// 		}
+// 	}
+// };
+
+function showDescription() {
+	console.log('game description');
 }
+
+// Open modal on game name (card)
+document.addEventListener('click', openModalFn);
+function openModalFn(e) {
+	if (e.target.classList.contains('open-modal')) {
+		document.querySelector('#modal').classList.remove('modal--hidden');
+		disableScroll();
+	}
+}
+
+document.addEventListener('click', closeModalFn);
+function closeModalFn(e) {
+	if (
+		e.target.classList.contains('modal') ||
+		e.target.classList.contains('modal__close') ||
+		e.target.classList.contains('modal__close--path')
+	) {
+		document.querySelector('#modal').classList.add('modal--hidden');
+		enableScroll();
+	}
+}
+
+function escKeyboard(e) {
+	if (
+		(e.keyCode = 'Escape') &&
+		!document.querySelector('#modal').classList.contains('modal--hidden')
+	) {
+		document.querySelector('#modal').classList.add('modal--hidden');
+		enableScroll();
+	}
+}
+
+// Disable scroll Y
+function disableScroll() {
+	// Get the current page scroll position
+	scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+	(scrollLeft = window.pageXOffset || document.documentElement.scrollLeft),
+		// if any scroll is attempted, set this to the previous value
+		(window.onscroll = function () {
+			window.scrollTo(scrollLeft, scrollTop);
+		});
+}
+
+// Enable scroll Y
+function enableScroll() {
+	window.onscroll = function () {};
+}
+
+// Change card info on vertical/horizontal display
+document.querySelectorAll('.card__info--format');
+// Change card image on vertical/horizontal display
+document.querySelectorAll('.card__img--format');
 
 // Horizontal display
 function alignHorizontalFn(e) {
@@ -204,17 +259,36 @@ function alignHorizontalFn(e) {
 		e.target.parentElement.classList.remove('alignment__icon--offset');
 		alignVertical.classList.add('alignment__icon--offset');
 	}
+
 	while (cardsWrapper.classList.contains('cards__wrapper--vertical')) {
 		cardsWrapper.classList.remove('cards__wrapper--vertical');
 		cardsWrapper.classList.add('cards__wrapper');
 	}
-	while (cardInfo.classList.contains('card__info--vertical')) {
-		cardInfo.classList.remove('card__info--vertical');
-		cardInfo.classList.add('card__info');
+
+	document
+		.querySelector('.card__info--format')
+		.classList.replace('card__info--vertical', 'card__info');
+
+	document
+		.querySelector('.card__img--format')
+		.classList.replace('card__img--vertical', 'card__img');
+
+	let cardImg = document.querySelectorAll('.card__img--format');
+	for (let i = 0; i < cardImg.length; i++) {
+		const eachCardImage = cardImg[i];
+		eachCardImage.classList.replace('card__img--vertical', 'card__img');
 	}
-	while (cardImg.classList.contains('card__img--vertical')) {
-		cardImg.classList.remove('card__img--vertical');
-		cardImg.classList.add('card__img');
+
+	let cardInfo = document.querySelectorAll('.card__info--format');
+	for (let i = 0; i < cardInfo.length; i++) {
+		const eachCardInfo = cardInfo[i];
+		eachCardInfo.classList.replace('card__info--vertical', 'card__info');
+	}
+
+	let cardDescription = document.querySelectorAll('.card__description--format');
+	for (let i = 0; i < cardDescription.length; i++) {
+		const eachcardDescription = cardDescription[i];
+		eachcardDescription.classList.add('card__description--hidden');
 	}
 }
 // Vertical display
@@ -229,12 +303,28 @@ function alignVerticalFn() {
 		cardsWrapper.classList.add('cards__wrapper--vertical');
 	}
 
-	while (cardInfo.classList.contains('card__info')) {
-		cardInfo.classList.remove('card__info');
-		cardInfo.classList.add('card__info--vertical');
+	let cardImg = document.querySelectorAll('.card__img--format');
+	for (let i = 0; i < cardImg.length; i++) {
+		const eachCardImage = cardImg[i];
+		eachCardImage.classList.replace('card__img', 'card__img--vertical');
 	}
-	while (cardImg.classList.contains('card__img')) {
-		cardImg.classList.remove('card__img');
-		cardImg.classList.add('card__img--vertical');
+
+	let cardInfo = document.querySelectorAll('.card__info--format');
+	for (let i = 0; i < cardInfo.length; i++) {
+		const eachCardInfo = cardInfo[i];
+		eachCardInfo.classList.replace('card__info', 'card__info--vertical');
 	}
+
+	let cardDescription = document.querySelectorAll('.card__description--format');
+	for (let i = 0; i < cardDescription.length; i++) {
+		const eachcardDescription = cardDescription[i];
+		eachcardDescription.classList.remove('card__description--hidden');
+	}
+}
+
+// Modal
+
+// Get game by id
+function getGameID(id) {
+	// body
 }

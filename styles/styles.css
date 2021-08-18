@@ -784,7 +784,6 @@ aside a:hover .icon {
 }
 
 .card__img {
-	background-image: url('../img/Biomutant-screenshots-gallery-08-24-2017-1.png');
 	background-position: center;
 	background-size: cover;
 	width: 100%;
@@ -798,7 +797,6 @@ aside a:hover .icon {
 } */
 
 .card__img--vertical {
-	background-image: url('../img/Biomutant-screenshots-gallery-08-24-2017-1.png');
 	background-position: center;
 	background-size: cover;
 	width: 100%;
@@ -808,7 +806,7 @@ aside a:hover .icon {
 
 .card__info {
 	display: grid;
-	grid-template-columns: 60% auto;
+	grid-template-columns: auto auto;
 	grid-template-areas:
 		'header consoles'
 		'release rank'
@@ -822,7 +820,8 @@ aside a:hover .icon {
 	grid-template-columns: 3fr 3fr 1fr 2fr;
 	grid-template-areas:
 		'header header header consoles'
-		'release genre rank gift';
+		'release genre rank gift'
+		'desc desc desc desc';
 	padding: 20px;
 	gap: 20px;
 	color: var(--white);
@@ -916,13 +915,25 @@ aside a:hover .icon {
 	background: var(--green);
 }
 
+.card__description--format {
+	grid-area: desc;
+	font-size: 14px;
+	line-height: 19px;
+
+	color: #ffffff;
+}
+
+.card__description--hidden {
+	display: none;
+}
+
 /******** modal ********/
 .modal {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
-	max-width: 100vw;
-	max-height: 100vh;
+	width: 100%;
+	height: 100%;
 	background-color: rgba(0, 0, 0, 0.78);
 	color: var(--white);
 }
