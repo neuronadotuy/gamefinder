@@ -1,14 +1,15 @@
 /** @format */
 
-const alignHorizontal = document.querySelector('.alignment__icon--horizontal');
-const alignVertical = document.querySelector('.alignment__icon--vertical');
-const cardsWrapper = document.querySelector('.cards__wrapper');
-const closeModalBtn = document.querySelector('.modal__close');
-const modal = document.querySelector('#modal');
-const asideMenu = document.querySelector('#aside-menu');
-const navBtn = document.querySelector('.nav__menu');
-const menuCloser = document.querySelector('#menu-closer');
-const searchbar = document.querySelector('#searchbar');
+const alignHorizontal = document.querySelector(".alignment__icon--horizontal");
+const alignVertical = document.querySelector(".alignment__icon--vertical");
+const cardsWrapper = document.querySelector(".cards__wrapper");
+const closeModalBtn = document.querySelector(".modal__close");
+const modal = document.querySelector("#modal");
+const asideMenu = document.querySelector("#aside-menu");
+const navBtn = document.querySelector(".nav__menu");
+const menuCloser = document.querySelector("#menu-closer");
+
+const searchbar = document.querySelector("#searchbar");
 
 // Icons
 const pcIcon = `<svg id="pc" viewBox="0 0 16 13" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M13 5.95833H5.95833V0.998704L13 0V5.95833ZM5.41667 1.08333V5.95833H0V1.80612L5.41667 1.08333ZM5.41667 6.5H0V11.1145L5.41667 11.9167V6.5ZM5.95833 11.912V6.5H13V13L5.95833 11.912Z"  /> </svg>`;
@@ -26,83 +27,83 @@ const androidIcon = `<svg id="android" viewBox="0 0 45 50" xmlns="http://www.w3.
 
 eventListeners();
 function eventListeners() {
-	alignHorizontal.addEventListener('click', alignHorizontalFn);
-	alignVertical.addEventListener('click', alignVerticalFn);
-	navBtn.addEventListener('click', navLuncher);
-	menuCloser.addEventListener('click', navCloser);
-	document.addEventListener('keydown', escKeyboard);
+  alignHorizontal.addEventListener("click", alignHorizontalFn);
+  alignVertical.addEventListener("click", alignVerticalFn);
+  navBtn.addEventListener("click", navLuncher);
+  menuCloser.addEventListener("click", navCloser);
+  document.addEventListener("keydown", escKeyboard);
 }
 
-const tabletView = window.innerWidth <= '767px';
+const tabletView = window.innerWidth <= "767px";
 if (tabletView) {
-	asideMenu.classList.add('aside--hidden');
-	while (asideMenu.classList.contains('aside--show')) {
-		asideMenu.classList.remove('aside--show');
-	}
+  asideMenu.classList.add("aside--hidden");
+  while (asideMenu.classList.contains("aside--show")) {
+    asideMenu.classList.remove("aside--show");
+  }
 }
 
 function navLuncher(e) {
-	if (
-		e.target.classList.contains('nav__menu') ||
-		e.target.classList.contains('nav__menu--icon') ||
-		e.target.classList.contains('nav__menu--path')
-	) {
-		asideMenu.classList.add('aside--show');
-		asideMenu.classList.remove('aside--hidden');
-		menuCloser.classList.add('menu__closer');
-	}
+  if (
+    e.target.classList.contains("nav__menu") ||
+    e.target.classList.contains("nav__menu--icon") ||
+    e.target.classList.contains("nav__menu--path")
+  ) {
+    asideMenu.classList.add("aside--show");
+    asideMenu.classList.remove("aside--hidden");
+    menuCloser.classList.add("menu__closer");
+  }
 }
 
 function navCloser(e) {
-	asideMenu.classList.remove('aside--show');
-	asideMenu.classList.add('aside--hidden');
-	e.target.classList.add('menu__closer--hidden');
-	e.target.classList.remove('menu__closer');
+  asideMenu.classList.remove("aside--show");
+  asideMenu.classList.add("aside--hidden");
+  e.target.classList.add("menu__closer--hidden");
+  e.target.classList.remove("menu__closer");
 }
 
-const formatDate = function (date) {
-	let newDate = new Date(date);
-	return newDate
-		.toLocaleString('en-US', {
-			month: 'short',
-			day: 'numeric',
-			year: 'numeric',
-		})
-		.replace(',', '');
+const formatDate = function(date) {
+  let newDate = new Date(date);
+  return newDate
+    .toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    })
+    .replace(",", "");
 };
 
 fetchAPI();
 async function fetchAPI() {
-	const API_KEY = '7a45335865234c029dcee2ab6fd2fd49';
-	const url = `https://api.rawg.io/api/games?key=${API_KEY}`;
-	try {
-		const req = await fetch(url, {
-			method: 'GET',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				'User-Agent': 'Nicolas Oten',
-			},
-		});
-		const games = await req.json();
-		allGames(games.results);
-		getGameDetails(games.results);
-	} catch (error) {
-		console.log(error);
-	}
+  const API_KEY = "7a45335865234c029dcee2ab6fd2fd49";
+  const url = `https://api.rawg.io/api/games?key=${API_KEY}`;
+  try {
+    const req = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "Nicolas Oten"
+      }
+    });
+    const games = await req.json();
+    allGames(games.results);
+    getGameDetails(games.results);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function getGameDetails(games) {
-	for (let i = 0; i < games.length; i++) {
-		const gameId = games[i].id;
-		// const gamePics = games.results[i].short_screenshots;
+  for (let i = 0; i < games.length; i++) {
+    let gameId = games[i].id;
+    // let gameScreenshots = games.results[i].short_screenshots;
 
-		const gameDetails = await fetchGameDesc(gameId);
+    const gameDetails = await fetchGameDesc(gameId);
 
-		listOfGames.push(gameDetails);
-	}
-	addDescription();
-	// console.log(listOfGames);
+    listOfGames.push(gameDetails);
+  }
+  addDescription();
+  // console.log(listOfGames);
 }
 
 // Store games fetch data on local array to prevent multiple calls to the api
@@ -110,82 +111,81 @@ let listOfGames = [];
 
 // Get game's description to complete the card and modal
 async function fetchGameDesc(id) {
-	const API_KEY = '7a45335865234c029dcee2ab6fd2fd49';
-	const url = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
-	try {
-		const req = await fetch(url, {
-			method: 'GET',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				'User-Agent': 'Nicolas Oten',
-			},
-		});
-		const data = await req.json();
-		// console.log(data.description);
-		return data;
-	} catch (error) {
-		console.log(error);
-	}
+  const API_KEY = "7a45335865234c029dcee2ab6fd2fd49";
+  const url = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
+  try {
+    const req = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "Nicolas Oten"
+      }
+    });
+    const data = await req.json();
+    // console.log(data.description);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // create each game's card
 function allGames(games) {
-	let newGame = '';
-	games.forEach((game, index) => {
-		const {
-			id,
-			background_image,
-			name,
-			parent_platforms,
-			released,
-			rating,
-			genres,
-		} = game;
+  let newGame = "";
+  games.forEach((game, index) => {
+    const {
+      id,
+      background_image,
+      name,
+      parent_platforms,
+      released,
+      rating,
+      genres
+    } = game;
 
-		newGame += `
+    newGame += `
 		<div class="card" id=${id}>
-		<div class="card__img card__img--format" style="background-image: url(${
-			background_image || '../img/placeholder.jpg'
-		});"></div>
+		<div class="card__img card__img--format" style="background-image: url(${background_image ||
+      "../img/placeholder.jpg"});"></div>
 		<div class="card__info card__info--format">
 			<h3 class="header bold open-modal">${name}</h3>
 			<div class="consoles">
 			<ul>`;
-		for (let i = 0; i < parent_platforms.length; i++) {
-			parent_platforms[i].platform.slug;
-			// newGame += `<li>${platform}</li>`;
-			if (parent_platforms[i].platform.slug === 'playstation') {
-				newGame += `<li><div class="console__icon">${playstationIcon}</div></li>`;
-			}
+    for (let i = 0; i < parent_platforms.length; i++) {
+      parent_platforms[i].platform.slug;
+      // newGame += `<li>${platform}</li>`;
+      if (parent_platforms[i].platform.slug === "playstation") {
+        newGame += `<li><div class="console__icon">${playstationIcon}</div></li>`;
+      }
 
-			if (parent_platforms[i].platform.slug === 'xbox360') {
-				newGame += `<li><div class="console__icon">${xboxIcon}</div></li>`;
-			}
+      if (parent_platforms[i].platform.slug === "xbox360") {
+        newGame += `<li><div class="console__icon">${xboxIcon}</div></li>`;
+      }
 
-			if (parent_platforms[i].platform.slug === 'pc') {
-				newGame += `<li><div class="console__icon">${pcIcon}</div></li>`;
-			}
+      if (parent_platforms[i].platform.slug === "pc") {
+        newGame += `<li><div class="console__icon">${pcIcon}</div></li>`;
+      }
 
-			if (parent_platforms[i].platform.slug === 'nintendo') {
-				newGame += `<li><div class="console__icon">${nintendoIcon}</div></li>`;
-			}
+      if (parent_platforms[i].platform.slug === "nintendo") {
+        newGame += `<li><div class="console__icon">${nintendoIcon}</div></li>`;
+      }
 
-			if (parent_platforms[i].platform.slug === 'ios') {
-				newGame += `<li><div class="console__icon">${iosIcon}</div></li>`;
-			}
+      if (parent_platforms[i].platform.slug === "ios") {
+        newGame += `<li><div class="console__icon">${iosIcon}</div></li>`;
+      }
 
-			if (parent_platforms[i].platform.slug === 'mac') {
-				newGame += `<li><div class="console__icon">${macIcon}</div></li>`;
-			}
-			if (parent_platforms[i].platform.slug === 'linux') {
-				newGame += `<li><div class="console__icon">${linuxIcon}</div></li>`;
-			}
-			if (parent_platforms[i].platform.slug === 'android') {
-				newGame += `<li><div class="console__icon">${androidIcon}</div></li>`;
-			}
-		}
-		newGame += `</ul>
+      if (parent_platforms[i].platform.slug === "mac") {
+        newGame += `<li><div class="console__icon">${macIcon}</div></li>`;
+      }
+      if (parent_platforms[i].platform.slug === "linux") {
+        newGame += `<li><div class="console__icon">${linuxIcon}</div></li>`;
+      }
+      if (parent_platforms[i].platform.slug === "android") {
+        newGame += `<li><div class="console__icon">${androidIcon}</div></li>`;
+      }
+    }
+    newGame += `</ul>
 			</div>
 			<div class="release--card">
 				<p>Release Date</p>
@@ -194,196 +194,197 @@ function allGames(games) {
 			<p class="rank bold">#${index + 1}</p>
 			<div class="genre--card">
 				<p>Genres</p><p>`;
-		for (let i = 0; i < genres.length; i++) {
-			let genre = genres[i];
-			newGame += `${genre.name}`;
-			if (i < genres.length - 1) {
-				newGame += `, `;
-			}
-		}
-		newGame += `</p></div>
+    for (let i = 0; i < genres.length; i++) {
+      let genre = genres[i];
+      newGame += `${genre.name}`;
+      if (i < genres.length - 1) {
+        newGame += `, `;
+      }
+    }
+    newGame += `</p></div>
 			<div class="gift__container">
 				<button class="gift bold">+<img src="./img/gift.svg" alt=""></button>
 			</div>
 			<div class="card__description--format card__description--hidden" id="card__description--${id}"></div>
 		</div>
-		
+
 	</div>
 		`;
-	});
-	cardsWrapper.innerHTML += newGame;
+  });
+  cardsWrapper.innerHTML += newGame;
 }
 
 function addDescription() {
-	for (let i = 0; i < listOfGames.length; i++) {
-		const newGameDescription = listOfGames[i].description;
-		document.getElementById(
-			`card__description--${listOfGames[i].id}`
-		).innerHTML = newGameDescription;
-	}
+  for (let i = 0; i < listOfGames.length; i++) {
+    const newGameDescription = listOfGames[i].description;
+    document.getElementById(
+      `card__description--${listOfGames[i].id}`
+    ).innerHTML = newGameDescription;
+  }
 }
 
 // Open modal on card click
-document.addEventListener('click', openModalFn);
+document.addEventListener("click", openModalFn);
 function openModalFn(e) {
-	let cardId = e.path[2].id;
-	if (e.target.classList.contains('open-modal')) {
-		document.querySelector('#modal').classList.remove('modal--hidden');
-		document.body.style.overflowY = 'hidden';
-		makeModal(cardId);
-		disableScroll();
-	}
+  let cardId = e.path[2].id;
+  if (e.target.classList.contains("open-modal")) {
+    document.querySelector("#modal").classList.remove("modal--hidden");
+    document.body.style.overflowY = "hidden";
+    makeModal(cardId);
+    disableScroll();
+  }
 }
 
-document.addEventListener('click', closeModalFn);
+document.addEventListener("click", closeModalFn);
 function closeModalFn(e) {
-	if (
-		e.target.classList.contains('modal') ||
-		e.target.classList.contains('modal__close') ||
-		e.target.classList.contains('modal__close--path')
-	) {
-		document.querySelector('#modal').classList.add('modal--hidden');
-		document.body.style.overflowY = 'scroll';
-		enableScroll();
-	}
+  if (
+    e.target.classList.contains("modal") ||
+    e.target.classList.contains("modal__close") ||
+    e.target.classList.contains("modal__close--path")
+  ) {
+    document.querySelector("#modal").classList.add("modal--hidden");
+    document.body.style.overflowY = "scroll";
+    enableScroll();
+  }
 }
 
-document.addEventListener('keydown', escKeyboard);
+document.addEventListener("keydown", escKeyboard);
 function escKeyboard(e) {
-	if (
-		(e.keyCode = 'escape') &&
-		!document.querySelector('#modal').classList.contains('modal--hidden')
-	) {
-		document.querySelector('#modal').classList.add('modal--hidden');
-		document.body.style.overflowY = 'scroll';
-		enableScroll();
-	}
+  if (
+    (e.keyCode = "escape") &&
+    !document.querySelector("#modal").classList.contains("modal--hidden")
+  ) {
+    document.querySelector("#modal").classList.add("modal--hidden");
+    document.body.style.overflowY = "scroll";
+    enableScroll();
+  }
 }
 
 // Disable scroll Y
 function disableScroll() {
-	// Get the current page scroll position
-	scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-	(scrollLeft = window.pageXOffset || document.documentElement.scrollLeft),
-		// if any scroll is attempted, set this to the previous value
-		(window.onscroll = function () {
-			window.scrollTo(scrollLeft, scrollTop);
-		});
+  // Get the current page scroll position
+  scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  (scrollLeft = window.pageXOffset || document.documentElement.scrollLeft),
+    // if any scroll is attempted, set this to the previous value
+    (window.onscroll = function() {
+      window.scrollTo(scrollLeft, scrollTop);
+    });
 }
 
 // Enable scroll Y
 function enableScroll() {
-	window.onscroll = function () {};
+  window.onscroll = function() {};
 }
 
 // Change card info on vertical/horizontal display
-document.querySelectorAll('.card__info--format');
+document.querySelectorAll(".card__info--format");
 // Change card image on vertical/horizontal display
-document.querySelectorAll('.card__img--format');
+document.querySelectorAll(".card__img--format");
 
 // Horizontal display
 function alignHorizontalFn(e) {
-	while (e.target.parentElement.classList.contains('alignment__icon--offset')) {
-		e.target.parentElement.classList.remove('alignment__icon--offset');
-		alignVertical.classList.add('alignment__icon--offset');
-	}
+  while (e.target.parentElement.classList.contains("alignment__icon--offset")) {
+    e.target.parentElement.classList.remove("alignment__icon--offset");
+    alignVertical.classList.add("alignment__icon--offset");
+  }
 
-	while (cardsWrapper.classList.contains('cards__wrapper--vertical')) {
-		cardsWrapper.classList.remove('cards__wrapper--vertical');
-		cardsWrapper.classList.add('cards__wrapper');
-	}
+  while (cardsWrapper.classList.contains("cards__wrapper--vertical")) {
+    cardsWrapper.classList.remove("cards__wrapper--vertical");
+    cardsWrapper.classList.add("cards__wrapper");
+  }
 
-	document
-		.querySelector('.card__info--format')
-		.classList.replace('card__info--vertical', 'card__info');
+  document
+    .querySelector(".card__info--format")
+    .classList.replace("card__info--vertical", "card__info");
 
-	document
-		.querySelector('.card__img--format')
-		.classList.replace('card__img--vertical', 'card__img');
+  document
+    .querySelector(".card__img--format")
+    .classList.replace("card__img--vertical", "card__img");
 
-	let cardImg = document.querySelectorAll('.card__img--format');
-	for (let i = 0; i < cardImg.length; i++) {
-		const eachCardImage = cardImg[i];
-		eachCardImage.classList.replace('card__img--vertical', 'card__img');
-	}
+  let cardImg = document.querySelectorAll(".card__img--format");
+  for (let i = 0; i < cardImg.length; i++) {
+    const eachCardImage = cardImg[i];
+    eachCardImage.classList.replace("card__img--vertical", "card__img");
+  }
 
-	let cardInfo = document.querySelectorAll('.card__info--format');
-	for (let i = 0; i < cardInfo.length; i++) {
-		const eachCardInfo = cardInfo[i];
-		eachCardInfo.classList.replace('card__info--vertical', 'card__info');
-	}
+  let cardInfo = document.querySelectorAll(".card__info--format");
+  for (let i = 0; i < cardInfo.length; i++) {
+    const eachCardInfo = cardInfo[i];
+    eachCardInfo.classList.replace("card__info--vertical", "card__info");
+  }
 
-	let cardDescription = document.querySelectorAll('.card__description--format');
-	for (let i = 0; i < cardDescription.length; i++) {
-		const eachcardDescription = cardDescription[i];
-		eachcardDescription.classList.add('card__description--hidden');
-	}
+  let cardDescription = document.querySelectorAll(".card__description--format");
+  for (let i = 0; i < cardDescription.length; i++) {
+    const eachcardDescription = cardDescription[i];
+    eachcardDescription.classList.add("card__description--hidden");
+  }
 }
 // Vertical display
 function alignVerticalFn() {
-	while (alignVertical.classList.contains('alignment__icon--offset')) {
-		alignVertical.classList.remove('alignment__icon--offset');
-		alignHorizontal.classList.add('alignment__icon--offset');
-	}
+  while (alignVertical.classList.contains("alignment__icon--offset")) {
+    alignVertical.classList.remove("alignment__icon--offset");
+    alignHorizontal.classList.add("alignment__icon--offset");
+  }
 
-	while (cardsWrapper.classList.contains('cards__wrapper')) {
-		cardsWrapper.classList.remove('cards__wrapper');
-		cardsWrapper.classList.add('cards__wrapper--vertical');
-	}
+  while (cardsWrapper.classList.contains("cards__wrapper")) {
+    cardsWrapper.classList.remove("cards__wrapper");
+    cardsWrapper.classList.add("cards__wrapper--vertical");
+  }
 
-	let cardImg = document.querySelectorAll('.card__img--format');
-	for (let i = 0; i < cardImg.length; i++) {
-		const eachCardImage = cardImg[i];
-		eachCardImage.classList.replace('card__img', 'card__img--vertical');
-	}
+  let cardImg = document.querySelectorAll(".card__img--format");
+  for (let i = 0; i < cardImg.length; i++) {
+    const eachCardImage = cardImg[i];
+    eachCardImage.classList.replace("card__img", "card__img--vertical");
+  }
 
-	let cardInfo = document.querySelectorAll('.card__info--format');
-	for (let i = 0; i < cardInfo.length; i++) {
-		const eachCardInfo = cardInfo[i];
-		eachCardInfo.classList.replace('card__info', 'card__info--vertical');
-	}
+  let cardInfo = document.querySelectorAll(".card__info--format");
+  for (let i = 0; i < cardInfo.length; i++) {
+    const eachCardInfo = cardInfo[i];
+    eachCardInfo.classList.replace("card__info", "card__info--vertical");
+  }
 
-	let cardDescription = document.querySelectorAll('.card__description--format');
-	for (let i = 0; i < cardDescription.length; i++) {
-		const eachcardDescription = cardDescription[i];
-		eachcardDescription.classList.remove('card__description--hidden');
-	}
+  let cardDescription = document.querySelectorAll(".card__description--format");
+  for (let i = 0; i < cardDescription.length; i++) {
+    const eachcardDescription = cardDescription[i];
+    eachcardDescription.classList.remove("card__description--hidden");
+  }
 }
 
 // Modal
 function makeModal(id) {
-	let modalInformation;
-	let i = 0;
-	let modalReady = false;
-	document.querySelector('#modal').innerHTML = '';
+  let modalInformation;
+  let i = 0;
+  let modalReady = false;
+  document.querySelector("#modal").innerHTML = "";
 
-	while (i < listOfGames.length && !modalReady) {
-		const modal = listOfGames[i];
-		if (modal.id === Number(id)) {
-			modalInformation = listOfGames[i];
-			modalReady = true;
-		}
-		i++;
-	}
+  while (i < listOfGames.length && !modalReady) {
+    const modal = listOfGames[i];
+    if (modal.id === Number(id)) {
+      modalInformation = listOfGames[i];
+      modalReady = true;
+    }
+    i++;
+  }
 
-	const {
-		background_image,
-		parent_platforms,
-		platforms,
-		platforms: { platform },
-		genres,
-		developers,
-		released,
-		description,
-		publishers,
-		esrb_rating,
-		website,
-		name,
-	} = modalInformation;
+  const {
+    background_image,
+    parent_platforms,
+    platforms,
+    platforms: { platform },
+    genres,
+    developers,
+    released,
+    description,
+    publishers,
+    esrb_rating,
+    website,
+    name,
+    short_screenshots
+  } = modalInformation;
 
-	let newModal = '';
+  let newModal = "";
 
-	newModal += `
+  newModal += `
 	<div class="modal__wrapper" style="background-image: linear-gradient(
 		0deg,
 		rgba(30, 30, 30, 1) 35%,
@@ -392,39 +393,39 @@ function makeModal(id) {
 	url(${background_image})";>
 	<div class="modal-header__wrapper">
 		<ul class="modal__consoles">`;
-	for (let i = 0; i < parent_platforms.length; i++) {
-		parent_platforms[i].platform.slug;
-		if (parent_platforms[i].platform.slug === 'playstation') {
-			newModal += `<li><div class="modal__consoles--icon">${playstationIcon}</div></li>`;
-		}
+  for (let i = 0; i < parent_platforms.length; i++) {
+    parent_platforms[i].platform.slug;
+    if (parent_platforms[i].platform.slug === "playstation") {
+      newModal += `<li><div class="modal__consoles--icon">${playstationIcon}</div></li>`;
+    }
 
-		if (parent_platforms[i].platform.slug === 'xbox360') {
-			newModal += `<li><div class="modal__consoles--icon">${xboxIcon}</div></li>`;
-		}
+    if (parent_platforms[i].platform.slug === "xbox360") {
+      newModal += `<li><div class="modal__consoles--icon">${xboxIcon}</div></li>`;
+    }
 
-		if (parent_platforms[i].platform.slug === 'pc') {
-			newModal += `<li><div class="modal__consoles--icon">${pcIcon}</div></li>`;
-		}
+    if (parent_platforms[i].platform.slug === "pc") {
+      newModal += `<li><div class="modal__consoles--icon">${pcIcon}</div></li>`;
+    }
 
-		if (parent_platforms[i].platform.slug === 'nintendo') {
-			newModal += `<li><div class="modal__consoles--icon">${nintendoIcon}</div></li>`;
-		}
+    if (parent_platforms[i].platform.slug === "nintendo") {
+      newModal += `<li><div class="modal__consoles--icon">${nintendoIcon}</div></li>`;
+    }
 
-		if (parent_platforms[i].platform.slug === 'ios') {
-			newModal += `<li><div class="modal__consoles--icon">${iosIcon}</div></li>`;
-		}
+    if (parent_platforms[i].platform.slug === "ios") {
+      newModal += `<li><div class="modal__consoles--icon">${iosIcon}</div></li>`;
+    }
 
-		if (parent_platforms[i].platform.slug === 'mac') {
-			newModal += `<li><div class="modal__consoles--icon">${macIcon}</div></li>`;
-		}
-		if (parent_platforms[i].platform.slug === 'linux') {
-			newModal += `<li><div class="modal__consoles--icon">${linuxIcon}</div></li>`;
-		}
-		if (parent_platforms[i].platform.slug === 'android') {
-			newModal += `<li><div class="modal__consoles--icon">${androidIcon}</div></li>`;
-		}
-	}
-	newModal += `</ul>
+    if (parent_platforms[i].platform.slug === "mac") {
+      newModal += `<li><div class="modal__consoles--icon">${macIcon}</div></li>`;
+    }
+    if (parent_platforms[i].platform.slug === "linux") {
+      newModal += `<li><div class="modal__consoles--icon">${linuxIcon}</div></li>`;
+    }
+    if (parent_platforms[i].platform.slug === "android") {
+      newModal += `<li><div class="modal__consoles--icon">${androidIcon}</div></li>`;
+    }
+  }
+  newModal += `</ul>
 		<h3 class="bold modal__header">${name}</h3>
 	</div>
 	<div class="modal-information__wrapper">
@@ -457,7 +458,7 @@ function makeModal(id) {
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="modal__desc">
 		${description}
 		</div>
@@ -483,26 +484,26 @@ function makeModal(id) {
 			<div class="plataforms">
 				<p class="spec__title">Plataforms</p>
 				<p class="spec__desc underline">`;
-	for (let i = 0; i < platforms.length; i++) {
-		let platform = platforms[i].platform;
-		newModal += `${platform.name}`;
-		if (i < platforms.length - 1) {
-			newModal += `, `;
-		}
-	}
-	newModal += `</p>
+  for (let i = 0; i < platforms.length; i++) {
+    let platform = platforms[i].platform;
+    newModal += `${platform.name}`;
+    if (i < platforms.length - 1) {
+      newModal += `, `;
+    }
+  }
+  newModal += `</p>
 			</div>
 			<div class="genre">
 				<p class="spec__title">Genre</p>
 				<p class="spec__desc underline">`;
-	for (let i = 0; i < genres.length; i++) {
-		let genre = genres[i];
-		newModal += `${genre.name}`;
-		if (i < genres.length - 1) {
-			newModal += `, `;
-		}
-	}
-	newModal += `</p>
+  for (let i = 0; i < genres.length; i++) {
+    let genre = genres[i];
+    newModal += `${genre.name}`;
+    if (i < genres.length - 1) {
+      newModal += `, `;
+    }
+  }
+  newModal += `</p>
 			</div>
 			<div class="release">
 				<p class="spec__title">Release Date</p>
@@ -511,52 +512,57 @@ function makeModal(id) {
 			<div class="developer">
 				<p class="spec__title">Developer</p>
 				<p class="spec__desc underline">`;
-	for (let i = 0; i < developers.length; i++) {
-		let developer = developers[i];
-		newModal += `${developer.name}`;
-		if (i < developers.length - 1) {
-			newModal += `, `;
-		}
-	}
-	newModal += `</p>
+  for (let i = 0; i < developers.length; i++) {
+    let developer = developers[i];
+    newModal += `${developer.name}`;
+    if (i < developers.length - 1) {
+      newModal += `, `;
+    }
+  }
+  newModal += `</p>
 			</div>
 			<div class="publisher">
 				<p class="spec__title">Publisher</p>
 				<p class="spec__desc underline">`;
-	for (let i = 0; i < publishers.length; i++) {
-		let publisher = publishers[i];
-		newModal += `${publisher.name}`;
-		if (i < publishers.length - 1) {
-			newModal += `, `;
-		} else if ((publishers.length = 0)) {
-			newModal += `¯_(ツ)_/¯ `;
-		}
-	}
-	newModal += `</p>
+  for (let i = 0; i < publishers.length; i++) {
+    let publisher = publishers[i];
+    newModal += `${publisher.name}`;
+    if (i < publishers.length - 1) {
+      newModal += `, `;
+    } else if ((publishers.length = 0)) {
+      newModal += `¯\_(ツ)_/¯ `;
+    }
+  }
+  newModal += `</p>
 			</div>
 			<div class="age-rating">
 				<p class="spec__title">Age rating</p>
-				<p class="spec__desc">${esrb_rating ? esrb_rating.name : 'Not rated'}</p>
+				<p class="spec__desc">${esrb_rating ? esrb_rating.name : "Not rated"}</p>
 			</div>
 			<div class="website">
 				<p class="spec__title">Website</p>
 				<p class="spec__desc underline"><a href=${website} target="_blank">${
-		website ? website : 'Oops! Website not found'
-	}</a></p>
+    website ? website : "Oops! Website not found"
+  }</a></p>
 			</div>
 		</div>
 	</div>
 	<div class="modal-images__wrapper">
-		<div class="modal__images">
-			<img class="modal__image--first" src="img/placeholder.jpg"
-				alt="Image not found">
-			<img src="img/placeholder.jpg" alt="Image not found">
-			<img src="img/placeholder.jpg" alt="Image not found">
-			<img src="img/placeholder.jpg" alt="Image not found">
-			<img src="img/placeholder.jpg" alt="Image not found">
+		<div class="modal__images">`;
+  // for (var index = 0; index < 4; index++) {
+  // 	let screenshots = short_screenshots[index];
+  // 	newModal += `<img src=${screenshots.image} alt="Image not found">`;
+  // }
+  // <img class="modal__image--first" src="img/placeholder.jpg"
+  // 	alt="Image not found">
+  // <img src="img/placeholder.jpg" alt="Image not found">
+  // <img src="img/placeholder.jpg" alt="Image not found">
+  // <img src="img/placeholder.jpg" alt="Image not found">
+  // <img src="img/placeholder.jpg" alt="Image not found">
+  newModal += `
 		</div>
 	</div>
 </div>`;
 
-	document.querySelector('#modal').innerHTML += newModal;
+  document.querySelector("#modal").innerHTML += newModal;
 }
