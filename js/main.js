@@ -8,6 +8,7 @@ const modal = document.querySelector('#modal');
 const asideMenu = document.querySelector('#aside-menu');
 const navBtn = document.querySelector('.nav__menu');
 const menuCloser = document.querySelector('#menu-closer');
+const searchbar = document.querySelector('#searchbar');
 
 // Icons
 const pcIcon = `<svg id="pc" viewBox="0 0 16 13" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M13 5.95833H5.95833V0.998704L13 0V5.95833ZM5.41667 1.08333V5.95833H0V1.80612L5.41667 1.08333ZM5.41667 6.5H0V11.1145L5.41667 11.9167V6.5ZM5.95833 11.912V6.5H13V13L5.95833 11.912Z"  /> </svg>`;
@@ -29,7 +30,6 @@ function eventListeners() {
 	alignVertical.addEventListener('click', alignVerticalFn);
 	navBtn.addEventListener('click', navLuncher);
 	menuCloser.addEventListener('click', navCloser);
-	// modal.addEventListener('click', closeModalFn);
 	document.addEventListener('keydown', escKeyboard);
 }
 
@@ -102,11 +102,13 @@ async function getGameDetails(games) {
 		listOfGames.push(gameDetails);
 	}
 	addDescription();
+	// console.log(listOfGames);
 }
 
+// Store games fetch data on local array to prevent multiple calls to the api
 let listOfGames = [];
 
-// Get game's screenshots and description to complete the card and modal
+// Get game's description to complete the card and modal
 async function fetchGameDesc(id) {
 	const API_KEY = '7a45335865234c029dcee2ab6fd2fd49';
 	const url = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
@@ -221,26 +223,14 @@ function addDescription() {
 	}
 }
 
-// function addGameDesc(id) {
-// 	let description = '';
-// 	for (let i = 0; i < cardsDetails.length; i++) {
-// 		let game = cardsDetails[i];
-// 		if (game.id === id) {
-// 			description;
-// 		}
-// 	}
-// 	document.querySelector(`#game__description--${id}`).innerHTML = description;
-// }
-
-// function showDescription() {
-// 	console.log('game description');
-// }
-
-// Open modal on game name (card)
+// Open modal on card click
 document.addEventListener('click', openModalFn);
 function openModalFn(e) {
+	let cardId = e.path[2].id;
 	if (e.target.classList.contains('open-modal')) {
 		document.querySelector('#modal').classList.remove('modal--hidden');
+		document.body.style.overflowY = 'hidden';
+		makeModal(cardId);
 		disableScroll();
 	}
 }
@@ -253,16 +243,19 @@ function closeModalFn(e) {
 		e.target.classList.contains('modal__close--path')
 	) {
 		document.querySelector('#modal').classList.add('modal--hidden');
+		document.body.style.overflowY = 'scroll';
 		enableScroll();
 	}
 }
 
+document.addEventListener('keydown', escKeyboard);
 function escKeyboard(e) {
 	if (
-		(e.keyCode = 'Escape') &&
+		(e.keyCode = 'escape') &&
 		!document.querySelector('#modal').classList.contains('modal--hidden')
 	) {
 		document.querySelector('#modal').classList.add('modal--hidden');
+		document.body.style.overflowY = 'scroll';
 		enableScroll();
 	}
 }
@@ -359,18 +352,211 @@ function alignVerticalFn() {
 
 // Modal
 function makeModal(id) {
-	var modalInfo;
+	let modalInformation;
 	let i = 0;
-	let modalFlag = false;
-	while (i < listOfGames.length && !modalFlag) {
+	let modalReady = false;
+	document.querySelector('#modal').innerHTML = '';
+
+	while (i < listOfGames.length && !modalReady) {
 		const modal = listOfGames[i];
-		if (modal.id === id) {
-			modalInfo = listOfGames[i];
-			modalFlag = true;
+		if (modal.id === Number(id)) {
+			modalInformation = listOfGames[i];
+			modalReady = true;
 		}
 		i++;
 	}
 
+	const {
+		background_image,
+		parent_platforms,
+		platforms,
+		platforms: { platform },
+		genres,
+		developers,
+		released,
+		description,
+		publishers,
+		esrb_rating,
+		website,
+		name,
+	} = modalInformation;
+
 	let newModal = '';
-	newModal += ``;
+
+	newModal += `
+	<div class="modal__wrapper" style="background-image: linear-gradient(
+		0deg,
+		rgba(30, 30, 30, 1) 35%,
+		rgba(30, 30, 30, 0.5) 100%
+	),
+	url(${background_image})";>
+	<div class="modal-header__wrapper">
+		<ul class="modal__consoles">`;
+	for (let i = 0; i < parent_platforms.length; i++) {
+		parent_platforms[i].platform.slug;
+		if (parent_platforms[i].platform.slug === 'playstation') {
+			newModal += `<li><div class="modal__consoles--icon">${playstationIcon}</div></li>`;
+		}
+
+		if (parent_platforms[i].platform.slug === 'xbox360') {
+			newModal += `<li><div class="modal__consoles--icon">${xboxIcon}</div></li>`;
+		}
+
+		if (parent_platforms[i].platform.slug === 'pc') {
+			newModal += `<li><div class="modal__consoles--icon">${pcIcon}</div></li>`;
+		}
+
+		if (parent_platforms[i].platform.slug === 'nintendo') {
+			newModal += `<li><div class="modal__consoles--icon">${nintendoIcon}</div></li>`;
+		}
+
+		if (parent_platforms[i].platform.slug === 'ios') {
+			newModal += `<li><div class="modal__consoles--icon">${iosIcon}</div></li>`;
+		}
+
+		if (parent_platforms[i].platform.slug === 'mac') {
+			newModal += `<li><div class="modal__consoles--icon">${macIcon}</div></li>`;
+		}
+		if (parent_platforms[i].platform.slug === 'linux') {
+			newModal += `<li><div class="modal__consoles--icon">${linuxIcon}</div></li>`;
+		}
+		if (parent_platforms[i].platform.slug === 'android') {
+			newModal += `<li><div class="modal__consoles--icon">${androidIcon}</div></li>`;
+		}
+	}
+	newModal += `</ul>
+		<h3 class="bold modal__header">${name}</h3>
+	</div>
+	<div class="modal-information__wrapper">
+		<svg class="modal__close" id="Capa_1" data-name="Capa 1"
+			xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+			<path class="modal__close--path"
+				d="M16,8a8,8,0,1,1-2.34-5.66A8,8,0,0,1,16,8ZM5.35,4.65a.5.5,0,1,0-.7.7L7.29,8,4.65,10.65a.36.36,0,0,0-.11.16.47.47,0,0,0,0,.38.36.36,0,0,0,.11.16A.47.47,0,0,0,5,11.5a.41.41,0,0,0,.19,0,.36.36,0,0,0,.16-.11L8,8.71l2.65,2.64a.36.36,0,0,0,.16.11.47.47,0,0,0,.38,0,.53.53,0,0,0,.27-.27.47.47,0,0,0,0-.38.36.36,0,0,0-.11-.16L8.71,8l2.64-2.65a.36.36,0,0,0,.11-.16.47.47,0,0,0,0-.38.53.53,0,0,0-.27-.27.47.47,0,0,0-.38,0,.36.36,0,0,0-.16.11L8,7.29Z"
+				transform="translate(0 0)" />
+		</svg>
+		<ul class="modal__featured-info">
+			<li class="modal__featured-item">${formatDate(released)}</li>
+			<li class="modal__featured-item"><span>#1</span> TOP 2021</li>
+			<li class="modal__featured-item"><span>#342</span> RPG</li>
+		</ul>
+		<div class="modal__features-buttons">
+			<div class="modal__featured-button--outline">
+				<div class="button__text">
+					<p>Where to </br><span>BUY</span></p>
+				</div>
+				<div class="button__icon">
+					+
+				</div>
+			</div>
+			<div class="modal__featured-button">
+				<div class="button__text">
+					<p>Add to </br><span>WISHLIST</span></p>
+				</div>
+				<div class="button__icon--gift">
+					<img src="./img/gift.svg" alt="">
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal__desc">
+		${description}
+		</div>
+		<div class="modal__buttons">
+			<div class="modal__button">
+				<div class="button__text">
+					Left a comment
+				</div>
+				<div class="button__icon">
+					<img src="img/chat-bubble.svg" alt="">
+				</div>
+			</div>
+			<div class="modal__button">
+				<div class="button__text">
+					Write a review
+				</div>
+				<div class="button__icon">
+					<img src="img/plus.svg" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="modal__spec">
+			<div class="plataforms">
+				<p class="spec__title">Plataforms</p>
+				<p class="spec__desc underline">`;
+	for (let i = 0; i < platforms.length; i++) {
+		let platform = platforms[i].platform;
+		newModal += `${platform.name}`;
+		if (i < platforms.length - 1) {
+			newModal += `, `;
+		}
+	}
+	newModal += `</p>
+			</div>
+			<div class="genre">
+				<p class="spec__title">Genre</p>
+				<p class="spec__desc underline">`;
+	for (let i = 0; i < genres.length; i++) {
+		let genre = genres[i];
+		newModal += `${genre.name}`;
+		if (i < genres.length - 1) {
+			newModal += `, `;
+		}
+	}
+	newModal += `</p>
+			</div>
+			<div class="release">
+				<p class="spec__title">Release Date</p>
+				<p class="spec__desc">${formatDate(released)}</p>
+			</div>
+			<div class="developer">
+				<p class="spec__title">Developer</p>
+				<p class="spec__desc underline">`;
+	for (let i = 0; i < developers.length; i++) {
+		let developer = developers[i];
+		newModal += `${developer.name}`;
+		if (i < developers.length - 1) {
+			newModal += `, `;
+		}
+	}
+	newModal += `</p>
+			</div>
+			<div class="publisher">
+				<p class="spec__title">Publisher</p>
+				<p class="spec__desc underline">`;
+	for (let i = 0; i < publishers.length; i++) {
+		let publisher = publishers[i];
+		newModal += `${publisher.name}`;
+		if (i < publishers.length - 1) {
+			newModal += `, `;
+		} else if ((publishers.length = 0)) {
+			newModal += `¯_(ツ)_/¯ `;
+		}
+	}
+	newModal += `</p>
+			</div>
+			<div class="age-rating">
+				<p class="spec__title">Age rating</p>
+				<p class="spec__desc">${esrb_rating ? esrb_rating.name : 'Not rated'}</p>
+			</div>
+			<div class="website">
+				<p class="spec__title">Website</p>
+				<p class="spec__desc underline"><a href=${website} target="_blank">${
+		website ? website : 'Oops! Website not found'
+	}</a></p>
+			</div>
+		</div>
+	</div>
+	<div class="modal-images__wrapper">
+		<div class="modal__images">
+			<img class="modal__image--first" src="img/placeholder.jpg"
+				alt="Image not found">
+			<img src="img/placeholder.jpg" alt="Image not found">
+			<img src="img/placeholder.jpg" alt="Image not found">
+			<img src="img/placeholder.jpg" alt="Image not found">
+			<img src="img/placeholder.jpg" alt="Image not found">
+		</div>
+	</div>
+</div>`;
+
+	document.querySelector('#modal').innerHTML += newModal;
 }
