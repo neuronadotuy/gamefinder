@@ -1,239 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <title>GameFinder | Main</title>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/styles/styles.css">
-	<title>GameFinder | Main</title>
-</head>
-
-<body>
-	<div class="main__container">
-		<div class="main__wrapper">
-			<div class="nav__top">
-				<nav class="nav">
-					<div class="nav__info">
-						<!-- info -->
-						<div class="nav__header">
-							<div class="nav__menu nav__menu--open nav__menu--close">
-								<svg class="nav__menu--icon" width="28" height="24" viewBox="0 0 28 24"
-									xmlns="http://www.w3.org/2000/svg">
-									<path class="nav__menu--path" fill-rule="evenodd" clip-rule="evenodd"
-										d="M0.25 22C0.25 21.6685 0.381696 21.3505 0.616117 21.1161C0.850537 20.8817 1.16848 20.75 1.5 20.75H26.5C26.8315 20.75 27.1495 20.8817 27.3839 21.1161C27.6183 21.3505 27.75 21.6685 27.75 22C27.75 22.3315 27.6183 22.6495 27.3839 22.8839C27.1495 23.1183 26.8315 23.25 26.5 23.25H1.5C1.16848 23.25 0.850537 23.1183 0.616117 22.8839C0.381696 22.6495 0.25 22.3315 0.25 22ZM0.25 12C0.25 11.6685 0.381696 11.3505 0.616117 11.1161C0.850537 10.8817 1.16848 10.75 1.5 10.75H26.5C26.8315 10.75 27.1495 10.8817 27.3839 11.1161C27.6183 11.3505 27.75 11.6685 27.75 12C27.75 12.3315 27.6183 12.6495 27.3839 12.8839C27.1495 13.1183 26.8315 13.25 26.5 13.25H1.5C1.16848 13.25 0.850537 13.1183 0.616117 12.8839C0.381696 12.6495 0.25 12.3315 0.25 12ZM0.25 2C0.25 1.66848 0.381696 1.35054 0.616117 1.11612C0.850537 0.881696 1.16848 0.75 1.5 0.75H26.5C26.8315 0.75 27.1495 0.881696 27.3839 1.11612C27.6183 1.35054 27.75 1.66848 27.75 2C27.75 2.33152 27.6183 2.64946 27.3839 2.88388C27.1495 3.1183 26.8315 3.25 26.5 3.25H1.5C1.16848 3.25 0.850537 3.1183 0.616117 2.88388C0.381696 2.64946 0.25 2.33152 0.25 2Z" />
-								</svg>
-							</div>
-							<h1 class="header__h1 header__h1--nav">Game<span class="header__h1--bold">Finder</span>
-							</h1>
-						</div>
-						<form id="search" class="nav__form">
-							<button><img src="./img/search.svg" alt="Search"></button>
-							<input type="search" name="searchbar" placeholder="Type game name or console">
-						</form>
-						<!-- logout -->
-						<div class="logout-profile__wrapper">
-							<div class="logout">
-								<a href="http://localhost:5501/index.html" id="logout-btn">
-									Logout
-									<div class="logout__img">
-										<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-											xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-											viewBox="0 0 16 12" style="enable-background:new 0 0 16 12;"
-											xml:space="preserve">
-											<g>
-												<path class="st0" d="M10,10.5c0,0.3-0.2,0.5-0.5,0.5h-8C1.2,11,1,10.8,1,10.5v-9C1,1.2,1.2,1,1.5,1h8C9.8,1,10,1.2,10,1.5v2
+  <body>
+    <div class="main__container">
+      <div class="main__wrapper">
+        <div class="nav__top">
+          <nav class="nav">
+            <div class="nav__info">
+              <!-- info -->
+              <div class="nav__header">
+                <div class="nav__menu nav__menu--open nav__menu--close">
+                  <svg
+                    class="nav__menu--icon"
+                    width="28"
+                    height="24"
+                    viewBox="0 0 28 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      class="nav__menu--path"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M0.25 22C0.25 21.6685 0.381696 21.3505 0.616117 21.1161C0.850537 20.8817 1.16848 20.75 1.5 20.75H26.5C26.8315 20.75 27.1495 20.8817 27.3839 21.1161C27.6183 21.3505 27.75 21.6685 27.75 22C27.75 22.3315 27.6183 22.6495 27.3839 22.8839C27.1495 23.1183 26.8315 23.25 26.5 23.25H1.5C1.16848 23.25 0.850537 23.1183 0.616117 22.8839C0.381696 22.6495 0.25 22.3315 0.25 22ZM0.25 12C0.25 11.6685 0.381696 11.3505 0.616117 11.1161C0.850537 10.8817 1.16848 10.75 1.5 10.75H26.5C26.8315 10.75 27.1495 10.8817 27.3839 11.1161C27.6183 11.3505 27.75 11.6685 27.75 12C27.75 12.3315 27.6183 12.6495 27.3839 12.8839C27.1495 13.1183 26.8315 13.25 26.5 13.25H1.5C1.16848 13.25 0.850537 13.1183 0.616117 12.8839C0.381696 12.6495 0.25 12.3315 0.25 12ZM0.25 2C0.25 1.66848 0.381696 1.35054 0.616117 1.11612C0.850537 0.881696 1.16848 0.75 1.5 0.75H26.5C26.8315 0.75 27.1495 0.881696 27.3839 1.11612C27.6183 1.35054 27.75 1.66848 27.75 2C27.75 2.33152 27.6183 2.64946 27.3839 2.88388C27.1495 3.1183 26.8315 3.25 26.5 3.25H1.5C1.16848 3.25 0.850537 3.1183 0.616117 2.88388C0.381696 2.64946 0.25 2.33152 0.25 2Z"
+                    />
+                  </svg>
+                </div>
+                <h1 class="header__h1 header__h1--nav">
+                  Game<span class="header__h1--bold">Finder</span>
+                </h1>
+              </div>
+              <form id="search" class="nav__form">
+                <button type="submit">
+                  <img src="./img/search.svg" alt="Search" />
+                </button>
+                <input
+                  type="search"
+                  name="searchbar"
+                  id="searchbar"
+                  placeholder="Type game name or console"
+                />
+              </form>
+              <!-- logout -->
+              <div class="logout-profile__wrapper">
+                <div class="logout">
+                  <a href="http://localhost:5501/index.html" id="logout-btn">
+                    Logout
+                    <div class="logout__img">
+                      <svg
+                        version="1.1"
+                        id="Capa_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        viewBox="0 0 16 12"
+                        style="enable-background:new 0 0 16 12;"
+                        xml:space="preserve"
+                      >
+                        <g>
+                          <path
+                            class="st0"
+                            d="M10,10.5c0,0.3-0.2,0.5-0.5,0.5h-8C1.2,11,1,10.8,1,10.5v-9C1,1.2,1.2,1,1.5,1h8C9.8,1,10,1.2,10,1.5v2
 				C10,3.8,10.2,4,10.5,4S11,3.8,11,3.5v-2C11,0.7,10.3,0,9.5,0h-8C0.7,0,0,0.7,0,1.5v9C0,11.3,0.7,12,1.5,12h8c0.8,0,1.5-0.7,1.5-1.5
-				v-2C11,8.2,10.8,8,10.5,8S10,8.2,10,8.5V10.5z" />
-												<path class="st0" d="M15.9,6.4C16,6.3,16,6.1,16,6S16,5.7,15.9,5.6l-3-3c-0.2-0.2-0.5-0.2-0.7,0s-0.2,0.5,0,0.7l2.1,2.1H5.5
-				C5.2,5.5,5,5.7,5,6s0.2,0.5,0.5,0.5h8.8l-2.1,2.1c-0.2,0.2-0.2,0.5,0,0.7s0.5,0.2,0.7,0L15.9,6.4z" />
-											</g>
-										</svg>
-									</div>
-								</a>
-							</div>
-							<div class="profile">
-								<img src="img/elmanga.jpeg" alt="Profile" title="xXmanGODnello69Xx">
-							</div>
-						</div>
-					</div>
-					<!-- divider -->
-					<div class="nav__divider"></div>
-				</nav>
-			</div>
-			<!-- nav end -->
-			<!-- main area -->
-			<div class="aside-main__container">
-				<aside class="aside aside--hidden" id="aside-menu">
-					<ul>
-						<li>
-							<h1 class="header__h1 header--menu">Game<span class="header__h1--bold">Finder</span>
-							</h1>
-						</li>
-						<li><a href="#" class="bold">Home</a></li>
-						<li><a href="#" class="bold">Reviews</a></li>
-						<li><a href="#" class="bold">New Releases</a></li>
-						<li><a href="#" class="icon__link">
-								<div class="icon">
-									<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-										xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 17 16"
-										style="enable-background:new 0 0 17 16;" xml:space="preserve">
-										<path class="st0" d="M3.6,15.4c-0.4,0.2-0.8-0.1-0.7-0.6l0.8-4.7L0.2,6.8C-0.2,6.5,0,5.9,0.5,5.8l4.9-0.7l2.2-4.3
+				v-2C11,8.2,10.8,8,10.5,8S10,8.2,10,8.5V10.5z"
+                          />
+                          <path
+                            class="st0"
+                            d="M15.9,6.4C16,6.3,16,6.1,16,6S16,5.7,15.9,5.6l-3-3c-0.2-0.2-0.5-0.2-0.7,0s-0.2,0.5,0,0.7l2.1,2.1H5.5
+				C5.2,5.5,5,5.7,5,6s0.2,0.5,0.5,0.5h8.8l-2.1,2.1c-0.2,0.2-0.2,0.5,0,0.7s0.5,0.2,0.7,0L15.9,6.4z"
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                  </a>
+                </div>
+                <div class="profile">
+                  <img
+                    src="img/elmanga.jpeg"
+                    alt="Profile"
+                    title="xXmanGODnello69Xx"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- divider -->
+            <div class="nav__divider"></div>
+          </nav>
+        </div>
+        <!-- nav end -->
+        <!-- main area -->
+        <div class="aside-main__container">
+          <aside class="aside aside--hidden" id="aside-menu">
+            <ul>
+              <li>
+                <h1 class="header__h1 header--menu">
+                  Game<span class="header__h1--bold">Finder</span>
+                </h1>
+              </li>
+              <li><a href="#" class="bold">Home</a></li>
+              <li><a href="#" class="bold">Reviews</a></li>
+              <li><a href="#" class="bold">New Releases</a></li>
+              <li>
+                <a href="#" class="icon__link">
+                  <div class="icon">
+                    <svg
+                      version="1.1"
+                      id="Capa_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 17 16"
+                      style="enable-background:new 0 0 17 16;"
+                      xml:space="preserve"
+                    >
+                      <path
+                        class="st0"
+                        d="M3.6,15.4c-0.4,0.2-0.8-0.1-0.7-0.6l0.8-4.7L0.2,6.8C-0.2,6.5,0,5.9,0.5,5.8l4.9-0.7l2.2-4.3
 						   c0.2-0.4,0.7-0.4,0.9,0l2.2,4.3l4.9,0.7c0.4,0.1,0.6,0.6,0.3,0.9l-3.5,3.4l0.8,4.7c0.1,0.4-0.4,0.8-0.7,0.6L8,13.2L3.6,15.4
-						   L3.6,15.4z" />
-									</svg>
-								</div>
-								This Week
-							</a></li>
-						<li><a href="#" class="icon__link">
-								<div class="icon">
-									<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-										xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16"
-										style="enable-background:new 0 0 16 16;" xml:space="preserve">
-										<path class="st0" d="M3.5,0C3.8,0,4,0.2,4,0.5V1h8V0.5C12,0.2,12.2,0,12.5,0S13,0.2,13,0.5V1h1c1.1,0,2,0.9,2,2v11c0,1.1-0.9,2-2,2
-		H2c-1.1,0-2-0.9-2-2V5h16V4H0V3c0-1.1,0.9-2,2-2h1V0.5C3,0.2,3.2,0,3.5,0z" />
-									</svg>
-								</div>
-								This Month
-							</a></li>
-						<li><a href="#" class="icon__link">
-								<div class="icon">
-									<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-										xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 13 16"
-										style="enable-background:new 0 0 13 16;" xml:space="preserve">
-										<path class="st0" d="M12.8,0.1C12.9,0.2,13,0.3,13,0.5V8c0,0.2-0.1,0.4-0.3,0.5L12.5,8l0.2,0.5l0,0l0,0l0,0
+						   L3.6,15.4z"
+                      />
+                    </svg>
+                  </div>
+                  This Week
+                </a>
+              </li>
+              <li>
+                <a href="#" class="icon__link">
+                  <div class="icon">
+                    <svg
+                      version="1.1"
+                      id="Capa_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 16 16"
+                      style="enable-background:new 0 0 16 16;"
+                      xml:space="preserve"
+                    >
+                      <path
+                        class="st0"
+                        d="M3.5,0C3.8,0,4,0.2,4,0.5V1h8V0.5C12,0.2,12.2,0,12.5,0S13,0.2,13,0.5V1h1c1.1,0,2,0.9,2,2v11c0,1.1-0.9,2-2,2
+		H2c-1.1,0-2-0.9-2-2V5h16V4H0V3c0-1.1,0.9-2,2-2h1V0.5C3,0.2,3.2,0,3.5,0z"
+                      />
+                    </svg>
+                  </div>
+                  This Month
+                </a>
+              </li>
+              <li>
+                <a href="#" class="icon__link">
+                  <div class="icon">
+                    <svg
+                      version="1.1"
+                      id="Capa_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 13 16"
+                      style="enable-background:new 0 0 13 16;"
+                      xml:space="preserve"
+                    >
+                      <path
+                        class="st0"
+                        d="M12.8,0.1C12.9,0.2,13,0.3,13,0.5V8c0,0.2-0.1,0.4-0.3,0.5L12.5,8l0.2,0.5l0,0l0,0l0,0
 		c-0.1,0.1-0.3,0.1-0.4,0.1c-0.3,0.1-0.6,0.2-1,0.4c-0.8,0.3-1.9,0.5-2.7,0.5C7.7,9.5,7,9.2,6.3,9l0,0C5.7,8.7,5.1,8.5,4.5,8.5
 		C3.8,8.5,2.9,8.7,2.1,9C1.7,9.1,1.4,9.2,1,9.3v6.2C1,15.8,0.8,16,0.5,16S0,15.8,0,15.5v-15C0,0.2,0.2,0,0.5,0S1,0.2,1,0.5v0.3
 		c0.2-0.1,0.5-0.2,0.8-0.3C2.6,0.3,3.7,0,4.5,0C5.3,0,6,0.3,6.6,0.5l0,0C7.3,0.8,7.8,1,8.5,1c0.7,0,1.6-0.2,2.4-0.5
-		c0.5-0.1,0.9-0.3,1.3-0.5l0,0l0,0h0" />
-									</svg>
-								</div>
-								Coming Soon
-							</a></li>
-						<li><a href="#" class="bold">Popular</a></li>
-						<li><a href="#" class="icon__link">
-								<div class="icon">
-									<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-										xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16"
-										style="enable-background:new 0 0 16 16;" xml:space="preserve">
-										<path fill-rule="evenodd" clip-rule="evenodd"
-											d="M11.7424 10.3434C13.7502 7.60286 13.309 3.77838 10.7297 1.56713C8.15026 -0.644296 4.30284 -0.496048 1.90121 1.90731C-0.500426 4.31066 -0.645921 8.15818 1.56735 10.736C3.78044 13.3137 7.60525 13.7522 10.3443 11.7425C10.3742 11.7823 10.4061 11.8201 10.4419 11.857L14.2919 15.707C14.6824 16.0977 15.3157 16.098 15.7064 15.7075C16.0972 15.317 16.0974 14.6837 15.7069 14.293L11.8569 10.443C11.8213 10.4069 11.783 10.3736 11.7424 10.3434ZM9.24994 11.2631C10.9516 10.2807 11.9999 8.46496 11.9999 6.5C11.9999 3.46243 9.53751 0.999999 6.49994 0.999999C3.46237 0.999999 0.999941 3.46243 0.999941 6.5C0.999941 8.46496 2.04823 10.2807 3.74994 11.2631C5.45165 12.2456 7.54823 12.2456 9.24994 11.2631Z" />
-									</svg>
-								</div>
-								Last Searches
-							</a></li>
-						<li><a href="#" class="icon__link">
-								<div class="icon">
-									<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-										xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16"
-										style="enable-background:new 0 0 16 16;" xml:space="preserve">
-										<path class="st0" d="M2.5,0.5C2.5,0.2,2.7,0,3,0h10c0.3,0,0.5,0.2,0.5,0.5c0,0.5,0,1,0,1.5c1.1,0.2,2,0.9,2.3,2c0.4,1,0.1,2.2-0.6,3
+		c0.5-0.1,0.9-0.3,1.3-0.5l0,0l0,0h0"
+                      />
+                    </svg>
+                  </div>
+                  Coming Soon
+                </a>
+              </li>
+              <li><a href="#" class="bold">Popular</a></li>
+              <li>
+                <a href="#" class="icon__link">
+                  <div class="icon">
+                    <svg
+                      version="1.1"
+                      id="Capa_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 16 16"
+                      style="enable-background:new 0 0 16 16;"
+                      xml:space="preserve"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M11.7424 10.3434C13.7502 7.60286 13.309 3.77838 10.7297 1.56713C8.15026 -0.644296 4.30284 -0.496048 1.90121 1.90731C-0.500426 4.31066 -0.645921 8.15818 1.56735 10.736C3.78044 13.3137 7.60525 13.7522 10.3443 11.7425C10.3742 11.7823 10.4061 11.8201 10.4419 11.857L14.2919 15.707C14.6824 16.0977 15.3157 16.098 15.7064 15.7075C16.0972 15.317 16.0974 14.6837 15.7069 14.293L11.8569 10.443C11.8213 10.4069 11.783 10.3736 11.7424 10.3434ZM9.24994 11.2631C10.9516 10.2807 11.9999 8.46496 11.9999 6.5C11.9999 3.46243 9.53751 0.999999 6.49994 0.999999C3.46237 0.999999 0.999941 3.46243 0.999941 6.5C0.999941 8.46496 2.04823 10.2807 3.74994 11.2631C5.45165 12.2456 7.54823 12.2456 9.24994 11.2631Z"
+                      />
+                    </svg>
+                  </div>
+                  Last Searches
+                </a>
+              </li>
+              <li>
+                <a href="#" class="icon__link">
+                  <div class="icon">
+                    <svg
+                      version="1.1"
+                      id="Capa_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 16 16"
+                      style="enable-background:new 0 0 16 16;"
+                      xml:space="preserve"
+                    >
+                      <path
+                        class="st0"
+                        d="M2.5,0.5C2.5,0.2,2.7,0,3,0h10c0.3,0,0.5,0.2,0.5,0.5c0,0.5,0,1,0,1.5c1.1,0.2,2,0.9,2.3,2c0.4,1,0.1,2.2-0.6,3
 		c-0.7,0.8-1.8,1.2-2.9,0.9c-0.8,1.9-1.9,2.8-2.8,3v2.2l1.4,0.4c0.2,0,0.4,0.1,0.5,0.3l1.8,1.4c0.2,0.1,0.2,0.4,0.2,0.6
 		C13.4,15.9,13.2,16,13,16H3c-0.2,0-0.4-0.1-0.5-0.3c-0.1-0.2,0-0.4,0.2-0.6l1.8-1.4c0.2-0.1,0.3-0.2,0.5-0.3l1.4-0.4v-2.2
 		c-1-0.2-2-1.1-2.8-3C2.6,8.2,1.5,7.8,0.8,7C0,6.2-0.2,5,0.2,4c0.4-1,1.3-1.8,2.3-2C2.5,1.5,2.5,1,2.5,0.5z M2.6,3
 		C1.5,3.2,0.8,4.3,1,5.4C1.2,6.5,2.2,7.2,3.3,7C3,5.9,2.7,4.6,2.6,3z M15,5.4c-0.2,1.1-1.2,1.8-2.3,1.6c0.3-1,0.6-2.3,0.7-3.9
-		C14.5,3.2,15.2,4.3,15,5.4z" />
-									</svg>
-								</div>
-								Best of the year
-							</a></li>
-					</ul>
-				</aside>
-				<div class="desktop--hidden" id="menu-closer"></div>
-				<main>
-					<div class="main__info">
-						<div class="main__title">
-							<h2 class='bold'>New and trending</h2>
-							<p>Based on player counts and release date</p>
-						</div>
-						<div class="alignment__icons">
-							<div class="alignment__icon alignment__icon--horizontal">
-								<svg width="21" height="24" viewBox="0 0 21 24" fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-									<path fill-rule="evenodd" clip-rule="evenodd"
-										d="M17.543 0.799927H3.25729C1.67933 0.799927 0.400146 2.07911 0.400146 3.65707V7.94278C0.400146 9.52074 1.67933 10.7999 3.25729 10.7999H17.543C19.121 10.7999 20.4001 9.52074 20.4001 7.94278V3.65707C20.4001 2.07911 19.121 0.799927 17.543 0.799927ZM1.82878 3.65709C1.82878 2.86811 2.46837 2.22852 3.25735 2.22852H17.5431C18.332 2.22852 18.9716 2.86811 18.9716 3.65709V7.9428C18.9716 8.73178 18.332 9.37137 17.5431 9.37137H3.25735C2.46837 9.37137 1.82878 8.73178 1.82878 7.9428V3.65709ZM3.25729 13.6571H17.543C19.121 13.6571 20.4001 14.9362 20.4001 16.5142V20.7999C20.4001 22.3779 19.121 23.6571 17.543 23.6571H3.25729C1.67933 23.6571 0.400146 22.3779 0.400146 20.7999V16.5142C0.400146 14.9362 1.67933 13.6571 3.25729 13.6571ZM1.82878 16.5141C1.82878 15.7252 2.46837 15.0856 3.25735 15.0856H17.5431C18.332 15.0856 18.9716 15.7252 18.9716 16.5141V20.7999C18.9716 21.5888 18.332 22.2284 17.5431 22.2284H3.25735C2.46837 22.2284 1.82878 21.5888 1.82878 20.7999V16.5141Z" />
-								</svg>
-							</div>
-							<div class="alignment__icon alignment__icon--offset alignment__icon--vertical">
-								<svg width="21" height="19" viewBox="0 0 21 19" fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-									<path fill-rule="evenodd" clip-rule="evenodd"
-										d="M0.400146 0.828666C0.400146 0.434176 0.719943 0.11438 1.11443 0.11438H19.6859C20.0804 0.11438 20.4001 0.434176 20.4001 0.828666C20.4001 1.22315 20.0804 1.54295 19.6859 1.54295H1.11443C0.719943 1.54295 0.400146 1.22315 0.400146 0.828666ZM17.543 4.40006H3.25729C1.67933 4.40006 0.400146 5.67925 0.400146 7.25721V11.5429C0.400146 13.1209 1.67933 14.4001 3.25729 14.4001H17.543C19.121 14.4001 20.4001 13.1209 20.4001 11.5429V7.25721C20.4001 5.67925 19.121 4.40006 17.543 4.40006ZM1.82886 7.25735C1.82886 6.46837 2.46845 5.82878 3.25743 5.82878H17.5431C18.3321 5.82878 18.9717 6.46837 18.9717 7.25735V11.5431C18.9717 12.332 18.3321 12.9716 17.5431 12.9716H3.25743C2.46845 12.9716 1.82886 12.332 1.82886 11.5431V7.25735ZM1.11443 17.2573C0.719943 17.2573 0.400146 17.5771 0.400146 17.9716C0.400146 18.3661 0.719943 18.6859 1.11443 18.6859H19.6859C20.0804 18.6859 20.4001 18.3661 20.4001 17.9716C20.4001 17.5771 20.0804 17.2573 19.6859 17.2573H1.11443Z" />
-								</svg>
-							</div>
-						</div>
-					</div>
-					<div class="cards">
-						<div class="cards__wrapper">
-							<!-- card -->
-							<!-- <div class="card">
-								<div class="card__img">
-								</div>
-								<div class="card__info" id="card-info">
-									<h3 class="header bold open-modal">Biomutant</h3>
-									<div class="consoles">
-										<ul>
-											<li>
-												<div class="console__icon">
-													<svg id="ps" viewBox="0 0 17 13" xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M6.5 0.149439L6.5 12.0297L9.07955 12.882L9.07955 2.9205C9.07955 2.4511 9.28024 2.13944 9.60212 2.24662C10.023 2.36835 10.1048 2.80075 10.1048 3.26493L10.1048 7.24338C11.7104 8.05381 12.9745 7.24296 12.9745 5.10468C12.9745 2.91966 12.2334 1.94626 10.0527 1.16365C9.19249 0.864976 7.59836 0.360979 6.5 0.149439Z" />
-														<path
-															d="M9.75 11.1429L13.6492 9.45771C14.0903 9.25915 14.1578 8.9894 13.8008 8.84764C13.4382 8.70325 12.791 8.74457 12.3452 8.93895L9.75 10.0506V8.27688L9.89861 8.21729C9.89861 8.21729 10.6498 7.89415 11.7064 7.75502C12.7609 7.61465 14.0541 7.77328 15.0706 8.2385C16.2156 8.68019 16.3439 9.32446 16.0542 9.77281C15.7603 10.2165 15.0478 10.5375 15.0478 10.5375L9.75 12.8484" />
-														<path
-															d="M1.18907 11.3388C-0.0278308 10.9682 -0.230758 10.185 0.324385 9.7326C0.836458 9.31949 1.70854 9.0085 1.70854 9.0085L5.31353 7.6032L5.31353 9.20264L2.72172 10.2184C2.26263 10.3979 2.1938 10.6505 2.56358 10.7827C2.93997 10.9202 3.60794 10.8832 4.0673 10.6979L5.31353 10.2067V11.6345C5.23321 11.6492 5.1439 11.6641 5.06238 11.6793C3.81985 11.9048 2.49607 11.8122 1.18907 11.3388Z" />
-														<path fill-rule="evenodd" clip-rule="evenodd"
-															d="M16.1271 12.7978C16.0247 12.8989 15.8903 12.9561 15.7455 12.9561C15.6008 12.9561 15.462 12.8989 15.3594 12.7978C15.2582 12.6948 15.2021 12.5603 15.2021 12.4154C15.2021 12.1153 15.4451 11.8727 15.7455 11.8727C15.8903 11.8727 16.0247 11.928 16.1271 12.0314C16.2284 12.1324 16.2855 12.2692 16.2855 12.4154C16.2855 12.5603 16.2284 12.6948 16.1271 12.7978ZM15.2934 12.4154C15.2934 12.292 15.3396 12.1788 15.4239 12.095C15.5104 12.0092 15.6257 11.963 15.7455 11.963C15.8655 11.963 15.9779 12.0092 16.0622 12.095C16.1473 12.1788 16.1932 12.292 16.1932 12.4154C16.1932 12.6627 15.9922 12.8634 15.7455 12.8634C15.6257 12.8634 15.5104 12.8177 15.4239 12.7331C15.3396 12.6477 15.2934 12.5358 15.2934 12.4154ZM15.9927 12.6405C15.9976 12.6544 16.0034 12.6627 16.0118 12.6651L16.0193 12.6694V12.7038H15.9018L15.8996 12.6969L15.8916 12.6761C15.8903 12.6651 15.8887 12.6508 15.8871 12.6267L15.8819 12.5325C15.8805 12.4991 15.8696 12.4796 15.8494 12.4667C15.8345 12.4617 15.8141 12.4579 15.7837 12.4579H15.6205V12.7038H15.5134V12.0997H15.7941C15.8399 12.0997 15.8785 12.1078 15.908 12.1204C15.9672 12.1482 15.9976 12.1984 15.9976 12.269C15.9976 12.3037 15.9889 12.3362 15.9741 12.3601C15.9612 12.377 15.946 12.3924 15.9295 12.4075L15.9339 12.4106C15.9451 12.4185 15.9563 12.4263 15.9628 12.4378C15.9778 12.4543 15.9846 12.482 15.9858 12.5177L15.9885 12.5946C15.9889 12.6143 15.9905 12.6296 15.9927 12.6405ZM15.8661 12.3435C15.8835 12.3323 15.8916 12.31 15.8916 12.276C15.8916 12.2401 15.8792 12.2162 15.8549 12.2042C15.8399 12.1984 15.8214 12.1942 15.7964 12.1942H15.6205V12.3639H15.7867C15.8198 12.3639 15.846 12.3571 15.8661 12.3435Z" />
-													</svg>
-												</div>
-											</li>
-											<li>2</li>
-											<li>3</li>
-										</ul>
-									</div>
-									<div class="release--card">
-										<p>Release Date</p>
-										<p>May 31 2021</p>
-									</div>
-									<p class="rank bold">#1</p>
-									<div class="genre--card">
-										<p>Genres</p>
-										<p>Action, RPG</p>
-									</div>
-									<div class="gift__container">
-										<button class="gift bold">+<img src="./img/gift.svg" alt=""></button>
-									</div>
-								</div>
-							</div> -->
-							<!-- card end -->
-							<div class="modal modal--hidden" id="modal">
-								<div class="modal__wrapper">
+		C14.5,3.2,15.2,4.3,15,5.4z"
+                      />
+                    </svg>
+                  </div>
+                  Best of the year
+                </a>
+              </li>
+            </ul>
+          </aside>
+          <div class="desktop--hidden" id="menu-closer"></div>
+          <main>
+            <div class="main__info">
+              <div class="main__title">
+                <h2 class="bold">New and trending</h2>
+                <p>Based on player counts and release date</p>
+              </div>
+              <div class="alignment__icons">
+                <div class="alignment__icon alignment__icon--horizontal">
+                  <svg
+                    width="21"
+                    height="24"
+                    viewBox="0 0 21 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M17.543 0.799927H3.25729C1.67933 0.799927 0.400146 2.07911 0.400146 3.65707V7.94278C0.400146 9.52074 1.67933 10.7999 3.25729 10.7999H17.543C19.121 10.7999 20.4001 9.52074 20.4001 7.94278V3.65707C20.4001 2.07911 19.121 0.799927 17.543 0.799927ZM1.82878 3.65709C1.82878 2.86811 2.46837 2.22852 3.25735 2.22852H17.5431C18.332 2.22852 18.9716 2.86811 18.9716 3.65709V7.9428C18.9716 8.73178 18.332 9.37137 17.5431 9.37137H3.25735C2.46837 9.37137 1.82878 8.73178 1.82878 7.9428V3.65709ZM3.25729 13.6571H17.543C19.121 13.6571 20.4001 14.9362 20.4001 16.5142V20.7999C20.4001 22.3779 19.121 23.6571 17.543 23.6571H3.25729C1.67933 23.6571 0.400146 22.3779 0.400146 20.7999V16.5142C0.400146 14.9362 1.67933 13.6571 3.25729 13.6571ZM1.82878 16.5141C1.82878 15.7252 2.46837 15.0856 3.25735 15.0856H17.5431C18.332 15.0856 18.9716 15.7252 18.9716 16.5141V20.7999C18.9716 21.5888 18.332 22.2284 17.5431 22.2284H3.25735C2.46837 22.2284 1.82878 21.5888 1.82878 20.7999V16.5141Z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="alignment__icon alignment__icon--offset alignment__icon--vertical"
+                >
+                  <svg
+                    width="21"
+                    height="19"
+                    viewBox="0 0 21 19"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M0.400146 0.828666C0.400146 0.434176 0.719943 0.11438 1.11443 0.11438H19.6859C20.0804 0.11438 20.4001 0.434176 20.4001 0.828666C20.4001 1.22315 20.0804 1.54295 19.6859 1.54295H1.11443C0.719943 1.54295 0.400146 1.22315 0.400146 0.828666ZM17.543 4.40006H3.25729C1.67933 4.40006 0.400146 5.67925 0.400146 7.25721V11.5429C0.400146 13.1209 1.67933 14.4001 3.25729 14.4001H17.543C19.121 14.4001 20.4001 13.1209 20.4001 11.5429V7.25721C20.4001 5.67925 19.121 4.40006 17.543 4.40006ZM1.82886 7.25735C1.82886 6.46837 2.46845 5.82878 3.25743 5.82878H17.5431C18.3321 5.82878 18.9717 6.46837 18.9717 7.25735V11.5431C18.9717 12.332 18.3321 12.9716 17.5431 12.9716H3.25743C2.46845 12.9716 1.82886 12.332 1.82886 11.5431V7.25735ZM1.11443 17.2573C0.719943 17.2573 0.400146 17.5771 0.400146 17.9716C0.400146 18.3661 0.719943 18.6859 1.11443 18.6859H19.6859C20.0804 18.6859 20.4001 18.3661 20.4001 17.9716C20.4001 17.5771 20.0804 17.2573 19.6859 17.2573H1.11443Z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="cards">
+              <div class="cards__wrapper">
+                <!-- card -->
+                <!-- <div class="card">
+                  <div class="card__img"></div>
+                  <div class="card__info" id="card-info">
+                    <h3 class="header bold open-modal">Biomutant</h3>
+                    <div class="consoles">
+                      <ul>
+                        <li>
+                          <div class="console__icon">
+                            <svg
+                              id="ps"
+                              viewBox="0 0 17 13"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M6.5 0.149439L6.5 12.0297L9.07955 12.882L9.07955 2.9205C9.07955 2.4511 9.28024 2.13944 9.60212 2.24662C10.023 2.36835 10.1048 2.80075 10.1048 3.26493L10.1048 7.24338C11.7104 8.05381 12.9745 7.24296 12.9745 5.10468C12.9745 2.91966 12.2334 1.94626 10.0527 1.16365C9.19249 0.864976 7.59836 0.360979 6.5 0.149439Z"
+                              />
+                              <path
+                                d="M9.75 11.1429L13.6492 9.45771C14.0903 9.25915 14.1578 8.9894 13.8008 8.84764C13.4382 8.70325 12.791 8.74457 12.3452 8.93895L9.75 10.0506V8.27688L9.89861 8.21729C9.89861 8.21729 10.6498 7.89415 11.7064 7.75502C12.7609 7.61465 14.0541 7.77328 15.0706 8.2385C16.2156 8.68019 16.3439 9.32446 16.0542 9.77281C15.7603 10.2165 15.0478 10.5375 15.0478 10.5375L9.75 12.8484"
+                              />
+                              <path
+                                d="M1.18907 11.3388C-0.0278308 10.9682 -0.230758 10.185 0.324385 9.7326C0.836458 9.31949 1.70854 9.0085 1.70854 9.0085L5.31353 7.6032L5.31353 9.20264L2.72172 10.2184C2.26263 10.3979 2.1938 10.6505 2.56358 10.7827C2.93997 10.9202 3.60794 10.8832 4.0673 10.6979L5.31353 10.2067V11.6345C5.23321 11.6492 5.1439 11.6641 5.06238 11.6793C3.81985 11.9048 2.49607 11.8122 1.18907 11.3388Z"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M16.1271 12.7978C16.0247 12.8989 15.8903 12.9561 15.7455 12.9561C15.6008 12.9561 15.462 12.8989 15.3594 12.7978C15.2582 12.6948 15.2021 12.5603 15.2021 12.4154C15.2021 12.1153 15.4451 11.8727 15.7455 11.8727C15.8903 11.8727 16.0247 11.928 16.1271 12.0314C16.2284 12.1324 16.2855 12.2692 16.2855 12.4154C16.2855 12.5603 16.2284 12.6948 16.1271 12.7978ZM15.2934 12.4154C15.2934 12.292 15.3396 12.1788 15.4239 12.095C15.5104 12.0092 15.6257 11.963 15.7455 11.963C15.8655 11.963 15.9779 12.0092 16.0622 12.095C16.1473 12.1788 16.1932 12.292 16.1932 12.4154C16.1932 12.6627 15.9922 12.8634 15.7455 12.8634C15.6257 12.8634 15.5104 12.8177 15.4239 12.7331C15.3396 12.6477 15.2934 12.5358 15.2934 12.4154ZM15.9927 12.6405C15.9976 12.6544 16.0034 12.6627 16.0118 12.6651L16.0193 12.6694V12.7038H15.9018L15.8996 12.6969L15.8916 12.6761C15.8903 12.6651 15.8887 12.6508 15.8871 12.6267L15.8819 12.5325C15.8805 12.4991 15.8696 12.4796 15.8494 12.4667C15.8345 12.4617 15.8141 12.4579 15.7837 12.4579H15.6205V12.7038H15.5134V12.0997H15.7941C15.8399 12.0997 15.8785 12.1078 15.908 12.1204C15.9672 12.1482 15.9976 12.1984 15.9976 12.269C15.9976 12.3037 15.9889 12.3362 15.9741 12.3601C15.9612 12.377 15.946 12.3924 15.9295 12.4075L15.9339 12.4106C15.9451 12.4185 15.9563 12.4263 15.9628 12.4378C15.9778 12.4543 15.9846 12.482 15.9858 12.5177L15.9885 12.5946C15.9889 12.6143 15.9905 12.6296 15.9927 12.6405ZM15.8661 12.3435C15.8835 12.3323 15.8916 12.31 15.8916 12.276C15.8916 12.2401 15.8792 12.2162 15.8549 12.2042C15.8399 12.1984 15.8214 12.1942 15.7964 12.1942H15.6205V12.3639H15.7867C15.8198 12.3639 15.846 12.3571 15.8661 12.3435Z"
+                              />
+                            </svg>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="release--card">
+                      <p>Release Date</p>
+                      <p>May 31 2021</p>
+                    </div>
+                    <p class="rank bold">#1</p>
+                    <div class="genre--card">
+                      <p>Genres</p>
+                      <p>Action, RPG</p>
+                    </div>
+                    <div class="gift__container">
+                      <button class="gift bold">
+                        +<img src="./img/gift.svg" alt="" />
+                      </button>
+                    </div>
+                  </div>
+                </div> -->
+                <!-- card end -->
+                <div class="modal modal--hidden" id="modal">
+                  <!-- <div class="modal__wrapper">
 									<div class="modal-header__wrapper">
-										<!-- consoles -->
 										<ul class="modal__consoles">
 											<li>1</li>
 											<li>2</li>
 											<li>3</li>
 										</ul>
-										<!-- title / header -->
 										<h3 class="bold modal__header">Biomutant</h3>
 									</div>
 									<div class="modal-information__wrapper">
-										<!-- close icon -->
 										<svg class="modal__close" id="Capa_1" data-name="Capa 1"
 											xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
 											<path class="modal__close--path"
 												d="M16,8a8,8,0,1,1-2.34-5.66A8,8,0,0,1,16,8ZM5.35,4.65a.5.5,0,1,0-.7.7L7.29,8,4.65,10.65a.36.36,0,0,0-.11.16.47.47,0,0,0,0,.38.36.36,0,0,0,.11.16A.47.47,0,0,0,5,11.5a.41.41,0,0,0,.19,0,.36.36,0,0,0,.16-.11L8,8.71l2.65,2.64a.36.36,0,0,0,.16.11.47.47,0,0,0,.38,0,.53.53,0,0,0,.27-.27.47.47,0,0,0,0-.38.36.36,0,0,0-.11-.16L8.71,8l2.64-2.65a.36.36,0,0,0,.11-.16.47.47,0,0,0,0-.38.53.53,0,0,0-.27-.27.47.47,0,0,0-.38,0,.36.36,0,0,0-.16.11L8,7.29Z"
 												transform="translate(0 0)" />
 										</svg>
-										<!-- end of close icon -->
-										<!-- featured info -->
 										<ul class="modal__featured-info">
 											<li class="modal__featured-item">May 31 2021</li>
 											<li class="modal__featured-item"><span>#1</span> TOP 2021</li>
 											<li class="modal__featured-item"><span>#342</span> RPG</li>
 										</ul>
-										<!-- featured buttons -->
 										<div class="modal__features-buttons">
 											<div class="modal__featured-button--outline">
 												<div class="button__text">
@@ -252,7 +372,6 @@
 												</div>
 											</div>
 										</div>
-										<!-- description -->
 										<p class="modal__desc">
 											Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
 											perspiciatis dolore
@@ -265,7 +384,6 @@
 											rerum ad repudiandae earum facilis est inventore quidem beatae quod, unde et
 											cumque?
 										</p>
-										<!-- buttons -->
 										<div class="modal__buttons">
 											<div class="modal__button">
 												<div class="button__text">
@@ -284,7 +402,6 @@
 												</div>
 											</div>
 										</div>
-										<!-- specifications -->
 										<div class="modal__spec">
 											<div class="plataforms">
 												<p class="spec__title">Plataforms</p>
@@ -316,7 +433,6 @@
 											</div>
 										</div>
 									</div>
-									<!-- modal images -->
 									<div class="modal-images__wrapper">
 										<div class="modal__images">
 											<img class="modal__image--first" src="img/placeholder.jpg"
@@ -327,17 +443,16 @@
 											<img src="img/placeholder.jpg" alt="Image not found">
 										</div>
 									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</main>
-			</div>
-		</div>
-	</div>
+								</div> -->
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
 
-	<!-- nav -->
-	<script src="js/main.js"></script>
-</body>
-
+    <!-- nav -->
+    <script src="js/main.js"></script>
+  </body>
 </html>
