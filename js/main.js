@@ -9,7 +9,11 @@ const asideMenu = document.querySelector("#aside-menu");
 const navBtn = document.querySelector(".nav__menu");
 const menuCloser = document.querySelector("#menu-closer");
 
-const searchbar = document.querySelector("#searchbar");
+const searchbar = document.querySelector("#search");
+const searchbarInput = document.querySelector("#searchbar");
+
+let API_KEY = "7a45335865234c029dcee2ab6fd2fd49";
+let page = 1;
 
 // Icons
 const pcIcon = `<svg id="pc" viewBox="0 0 16 13" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M13 5.95833H5.95833V0.998704L13 0V5.95833ZM5.41667 1.08333V5.95833H0V1.80612L5.41667 1.08333ZM5.41667 6.5H0V11.1145L5.41667 11.9167V6.5ZM5.95833 11.912V6.5H13V13L5.95833 11.912Z"  /> </svg>`;
@@ -32,6 +36,8 @@ function eventListeners() {
   navBtn.addEventListener("click", navLuncher);
   menuCloser.addEventListener("click", navCloser);
   document.addEventListener("keydown", escKeyboard);
+  // searchbar.addEventListener("keyup", searchbarFn);
+  searchbar.addEventListener("submit", searchSubmit);
 }
 
 const tabletView = window.innerWidth <= "767px";
@@ -74,8 +80,7 @@ const formatDate = function(date) {
 
 fetchAPI();
 async function fetchAPI() {
-  const API_KEY = "7a45335865234c029dcee2ab6fd2fd49";
-  const url = `https://api.rawg.io/api/games?key=${API_KEY}`;
+  const url = `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`;
   try {
     const req = await fetch(url, {
       method: "GET",
@@ -96,11 +101,11 @@ async function fetchAPI() {
 async function getGameDetails(games) {
   for (let i = 0; i < games.length; i++) {
     let gameId = games[i].id;
-    // let gameScreenshots = games.results[i].short_screenshots;
+    let gameScreenshots = games[i].short_screenshots;
 
     const gameDetails = await fetchGameDesc(gameId);
 
-    listOfGames.push(gameDetails);
+    listOfGames.push({ gameDetails, gameScreenshots });
   }
   addDescription();
   // console.log(listOfGames);
@@ -111,7 +116,6 @@ let listOfGames = [];
 
 // Get game's description to complete the card and modal
 async function fetchGameDesc(id) {
-  const API_KEY = "7a45335865234c029dcee2ab6fd2fd49";
   const url = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
   try {
     const req = await fetch(url, {
@@ -208,17 +212,19 @@ function allGames(games) {
 			<div class="card__description--format card__description--hidden" id="card__description--${id}"></div>
 		</div>
 
-	</div>
+</div>
 		`;
   });
   cardsWrapper.innerHTML += newGame;
+
+  stopScrolling = false;
 }
 
 function addDescription() {
   for (let i = 0; i < listOfGames.length; i++) {
-    const newGameDescription = listOfGames[i].description;
+    const newGameDescription = listOfGames[i].gameDetails.description;
     document.getElementById(
-      `card__description--${listOfGames[i].id}`
+      `card__description--${listOfGames[i].gameDetails.id}`
     ).innerHTML = newGameDescription;
   }
 }
@@ -231,6 +237,8 @@ function openModalFn(e) {
     document.querySelector("#modal").classList.remove("modal--hidden");
     document.body.style.overflowY = "hidden";
     makeModal(cardId);
+    var modalFirstImage = document.querySelector(".modal__images");
+    modalFirstImage.children[1].classList.add("modal__images--first");
     disableScroll();
   }
 }
@@ -358,9 +366,9 @@ function makeModal(id) {
   document.querySelector("#modal").innerHTML = "";
 
   while (i < listOfGames.length && !modalReady) {
-    const modal = listOfGames[i];
+    const modal = listOfGames[i].gameDetails;
     if (modal.id === Number(id)) {
-      modalInformation = listOfGames[i];
+      modalInformation = listOfGames[i].gameDetails;
       modalReady = true;
     }
     i++;
@@ -390,7 +398,7 @@ function makeModal(id) {
 		rgba(30, 30, 30, 1) 35%,
 		rgba(30, 30, 30, 0.5) 100%
 	),
-	url(${background_image})";>
+	url(${background_image || "./img/placeholder.jpg"}  )";>
 	<div class="modal-header__wrapper">
 		<ul class="modal__consoles">`;
   for (let i = 0; i < parent_platforms.length; i++) {
@@ -529,7 +537,7 @@ function makeModal(id) {
     newModal += `${publisher.name}`;
     if (i < publishers.length - 1) {
       newModal += `, `;
-    } else if ((publishers.length = 0)) {
+    } else if (!publishers.length) {
       newModal += `¯\_(ツ)_/¯ `;
     }
   }
@@ -548,21 +556,114 @@ function makeModal(id) {
 		</div>
 	</div>
 	<div class="modal-images__wrapper">
-		<div class="modal__images">`;
-  // for (var index = 0; index < 4; index++) {
-  // 	let screenshots = short_screenshots[index];
-  // 	newModal += `<img src=${screenshots.image} alt="Image not found">`;
-  // }
+		<div class="modal__images">
+    <div class="modal__images--first">`;
+  if (listOfGames[i - 1].gameScreenshots.length) {
+    let screenshots = listOfGames[i - 1].gameScreenshots;
+    for (var index = 0; index < 1; index++) {
+      newModal += `<img src=${screenshots[index].image} alt=${name}>`;
+    }
+  } else {
+    newModal += `<img src="./img/placeholder.jpg" alt="Image not found">`;
+  }
+
   // <img class="modal__image--first" src="img/placeholder.jpg"
-  // 	alt="Image not found">
-  // <img src="img/placeholder.jpg" alt="Image not found">
-  // <img src="img/placeholder.jpg" alt="Image not found">
-  // <img src="img/placeholder.jpg" alt="Image not found">
-  // <img src="img/placeholder.jpg" alt="Image not found">
+
+  newModal += `
+      </div>`;
+  if (listOfGames[i - 1].gameScreenshots.length) {
+    let screenshots = listOfGames[i - 1].gameScreenshots;
+    for (var index = 0; index < 5; index++) {
+      newModal += `<img src=${screenshots[index].image} alt=${name}>`;
+    }
+  } else {
+    newModal += `<img src="./img/placeholder.jpg" alt="Image not found">`;
+  }
   newModal += `
 		</div>
 	</div>
 </div>`;
 
+  // document
+  //   .querySelector(".modal__images")
+  //   .children[1].classList.add("modal__images--first");
   document.querySelector("#modal").innerHTML += newModal;
 }
+
+// Search
+function searchSubmit(e) {
+  e.preventDefault();
+  cardsWrapper.innerHTML = `<div class="modal modal--hidden" id="modal"></div>`;
+  listOfGames = [];
+  fetchSubmit(searchbarInput.value);
+}
+
+// let searchResult = searchbar.value;
+async function fetchSubmit(searchQuery) {
+  const url = `https://api.rawg.io/api/games?key=${API_KEY}&search=${searchQuery}`;
+  try {
+    const req = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "Nicolas Oten"
+      }
+    });
+    const data = await req.json();
+    allGames(data.results);
+    getGameDetails(data.results);
+    // console.log(data.description);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Infinite scroll
+
+window.addEventListener("scroll", infiniteScrollFn);
+let stopScrolling = false;
+
+function infiniteScrollFn() {
+  // let getMoreCard = false;
+  let scrollHigh = document.documentElement.scrollHeight - window.innerHeight;
+  let scrolled = window.scrollY;
+  let percentageScrolled = Math.floor((scrolled / scrollHigh) * 100);
+  console.log(window.scrollY);
+
+  if (
+    percentageScrolled >= 60 &&
+    // !getMoreCard
+    !stopScrolling
+  ) {
+    page++;
+    fetchAPI();
+    stopScrolling = true;
+    console.log("fetch");
+  }
+}
+
+// if (bodyHTML.offsetHeight + bodyHTML.scrollTop >= bodyHTML.scrollHeight) {
+//   page++;
+//   fetchAPI();
+// }
+
+// fetchAPI();
+// async function fetchAPI() {
+//   const url = `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`;
+//   try {
+//     const req = await fetch(url, {
+//       method: "GET",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//         "User-Agent": "Nicolas Oten"
+//       }
+//     });
+//     const games = await req.json();
+//     allGames(games.results);
+//     getGameDetails(games.results);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
