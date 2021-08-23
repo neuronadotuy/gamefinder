@@ -18,5 +18,5 @@ $npm i
 `
 ## Scripts
 `
-** npm-start ** on console tu lunch json-server-auth
+**npm-start** on console tu lunch json-server-auth
 `
