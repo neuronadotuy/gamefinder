@@ -15,7 +15,7 @@ In this repository you will find my project as part of the program Become a Fron
 `open the gamefinder folder in VSC/Atom`
 `$npm i`
 `"Go Live" to start live server on VSC/Atom`
-`
+
 ## Scripts
 `
 npm start
