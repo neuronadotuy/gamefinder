@@ -6,15 +6,15 @@ In this repository you will find my project as part of the program Become a Fron
 - Suggested searches on search input
 
 ## Required
-` Node
-  json-server-auth
-  Visual StudioCode/Atom with the plugin Live Server
+` Node `
+`  json-server-auth `
+`  Visual StudioCode/Atom with the plugin Live Server
 `
 
 ## Run the app
-`open the gamefinder folder in VSC/Atom
-$npm i
-"Go Live" to start live server on VSC/Atom
+`open the gamefinder folder in VSC/Atom`
+`$npm i`
+`"Go Live" to start live server on VSC/Atom`
 `
 ## Scripts
 `
