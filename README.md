@@ -18,6 +18,6 @@ $npm i
 `
 ## Scripts
 `
-npm-start
+npm start
 `
 on console tu lunch json-server-auth
