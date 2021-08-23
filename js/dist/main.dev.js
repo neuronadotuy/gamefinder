@@ -9,7 +9,10 @@ var modal = document.querySelector('#modal');
 var asideMenu = document.querySelector('#aside-menu');
 var navBtn = document.querySelector('.nav__menu');
 var menuCloser = document.querySelector('#menu-closer');
-var searchbar = document.querySelector('#searchbar'); // Icons
+var searchbar = document.querySelector('#search');
+var searchbarInput = document.querySelector('#searchbar');
+var API_KEY = '7a45335865234c029dcee2ab6fd2fd49';
+var page = 1; // Icons
 
 var pcIcon = "<svg id=\"pc\" viewBox=\"0 0 16 13\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13 5.95833H5.95833V0.998704L13 0V5.95833ZM5.41667 1.08333V5.95833H0V1.80612L5.41667 1.08333ZM5.41667 6.5H0V11.1145L5.41667 11.9167V6.5ZM5.95833 11.912V6.5H13V13L5.95833 11.912Z\"  /> </svg>";
 var linuxIcon = "<svg id=\"linux\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 304.998 304.998\" > <path id=\"linux\" d=\"M274.659,244.888c-8.944-3.663-12.77-8.524-12.4-15.777c0.381-8.466-4.422-14.667-6.703-17.117 c1.378-5.264,5.405-23.474,0.004-39.291c-5.804-16.93-23.524-42.787-41.808-68.204c-7.485-10.438-7.839-21.784-8.248-34.922 c-0.392-12.531-0.834-26.735-7.822-42.525C190.084,9.859,174.838,0,155.851,0c-11.295,0-22.889,3.53-31.811,9.684 c-18.27,12.609-15.855,40.1-14.257,58.291c0.219,2.491,0.425,4.844,0.545,6.853c1.064,17.816,0.096,27.206-1.17,30.06 c-0.819,1.865-4.851,7.173-9.118,12.793c-4.413,5.812-9.416,12.4-13.517,18.539c-4.893,7.387-8.843,18.678-12.663,29.597 c-2.795,7.99-5.435,15.537-8.005,20.047c-4.871,8.676-3.659,16.766-2.647,20.505c-1.844,1.281-4.508,3.803-6.757,8.557 c-2.718,5.8-8.233,8.917-19.701,11.122c-5.27,1.078-8.904,3.294-10.804,6.586c-2.765,4.791-1.259,10.811,0.115,14.925 c2.03,6.048,0.765,9.876-1.535,16.826c-0.53,1.604-1.131,3.42-1.74,5.423c-0.959,3.161-0.613,6.035,1.026,8.542 c4.331,6.621,16.969,8.956,29.979,10.492c7.768,0.922,16.27,4.029,24.493,7.035c8.057,2.944,16.388,5.989,23.961,6.913 c1.151,0.145,2.291,0.218,3.39,0.218c11.434,0,16.6-7.587,18.238-10.704c4.107-0.838,18.272-3.522,32.871-3.882 c14.576-0.416,28.679,2.462,32.674,3.357c1.256,2.404,4.567,7.895,9.845,10.724c2.901,1.586,6.938,2.495,11.073,2.495 c0.001,0,0,0,0.001,0c4.416,0,12.817-1.044,19.466-8.039c6.632-7.028,23.202-16,35.302-22.551c2.7-1.462,5.226-2.83,7.441-4.065 c6.797-3.768,10.506-9.152,10.175-14.771C282.445,250.905,279.356,246.811,274.659,244.888z M124.189,243.535 c-0.846-5.96-8.513-11.871-17.392-18.715c-7.26-5.597-15.489-11.94-17.756-17.312c-4.685-11.082-0.992-30.568,5.447-40.602 c3.182-5.024,5.781-12.643,8.295-20.011c2.714-7.956,5.521-16.182,8.66-19.783c4.971-5.622,9.565-16.561,10.379-25.182 c4.655,4.444,11.876,10.083,18.547,10.083c1.027,0,2.024-0.134,2.977-0.403c4.564-1.318,11.277-5.197,17.769-8.947 c5.597-3.234,12.499-7.222,15.096-7.585c4.453,6.394,30.328,63.655,32.972,82.044c2.092,14.55-0.118,26.578-1.229,31.289 c-0.894-0.122-1.96-0.221-3.08-0.221c-7.207,0-9.115,3.934-9.612,6.283c-1.278,6.103-1.413,25.618-1.427,30.003 c-2.606,3.311-15.785,18.903-34.706,21.706c-7.707,1.12-14.904,1.688-21.39,1.688c-5.544,0-9.082-0.428-10.551-0.651l-9.508-10.879 C121.429,254.489,125.177,250.583,124.189,243.535z M136.254,64.149c-0.297,0.128-0.589,0.265-0.876,0.411 c-0.029-0.644-0.096-1.297-0.199-1.952c-1.038-5.975-5-10.312-9.419-10.312c-0.327,0-0.656,0.025-1.017,0.08 c-2.629,0.438-4.691,2.413-5.821,5.213c0.991-6.144,4.472-10.693,8.602-10.693c4.85,0,8.947,6.536,8.947,14.272 C136.471,62.143,136.4,63.113,136.254,64.149z M173.94,68.756c0.444-1.414,0.684-2.944,0.684-4.532 c0-7.014-4.45-12.509-10.131-12.509c-5.552,0-10.069,5.611-10.069,12.509c0,0.47,0.023,0.941,0.067,1.411 c-0.294-0.113-0.581-0.223-0.861-0.329c-0.639-1.935-0.962-3.954-0.962-6.015c0-8.387,5.36-15.211,11.95-15.211 c6.589,0,11.95,6.824,11.95,15.211C176.568,62.78,175.605,66.11,173.94,68.756z M169.081,85.08 c-0.095,0.424-0.297,0.612-2.531,1.774c-1.128,0.587-2.532,1.318-4.289,2.388l-1.174,0.711c-4.718,2.86-15.765,9.559-18.764,9.952 c-2.037,0.274-3.297-0.516-6.13-2.441c-0.639-0.435-1.319-0.897-2.044-1.362c-5.107-3.351-8.392-7.042-8.763-8.485 c1.665-1.287,5.792-4.508,7.905-6.415c4.289-3.988,8.605-6.668,10.741-6.668c0.113,0,0.215,0.008,0.321,0.028 c2.51,0.443,8.701,2.914,13.223,4.718c2.09,0.834,3.895,1.554,5.165,2.01C166.742,82.664,168.828,84.422,169.081,85.08z M205.028,271.45c2.257-10.181,4.857-24.031,4.436-32.196c-0.097-1.855-0.261-3.874-0.42-5.826 c-0.297-3.65-0.738-9.075-0.283-10.684c0.09-0.042,0.19-0.078,0.301-0.109c0.019,4.668,1.033,13.979,8.479,17.226 c2.219,0.968,4.755,1.458,7.537,1.458c7.459,0,15.735-3.659,19.125-7.049c1.996-1.996,3.675-4.438,4.851-6.372 c0.257,0.753,0.415,1.737,0.332,3.005c-0.443,6.885,2.903,16.019,9.271,19.385l0.927,0.487c2.268,1.19,8.292,4.353,8.389,5.853 c-0.001,0.001-0.051,0.177-0.387,0.489c-1.509,1.379-6.82,4.091-11.956,6.714c-9.111,4.652-19.438,9.925-24.076,14.803 c-6.53,6.872-13.916,11.488-18.376,11.488c-0.537,0-1.026-0.068-1.461-0.206C206.873,288.406,202.886,281.417,205.028,271.45z M39.917,245.477c-0.494-2.312-0.884-4.137-0.465-5.905c0.304-1.31,6.771-2.714,9.533-3.313c3.883-0.843,7.899-1.714,10.525-3.308 c3.551-2.151,5.474-6.118,7.17-9.618c1.228-2.531,2.496-5.148,4.005-6.007c0.085-0.05,0.215-0.108,0.463-0.108 c2.827,0,8.759,5.943,12.177,11.262c0.867,1.341,2.473,4.028,4.331,7.139c5.557,9.298,13.166,22.033,17.14,26.301 c3.581,3.837,9.378,11.214,7.952,17.541c-1.044,4.909-6.602,8.901-7.913,9.784c-0.476,0.108-1.065,0.163-1.758,0.163 c-7.606,0-22.662-6.328-30.751-9.728l-1.197-0.503c-4.517-1.894-11.891-3.087-19.022-4.241c-5.674-0.919-13.444-2.176-14.732-3.312 c-1.044-1.171,0.167-4.978,1.235-8.337c0.769-2.414,1.563-4.91,1.998-7.523C41.225,251.596,40.499,248.203,39.917,245.477z\" /> </svg>";
@@ -26,7 +29,9 @@ function eventListeners() {
   alignVertical.addEventListener('click', alignVerticalFn);
   navBtn.addEventListener('click', navLuncher);
   menuCloser.addEventListener('click', navCloser);
-  document.addEventListener('keydown', escKeyboard);
+  document.addEventListener('keydown', escKeyboard); // searchbar.addEventListener("keyup", searchbarFn);
+
+  searchbar.addEventListener('submit', searchSubmit);
 }
 
 var tabletView = window.innerWidth <= '767px';
@@ -44,6 +49,8 @@ function navLuncher(e) {
     asideMenu.classList.add('aside--show');
     asideMenu.classList.remove('aside--hidden');
     menuCloser.classList.add('menu__closer');
+    document.body.style.overflowY = 'hidden';
+    disableScroll();
   }
 }
 
@@ -52,6 +59,8 @@ function navCloser(e) {
   asideMenu.classList.add('aside--hidden');
   e.target.classList.add('menu__closer--hidden');
   e.target.classList.remove('menu__closer');
+  document.body.style.overflowY = 'scroll';
+  enableScroll();
 }
 
 var formatDate = function formatDate(date) {
@@ -66,15 +75,14 @@ var formatDate = function formatDate(date) {
 fetchAPI();
 
 function fetchAPI() {
-  var API_KEY, url, req, games;
+  var url, req, games;
   return regeneratorRuntime.async(function fetchAPI$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          API_KEY = '7a45335865234c029dcee2ab6fd2fd49';
-          url = "https://api.rawg.io/api/games?key=".concat(API_KEY);
-          _context.prev = 2;
-          _context.next = 5;
+          url = "https://api.rawg.io/api/games?key=".concat(API_KEY, "&page=").concat(page);
+          _context.prev = 1;
+          _context.next = 4;
           return regeneratorRuntime.awrap(fetch(url, {
             method: 'GET',
             headers: {
@@ -84,33 +92,33 @@ function fetchAPI() {
             }
           }));
 
-        case 5:
+        case 4:
           req = _context.sent;
-          _context.next = 8;
+          _context.next = 7;
           return regeneratorRuntime.awrap(req.json());
 
-        case 8:
+        case 7:
           games = _context.sent;
           allGames(games.results);
           getGameDetails(games.results);
-          _context.next = 16;
+          _context.next = 15;
           break;
 
-        case 13:
-          _context.prev = 13;
-          _context.t0 = _context["catch"](2);
+        case 12:
+          _context.prev = 12;
+          _context.t0 = _context["catch"](1);
           console.log(_context.t0);
 
-        case 16:
+        case 15:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[2, 13]]);
+  }, null, null, [[1, 12]]);
 }
 
 function getGameDetails(games) {
-  var i, gameId, gameDetails;
+  var i, gameId, gameScreenshots, gameDetails;
   return regeneratorRuntime.async(function getGameDetails$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -119,28 +127,31 @@ function getGameDetails(games) {
 
         case 1:
           if (!(i < games.length)) {
-            _context2.next = 10;
+            _context2.next = 11;
             break;
           }
 
-          gameId = games[i].id; // let gameScreenshots = games.results[i].short_screenshots;
-
-          _context2.next = 5;
+          gameId = games[i].id;
+          gameScreenshots = games[i].short_screenshots;
+          _context2.next = 6;
           return regeneratorRuntime.awrap(fetchGameDesc(gameId));
 
-        case 5:
+        case 6:
           gameDetails = _context2.sent;
-          listOfGames.push(gameDetails);
+          listOfGames.push({
+            gameDetails: gameDetails,
+            gameScreenshots: gameScreenshots
+          });
 
-        case 7:
+        case 8:
           i++;
           _context2.next = 1;
           break;
 
-        case 10:
+        case 11:
           addDescription(); // console.log(listOfGames);
 
-        case 11:
+        case 12:
         case "end":
           return _context2.stop();
       }
@@ -152,15 +163,14 @@ function getGameDetails(games) {
 var listOfGames = []; // Get game's description to complete the card and modal
 
 function fetchGameDesc(id) {
-  var API_KEY, url, req, data;
+  var url, req, data;
   return regeneratorRuntime.async(function fetchGameDesc$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          API_KEY = '7a45335865234c029dcee2ab6fd2fd49';
           url = "https://api.rawg.io/api/games/".concat(id, "?key=").concat(API_KEY);
-          _context3.prev = 2;
-          _context3.next = 5;
+          _context3.prev = 1;
+          _context3.next = 4;
           return regeneratorRuntime.awrap(fetch(url, {
             method: 'GET',
             headers: {
@@ -170,26 +180,26 @@ function fetchGameDesc(id) {
             }
           }));
 
-        case 5:
+        case 4:
           req = _context3.sent;
-          _context3.next = 8;
+          _context3.next = 7;
           return regeneratorRuntime.awrap(req.json());
 
-        case 8:
+        case 7:
           data = _context3.sent;
           return _context3.abrupt("return", data);
 
-        case 12:
-          _context3.prev = 12;
-          _context3.t0 = _context3["catch"](2);
+        case 11:
+          _context3.prev = 11;
+          _context3.t0 = _context3["catch"](1);
           console.log(_context3.t0);
 
-        case 15:
+        case 14:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[2, 12]]);
+  }, null, null, [[1, 11]]);
 } // create each game's card
 
 
@@ -252,15 +262,16 @@ function allGames(games) {
       }
     }
 
-    newGame += "</p></div>\n\t\t\t<div class=\"gift__container\">\n\t\t\t\t<button class=\"gift bold\">+<img src=\"./img/gift.svg\" alt=\"\"></button>\n\t\t\t</div>\n\t\t\t<div class=\"card__description--format card__description--hidden\" id=\"card__description--".concat(id, "\"></div>\n\t\t</div>\n\n\t</div>\n\t\t");
+    newGame += "</p></div>\n\t\t\t<div class=\"gift__container\">\n\t\t\t\t<button class=\"gift bold\">+<img src=\"./img/gift.svg\" alt=\"\"></button>\n\t\t\t</div>\n\t\t\t<div class=\"card__description--format card__description--hidden\" id=\"card__description--".concat(id, "\"></div>\n\t\t</div>\n\n</div>\n\t\t");
   });
   cardsWrapper.innerHTML += newGame;
+  stopScrolling = false;
 }
 
 function addDescription() {
   for (var i = 0; i < listOfGames.length; i++) {
-    var newGameDescription = listOfGames[i].description;
-    document.getElementById("card__description--".concat(listOfGames[i].id)).innerHTML = newGameDescription;
+    var newGameDescription = listOfGames[i].gameDetails.description;
+    document.getElementById("card__description--".concat(listOfGames[i].gameDetails.id)).innerHTML = newGameDescription;
   }
 } // Open modal on card click
 
@@ -274,6 +285,8 @@ function openModalFn(e) {
     document.querySelector('#modal').classList.remove('modal--hidden');
     document.body.style.overflowY = 'hidden';
     makeModal(cardId);
+    var modalFirstImage = document.querySelector('.modal__images');
+    modalFirstImage.children[1].classList.add('modal__images--first');
     disableScroll();
   }
 }
@@ -395,10 +408,10 @@ function makeModal(id) {
   document.querySelector('#modal').innerHTML = '';
 
   while (i < listOfGames.length && !modalReady) {
-    var _modal = listOfGames[i];
+    var _modal = listOfGames[i].gameDetails;
 
     if (_modal.id === Number(id)) {
-      modalInformation = listOfGames[i];
+      modalInformation = listOfGames[i].gameDetails;
       modalReady = true;
     }
 
@@ -420,7 +433,7 @@ function makeModal(id) {
       name = _modalInformation.name,
       short_screenshots = _modalInformation.short_screenshots;
   var newModal = '';
-  newModal += "\n\t<div class=\"modal__wrapper\" style=\"background-image: linear-gradient(\n\t\t0deg,\n\t\trgba(30, 30, 30, 1) 35%,\n\t\trgba(30, 30, 30, 0.5) 100%\n\t),\n\turl(".concat(background_image, ")\";>\n\t<div class=\"modal-header__wrapper\">\n\t\t<ul class=\"modal__consoles\">");
+  newModal += "\n\t<div class=\"modal__wrapper\" style=\"background-image: linear-gradient(\n\t\t0deg,\n\t\trgba(30, 30, 30, 1) 35%,\n\t\trgba(30, 30, 30, 0.5) 100%\n\t),\n\turl(".concat(background_image || './img/placeholder.jpg', "  )\";>\n\t<div class=\"modal-header__wrapper\">\n\t\t<ul class=\"modal__consoles\">");
 
   for (var _i6 = 0; _i6 < parent_platforms.length; _i6++) {
     parent_platforms[_i6].platform.slug;
@@ -458,7 +471,7 @@ function makeModal(id) {
     }
   }
 
-  newModal += "</ul>\n\t\t<h3 class=\"bold modal__header\">".concat(name, "</h3>\n\t</div>\n\t<div class=\"modal-information__wrapper\">\n\t\t<svg class=\"modal__close\" id=\"Capa_1\" data-name=\"Capa 1\"\n\t\t\txmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 16\">\n\t\t\t<path class=\"modal__close--path\"\n\t\t\t\td=\"M16,8a8,8,0,1,1-2.34-5.66A8,8,0,0,1,16,8ZM5.35,4.65a.5.5,0,1,0-.7.7L7.29,8,4.65,10.65a.36.36,0,0,0-.11.16.47.47,0,0,0,0,.38.36.36,0,0,0,.11.16A.47.47,0,0,0,5,11.5a.41.41,0,0,0,.19,0,.36.36,0,0,0,.16-.11L8,8.71l2.65,2.64a.36.36,0,0,0,.16.11.47.47,0,0,0,.38,0,.53.53,0,0,0,.27-.27.47.47,0,0,0,0-.38.36.36,0,0,0-.11-.16L8.71,8l2.64-2.65a.36.36,0,0,0,.11-.16.47.47,0,0,0,0-.38.53.53,0,0,0-.27-.27.47.47,0,0,0-.38,0,.36.36,0,0,0-.16.11L8,7.29Z\"\n\t\t\t\ttransform=\"translate(0 0)\" />\n\t\t</svg>\n\t\t<ul class=\"modal__featured-info\">\n\t\t\t<li class=\"modal__featured-item\">").concat(formatDate(released), "</li>\n\t\t\t<li class=\"modal__featured-item\"><span>#1</span> TOP 2021</li>\n\t\t\t<li class=\"modal__featured-item\"><span>#342</span> RPG</li>\n\t\t</ul>\n\t\t<div class=\"modal__features-buttons\">\n\t\t\t<div class=\"modal__featured-button--outline\">\n\t\t\t\t<div class=\"button__text\">\n\t\t\t\t\t<p>Where to </br><span>BUY</span></p>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"button__icon\">\n\t\t\t\t\t+\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"modal__featured-button\">\n\t\t\t\t<div class=\"button__text\">\n\t\t\t\t\t<p>Add to </br><span>WISHLIST</span></p>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"button__icon--gift\">\n\t\t\t\t\t<img src=\"./img/gift.svg\" alt=\"\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"modal__desc\">\n\t\t").concat(description, "\n\t\t</div>\n\t\t<div class=\"modal__buttons\">\n\t\t\t<div class=\"modal__button\">\n\t\t\t\t<div class=\"button__text\">\n\t\t\t\t\tLeft a comment\n\t\t\t\t</div>\n\t\t\t\t<div class=\"button__icon\">\n\t\t\t\t\t<img src=\"img/chat-bubble.svg\" alt=\"\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"modal__button\">\n\t\t\t\t<div class=\"button__text\">\n\t\t\t\t\tWrite a review\n\t\t\t\t</div>\n\t\t\t\t<div class=\"button__icon\">\n\t\t\t\t\t<img src=\"img/plus.svg\" alt=\"\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"modal__spec\">\n\t\t\t<div class=\"plataforms\">\n\t\t\t\t<p class=\"spec__title\">Plataforms</p>\n\t\t\t\t<p class=\"spec__desc underline\">");
+  newModal += "</ul>\n\t\t<h3 class=\"bold modal__header\">".concat(name, "</h3>\n\t</div>\n\t\n\t<div class=\"modal__featured--mobile\">\n\t\t<svg class=\"modal__close\" id=\"Capa_1\" data-name=\"Capa 1\"\n\t\t\txmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 16\">\n\t\t\t<path class=\"modal__close--path\"\n\t\t\t\td=\"M16,8a8,8,0,1,1-2.34-5.66A8,8,0,0,1,16,8ZM5.35,4.65a.5.5,0,1,0-.7.7L7.29,8,4.65,10.65a.36.36,0,0,0-.11.16.47.47,0,0,0,0,.38.36.36,0,0,0,.11.16A.47.47,0,0,0,5,11.5a.41.41,0,0,0,.19,0,.36.36,0,0,0,.16-.11L8,8.71l2.65,2.64a.36.36,0,0,0,.16.11.47.47,0,0,0,.38,0,.53.53,0,0,0,.27-.27.47.47,0,0,0,0-.38.36.36,0,0,0-.11-.16L8.71,8l2.64-2.65a.36.36,0,0,0,.11-.16.47.47,0,0,0,0-.38.53.53,0,0,0-.27-.27.47.47,0,0,0-.38,0,.36.36,0,0,0-.16.11L8,7.29Z\"\n\t\t\t\ttransform=\"translate(0 0)\" />\n\t\t</svg>\n\t\t<ul class=\"modal__featured-info\">\n\t\t\t<li class=\"modal__featured-item\">").concat(formatDate(released), "</li>\n\t\t\t<li class=\"modal__featured-item\"><span>#1</span> TOP 2021</li>\n\t\t\t<li class=\"modal__featured-item\"><span>#342</span> RPG</li>\n\t\t</ul>\n\t\t<div class=\"modal__features-buttons\">\n\t\t\t<div class=\"modal__featured-button--outline\">\n\t\t\t\t<div class=\"button__text\">\n\t\t\t\t\t<p>Where to </br><span>BUY</span></p>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"button__icon\">\n\t\t\t\t\t+\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"modal__featured-button\">\n\t\t\t\t<div class=\"button__text\">\n\t\t\t\t\t<p>Add to </br><span>WISHLIST</span></p>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"button__icon--gift\">\n\t\t\t\t\t<img src=\"./img/gift.svg\" alt=\"\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"modal__desc\">\n\t\t").concat(description, "\n\t\t</div>\n\t\t</div>\n\t\t\n\t\t<div class=\"modal-information__wrapper\">\n\n\t\t<div class=\"modal__buttons\">\n\t\t\t<div class=\"modal__button\">\n\t\t\t\t<div class=\"button__text\">\n\t\t\t\t\tLeft a comment\n\t\t\t\t</div>\n\t\t\t\t<div class=\"button__icon\">\n\t\t\t\t\t<img src=\"img/chat-bubble.svg\" alt=\"\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"modal__button\">\n\t\t\t\t<div class=\"button__text\">\n\t\t\t\t\tWrite a review\n\t\t\t\t</div>\n\t\t\t\t<div class=\"button__icon\">\n\t\t\t\t\t<img src=\"img/plus.svg\" alt=\"\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"modal__spec\">\n\t\t\t<div class=\"plataforms\">\n\t\t\t\t<p class=\"spec__title\">Plataforms</p>\n\t\t\t\t<p class=\"spec__desc underline\">");
 
   for (var _i7 = 0; _i7 < platforms.length; _i7++) {
     var _platform = platforms[_i7].platform;
@@ -499,22 +512,131 @@ function makeModal(id) {
 
     if (_i10 < publishers.length - 1) {
       newModal += ", ";
-    } else if (publishers.length = 0) {
+    } else if (!publishers.length) {
       newModal += "\xAF_(\u30C4)_/\xAF ";
     }
   }
 
-  newModal += "</p>\n\t\t\t</div>\n\t\t\t<div class=\"age-rating\">\n\t\t\t\t<p class=\"spec__title\">Age rating</p>\n\t\t\t\t<p class=\"spec__desc\">".concat(esrb_rating ? esrb_rating.name : 'Not rated', "</p>\n\t\t\t</div>\n\t\t\t<div class=\"website\">\n\t\t\t\t<p class=\"spec__title\">Website</p>\n\t\t\t\t<p class=\"spec__desc underline\"><a href=").concat(website, " target=\"_blank\">").concat(website ? website : 'Oops! Website not found', "</a></p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<div class=\"modal-images__wrapper\">\n\t\t<div class=\"modal__images\">"); // for (var index = 0; index < 4; index++) {
-  // 	let screenshots = short_screenshots[index];
-  // 	newModal += `<img src=${screenshots.image} alt="Image not found">`;
-  // }
-  // <img class="modal__image--first" src="img/placeholder.jpg"
-  // 	alt="Image not found">
-  // <img src="img/placeholder.jpg" alt="Image not found">
-  // <img src="img/placeholder.jpg" alt="Image not found">
-  // <img src="img/placeholder.jpg" alt="Image not found">
-  // <img src="img/placeholder.jpg" alt="Image not found">
+  newModal += "</p>\n\t\t\t</div>\n\t\t\t<div class=\"age-rating\">\n\t\t\t\t<p class=\"spec__title\">Age rating</p>\n\t\t\t\t<p class=\"spec__desc\">".concat(esrb_rating ? esrb_rating.name : 'Not rated', "</p>\n\t\t\t</div>\n\t\t\t<div class=\"website\">\n\t\t\t\t<p class=\"spec__title\">Website</p>\n\t\t\t\t<p class=\"spec__desc underline\"><a href=").concat(website, " target=\"_blank\">").concat(website ? website : 'Oops! Website not found', "</a></p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<div class=\"modal-images__wrapper\">\n\t\t<div class=\"modal__images\">\n    <div class=\"modal__images--first\">");
 
-  newModal += "\n\t\t</div>\n\t</div>\n</div>";
+  if (listOfGames[i - 1].gameScreenshots.length) {
+    var screenshots = listOfGames[i - 1].gameScreenshots;
+
+    for (var index = 0; index < 1; index++) {
+      newModal += "<img src=".concat(screenshots[index].image, " alt=").concat(name, ">");
+    }
+  } else {
+    newModal += "<img src=\"./img/placeholder.jpg\" alt=\"Image not found\">";
+  } // <img class="modal__image--first" src="img/placeholder.jpg"
+
+
+  newModal += "\n      </div>";
+
+  if (listOfGames[i - 1].gameScreenshots.length) {
+    var _screenshots = listOfGames[i - 1].gameScreenshots;
+
+    for (var index = 0; index < 5; index++) {
+      newModal += "<img src=".concat(_screenshots[index].image, " alt=").concat(name, ">");
+    }
+  } else {
+    newModal += "<img src=\"./img/placeholder.jpg\" alt=\"Image not found\">";
+  }
+
+  newModal += "\n\t\t</div>\n\t</div>\n</div>"; // document
+  //   .querySelector(".modal__images")
+  //   .children[1].classList.add("modal__images--first");
+
   document.querySelector('#modal').innerHTML += newModal;
-}
+} // Search
+
+
+function searchSubmit(e) {
+  e.preventDefault();
+  cardsWrapper.innerHTML = "<div class=\"modal modal--hidden\" id=\"modal\"></div>";
+  listOfGames = [];
+  fetchSubmit(searchbarInput.value);
+} // let searchResult = searchbar.value;
+
+
+function fetchSubmit(searchQuery) {
+  var url, req, data;
+  return regeneratorRuntime.async(function fetchSubmit$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          url = "https://api.rawg.io/api/games?key=".concat(API_KEY, "&search=").concat(searchQuery);
+          _context4.prev = 1;
+          _context4.next = 4;
+          return regeneratorRuntime.awrap(fetch(url, {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              'User-Agent': 'Nicolas Oten'
+            }
+          }));
+
+        case 4:
+          req = _context4.sent;
+          _context4.next = 7;
+          return regeneratorRuntime.awrap(req.json());
+
+        case 7:
+          data = _context4.sent;
+          allGames(data.results);
+          getGameDetails(data.results); // console.log(data.description);
+
+          _context4.next = 15;
+          break;
+
+        case 12:
+          _context4.prev = 12;
+          _context4.t0 = _context4["catch"](1);
+          console.log(_context4.t0);
+
+        case 15:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, null, null, [[1, 12]]);
+} // Infinite scroll
+
+
+window.addEventListener('scroll', infiniteScrollFn);
+var stopScrolling = false;
+
+function infiniteScrollFn() {
+  // let getMoreCard = false;
+  var scrollHeigth = document.documentElement.scrollHeight - window.innerHeight;
+  var scrolled = window.scrollY;
+  var percentageScrolled = Math.floor(scrolled / scrollHeigth * 100);
+
+  if (percentageScrolled >= 60 && !stopScrolling) {
+    page++;
+    fetchAPI();
+    stopScrolling = true;
+  }
+} // if (bodyHTML.offsetHeight + bodyHTML.scrollTop >= bodyHTML.scrollHeight) {
+//   page++;
+//   fetchAPI();
+// }
+// fetchAPI();
+// async function fetchAPI() {
+//   const url = `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`;
+//   try {
+//     const req = await fetch(url, {
+//       method: "GET",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//         "User-Agent": "Nicolas Oten"
+//       }
+//     });
+//     const games = await req.json();
+//     allGames(games.results);
+//     getGameDetails(games.results);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
